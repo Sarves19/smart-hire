@@ -5,6 +5,8 @@ from database_config import engine
 from user_router import router as user_router
 from booking_router import router as booking_router
 
+
+
 @asynccontextmanager
 async def lifespan(app:FastAPI):
     print("Creating tables...")

@@ -19,7 +19,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7
 
 class AuthUtils:
     @staticmethod
-    async def hash_password(password:str) -> str:
+    def hash_password(password:str) -> str:
         return pwd_context.hash(password)
 
     @staticmethod

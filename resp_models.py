@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Optional
 
 from pydantic import BaseModel, EmailStr
 
@@ -44,19 +45,28 @@ class BookingBase(BaseModel):
     job_title: str
     description: str | None = None
 
-class BookingCreate(BookingBase):
+class BookingCreate(BaseModel):
+    provider_id: int
+    job_title: str
+    description: Optional[str] = None
+    booking_date: datetime
 
-    user_id: int
-
-class BookingResponse(BookingBase):
-    id: int
-    user_id: int
+class BookingUpdateStatus(BaseModel):
     status: str
+
+
+class BookingResponse(BaseModel):
+    id: int
+    customer_id: int
+    provider_id: int
+    job_title: str
+    description: Optional[str]
+    status: str
+    booking_date: datetime
     created_at: datetime
 
     class Config:
         from_attributes = True
-
 
 class LoginRequest(BaseModel):
     email: EmailStr

@@ -38,16 +38,18 @@ async def register_provider(user: ProviderCreate, db: AsyncSession = Depends(get
 @router.post("/login", response_model=TokenResponse)
 async def login(login_data: OAuth2PasswordRequestForm = Depends(), db: AsyncSession = Depends(get_db)):
     db_user = await user_repo.get_user_by_email(db, login_data.username)
+    print(db_user)
     if not db_user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid email or password"
+            detail="Invalid email"
         )
     is_password_correct = await AuthUtils.verify_password(login_data.password, db_user.password)
+    print(is_password_correct)
     if not is_password_correct:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid email or password"
+            detail="Invalid password"
         )
     token_data = {"sub": db_user.email, "role": db_user.role}
     access_token = await AuthUtils.create_access_token(data=token_data)
