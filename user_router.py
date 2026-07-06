@@ -4,8 +4,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from auth_utils import AuthUtils
 from database_config import get_db
 from db_models import User
-from resp_models import UserResponse, CustomerCreate, ProviderCreate, TokenResponse, LoginRequest
-from user_repository import UserRepository
+from resp_models import UserResponse, CustomerCreate, ProviderCreate, TokenResponse, LoginRequest, ProviderResponse
+from user_repository import UserRepository, ProviderRepository
 
 router = APIRouter()
 user_repo = UserRepository()
@@ -51,6 +51,7 @@ async def login(login_data: OAuth2PasswordRequestForm = Depends(), db: AsyncSess
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid password"
         )
+
     token_data = {"sub": db_user.email, "role": db_user.role}
     access_token = await AuthUtils.create_access_token(data=token_data)
     return TokenResponse(
@@ -62,3 +63,15 @@ async def login(login_data: OAuth2PasswordRequestForm = Depends(), db: AsyncSess
 @router.get("/me",response_model=UserResponse)
 async def get_me(current_user: User = Depends(AuthUtils.get_current_user)):
     return current_user
+
+
+@router.get("/providers", response_model=list[ProviderResponse])
+async def get_all_providers(service_type: str = None,location: str = None,db: AsyncSession = Depends(get_db)):
+   providers = await ProviderRepository.get_all_providers(db,service_type=service_type, location=location)
+
+   if not providers:
+       raise HTTPException(
+           status_code=status.HTTP_404_NOT_FOUND,
+           detail="No service providers found matching your search criteria."
+       )
+   return providers

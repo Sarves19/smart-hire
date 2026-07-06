@@ -13,7 +13,8 @@ logging.basicConfig(level=logging.INFO)
 
 class UserRepository():
 
-    async def create_user(self, db:AsyncSession, user_data:Union[CustomerCreate, ProviderCreate])-> UserResponse:
+    @staticmethod
+    async def create_user(db:AsyncSession, user_data:Union[CustomerCreate, ProviderCreate])-> UserResponse:
 
         print(user_data.password)
         print(type(user_data.password))
@@ -47,10 +48,43 @@ class UserRepository():
 
         return db_user
 
-
-    async def get_user_by_email(self, db: AsyncSession,email:str) -> User | None:
+    @staticmethod
+    async def get_user_by_email(db: AsyncSession,email:str) -> User | None:
         query = select(User).where(User.email == email).options(joinedload(User.provider_profile))
         result = await db.execute(query)
         return result.scalar_one_or_none()
+
+
+class ProviderRepository:
+
+    @staticmethod
+    async def get_all_providers(db: AsyncSession, service_type: str = None, location : str = None):
+        query = select(Provider).options(joinedload(Provider.user))
+
+        if service_type:
+            query = query.where(Provider.service_type.ilike(f"%{service_type}"))
+
+        if location:
+            query = query.where(Provider.location.ilike(f"%{location}"))
+        result = await db.execute(query)
+        providers = result.scalars().all()
+
+        provider_list = []
+        for p in providers:
+            user_name_val = p.user.username if p.user else "Unknown User"
+
+            provider_list.append({
+                "id": p.id,
+                "user_id": p.id,
+                "user_name": user_name_val,
+                "service_type": p.service_type,
+                "experience_years": p.experience_years,
+                "hourly_rate": p.hourly_rate,
+                "location": p.location,
+                "is_available": p.is_available,
+                "rating": p.rating
+            })
+        return provider_list
+
 
 

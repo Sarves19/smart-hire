@@ -20,7 +20,10 @@ class ProviderCreate(UserBase):
     hourly_rate: float =0.0
     location: str
 
-class ProviderProfileResponse(BaseModel):
+class ProviderResponse(BaseModel):
+    id: int              # providers.id
+    user_id: int # users.id
+    user_name: str
     service_type: str
     experience_years: int
     hourly_rate: float
@@ -35,7 +38,7 @@ class ProviderProfileResponse(BaseModel):
 class UserResponse(UserBase):
     id: int
     role: str
-    provider_profile: ProviderProfileResponse | None = None
+    provider_profile: ProviderResponse | None = None
 
     class Config:
         from_attributes = True
@@ -46,7 +49,7 @@ class BookingBase(BaseModel):
     description: str | None = None
 
 class BookingCreate(BaseModel):
-    provider_id: int
+    provider_profile_id: int
     job_title: str
     description: Optional[str] = None
     booking_date: datetime
