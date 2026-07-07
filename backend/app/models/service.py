@@ -4,6 +4,8 @@ Service Model
 Stores services offered by service providers.
 """
 
+from __future__ import annotations
+
 from decimal import Decimal
 from enum import Enum
 
@@ -25,6 +27,7 @@ class ServiceStatus(str, Enum):
     """
     Service Status
     """
+
     ACTIVE = "ACTIVE"
     INACTIVE = "INACTIVE"
     PENDING = "PENDING"
@@ -91,28 +94,39 @@ class Service(BaseModel):
         nullable=False,
     )
 
-provider: Mapped["ProviderProfile"] = relationship(
-    back_populates="services",
-)
+    # ==========================================
+    # Relationships
+    # ==========================================
 
-category: Mapped["Category"] = relationship(
-    back_populates="services",
-)
+    provider: Mapped["ProviderProfile"] = relationship(
+        "ProviderProfile",
+        back_populates="services",
+    )
 
-bookings: Mapped[list["Booking"]] = relationship(
-    back_populates="service",
-    cascade="all, delete-orphan",
-)
+    category: Mapped["Category"] = relationship(
+        "Category",
+        back_populates="services",
+    )
 
-reviews: Mapped[list["Review"]] = relationship(
-    back_populates="service",
-    cascade="all, delete-orphan",
-)
+    bookings: Mapped[list["Booking"]] = relationship(
+        "Booking",
+        back_populates="service",
+        cascade="all, delete-orphan",
+    )
 
-recommendations: Mapped[list["Recommendation"]] = relationship(
-    back_populates="service",
-    cascade="all, delete-orphan",
-)
+    reviews: Mapped[list["Review"]] = relationship(
+        "Review",
+        back_populates="service",
+        cascade="all, delete-orphan",
+    )
 
-def __repr__(self):
-        return f"<Service(title='{self.title}', price={self.price})>"
+    recommendations: Mapped[list["Recommendation"]] = relationship(
+        "Recommendation",
+        back_populates="service",
+        cascade="all, delete-orphan",
+    )
+
+    def __repr__(self) -> str:
+        return (
+            f"<Service(title='{self.title}', price={self.price})>"
+        )

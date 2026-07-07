@@ -4,7 +4,9 @@ Category Model
 Stores service categories.
 """
 
-from sqlalchemy import String, Text
+from __future__ import annotations
+
+from sqlalchemy import Boolean, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.models.base import BaseModel
@@ -35,15 +37,20 @@ class Category(BaseModel):
     )
 
     is_active: Mapped[bool] = mapped_column(
+        Boolean,
         default=True,
         nullable=False,
     )
 
-    # One Category -> Many Services
-services: Mapped[list["Service"]] = relationship(
-    back_populates="category",
-    cascade="all, delete-orphan",
-)
+    # ==========================================
+    # Relationships
+    # ==========================================
 
-def __repr__(self) -> str:
+    services: Mapped[list["Service"]] = relationship(
+        "Service",
+        back_populates="category",
+        cascade="all, delete-orphan",
+    )
+
+    def __repr__(self) -> str:
         return f"<Category(name='{self.name}')>"

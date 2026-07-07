@@ -4,6 +4,8 @@ Audit Log Model
 Stores system audit logs for important user and admin actions.
 """
 
+from __future__ import annotations
+
 from sqlalchemy import ForeignKey, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -52,11 +54,16 @@ class AuditLog(BaseModel):
         nullable=True,
     )
 
-user: Mapped["User"] = relationship(
-    back_populates="audit_logs",
-)
+    # ==========================================
+    # Relationships
+    # ==========================================
 
-def __repr__(self):
+    user: Mapped["User"] = relationship(
+        "User",
+        back_populates="audit_logs",
+    )
+
+    def __repr__(self) -> str:
         return (
             f"<AuditLog(action='{self.action}', entity='{self.entity_name}')>"
         )

@@ -4,6 +4,8 @@ Booking Model
 Stores customer bookings for services.
 """
 
+from __future__ import annotations
+
 from datetime import datetime
 from enum import Enum
 
@@ -70,27 +72,35 @@ class Booking(BaseModel):
         nullable=True,
     )
 
-customer: Mapped["CustomerProfile"] = relationship(
-    back_populates="bookings",
-)
+    # ==========================================
+    # Relationships
+    # ==========================================
 
-service: Mapped["Service"] = relationship(
-    back_populates="bookings",
-)
+    customer: Mapped["CustomerProfile"] = relationship(
+        "CustomerProfile",
+        back_populates="bookings",
+    )
 
-payment: Mapped["Payment"] = relationship(
-    back_populates="booking",
-    uselist=False,
-    cascade="all, delete-orphan",
-)
+    service: Mapped["Service"] = relationship(
+        "Service",
+        back_populates="bookings",
+    )
 
-review: Mapped["Review"] = relationship(
-    back_populates="booking",
-    uselist=False,
-    cascade="all, delete-orphan",
-)
+    payment: Mapped["Payment"] = relationship(
+        "Payment",
+        back_populates="booking",
+        uselist=False,
+        cascade="all, delete-orphan",
+    )
 
-def __repr__(self):
+    review: Mapped["Review"] = relationship(
+        "Review",
+        back_populates="booking",
+        uselist=False,
+        cascade="all, delete-orphan",
+    )
+
+    def __repr__(self) -> str:
         return (
             f"<Booking(id={self.id}, status='{self.status.value}')>"
         )
