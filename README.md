@@ -1,4 +1,9 @@
 # Smart Hire
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> d0fad27e10f8c6c1abb304a2c882cdaadc5638cd
 
 ## Project Overview
 
@@ -100,3 +105,7 @@ Program: Diploma in Advanced AI & Software Engineering
 Batch: 25/26
 
 Project: Smart Hire
+<<<<<<< HEAD
+>>>>>>> d0fad27e10f8c6c1abb304a2c882cdaadc5638cd
+=======
+>>>>>>> d0fad27e10f8c6c1abb304a2c882cdaadc5638cd
