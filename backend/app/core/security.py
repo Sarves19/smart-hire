@@ -3,10 +3,13 @@ Security Module
 
 Handles password hashing and verification using Argon2.
 
-This module is responsible ONLY for password security.
-JWT generation and validation are handled separately in jwt.py.
+This module is responsible for:
+- Password hashing
+- Password verification
+- OAuth2 Bearer Token configuration
 """
 
+from fastapi.security import OAuth2PasswordBearer
 from pwdlib import PasswordHash
 
 
@@ -21,16 +24,14 @@ class PasswordManager:
         """
         self.password_hasher = PasswordHash.recommended()
 
-    def hash_password(self, password: str) -> str:
+    def hash_password(
+        self,
+        password: str,
+    ) -> str:
         """
         Hash a plain text password.
-
-        Args:
-            password: User's plain text password.
-
-        Returns:
-            Secure Argon2 hashed password.
         """
+
         return self.password_hasher.hash(password)
 
     def verify_password(
@@ -40,19 +41,25 @@ class PasswordManager:
     ) -> bool:
         """
         Verify a password against its hash.
-
-        Args:
-            plain_password: Password entered by the user.
-            hashed_password: Password stored in the database.
-
-        Returns:
-            True if password matches.
-            False otherwise.
         """
+
         return self.password_hasher.verify(
             plain_password,
             hashed_password,
         )
 
 
+# =====================================================
+# Password Manager Instance
+# =====================================================
+
 password_manager = PasswordManager()
+
+
+# =====================================================
+# OAuth2 Authentication Scheme
+# =====================================================
+
+oauth2_scheme = OAuth2PasswordBearer(
+    tokenUrl="/api/v1/auth/login",
+)

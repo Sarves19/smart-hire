@@ -4,6 +4,8 @@ User Model
 Represents all users in the Smart Hire system.
 """
 
+from __future__ import annotations
+
 from enum import Enum
 
 from sqlalchemy import Boolean, Enum as SqlEnum, String
@@ -79,18 +81,27 @@ class User(BaseModel):
     # ==========================================
 
     customer_profile: Mapped["CustomerProfile"] = relationship(
+        "CustomerProfile",
         back_populates="customer",
         uselist=False,
         cascade="all, delete-orphan",
     )
 
     provider_profile: Mapped["ProviderProfile"] = relationship(
+        "ProviderProfile",
         back_populates="provider",
         uselist=False,
         cascade="all, delete-orphan",
     )
 
     notifications: Mapped[list["Notification"]] = relationship(
+        "Notification",
+        back_populates="user",
+        cascade="all, delete-orphan",
+    )
+
+    audit_logs: Mapped[list["AuditLog"]] = relationship(
+        "AuditLog",
         back_populates="user",
         cascade="all, delete-orphan",
     )
@@ -101,8 +112,4 @@ class User(BaseModel):
             f"email='{self.email}', "
             f"role='{self.role.value}')>"
         )
-    
-audit_logs: Mapped[list["AuditLog"]] = relationship(
-    back_populates="user",
-)
     

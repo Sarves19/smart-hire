@@ -4,6 +4,8 @@ Payment Model
 Stores payment information for bookings.
 """
 
+from __future__ import annotations
+
 from decimal import Decimal
 from enum import Enum
 
@@ -65,15 +67,21 @@ class Payment(BaseModel):
 
     transaction_reference: Mapped[str | None] = mapped_column(
         String(255),
-        nullable=True,
         unique=True,
+        nullable=True,
     )
 
-booking: Mapped["Booking"] = relationship(
-    back_populates="payment",
-)
+    # ==========================================
+    # Relationships
+    # ==========================================
 
-def __repr__(self):
+    booking: Mapped["Booking"] = relationship(
+        "Booking",
+        back_populates="payment",
+    )
+
+    def __repr__(self) -> str:
         return (
-            f"<Payment(id={self.id}, status='{self.payment_status.value}')>"
+            f"<Payment(id={self.id}, "
+            f"status='{self.payment_status.value}')>"
         )

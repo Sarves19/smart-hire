@@ -4,7 +4,9 @@ Recommendation Model
 Stores AI-generated service recommendations for customers.
 """
 
-from sqlalchemy import ForeignKey, Float
+from __future__ import annotations
+
+from sqlalchemy import Float, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.models.base import BaseModel
@@ -34,15 +36,21 @@ class Recommendation(BaseModel):
         nullable=False,
     )
 
-customer: Mapped["CustomerProfile"] = relationship(
-    back_populates="recommendations",
-)
+    # ==========================================
+    # Relationships
+    # ==========================================
 
-service: Mapped["Service"] = relationship(
-    back_populates="recommendations",
-)
+    customer: Mapped["CustomerProfile"] = relationship(
+        "CustomerProfile",
+        back_populates="recommendations",
+    )
 
-def __repr__(self):
+    service: Mapped["Service"] = relationship(
+        "Service",
+        back_populates="recommendations",
+    )
+
+    def __repr__(self) -> str:
         return (
             f"<Recommendation(customer_id={self.customer_id}, "
             f"service_id={self.service_id}, "

@@ -4,6 +4,8 @@ Provider Profile Model
 Stores service provider-specific information.
 """
 
+from __future__ import annotations
+
 from sqlalchemy import Boolean, Float, ForeignKey, Integer, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -30,8 +32,8 @@ class ProviderProfile(BaseModel):
 
     business_registration_number: Mapped[str | None] = mapped_column(
         String(100),
-        nullable=True,
         unique=True,
+        nullable=True,
     )
 
     description: Mapped[str | None] = mapped_column(
@@ -77,11 +79,22 @@ class ProviderProfile(BaseModel):
         nullable=False,
     )
 
-provider: Mapped["User"] = relationship(
-    back_populates="provider_profile",
-)
+    # ==========================================
+    # Relationships
+    # ==========================================
 
-services: Mapped[list["Service"]] = relationship(
-    back_populates="provider",
-    cascade="all, delete-orphan",
-)
+    provider: Mapped["User"] = relationship(
+        "User",
+        back_populates="provider_profile",
+    )
+
+    services: Mapped[list["Service"]] = relationship(
+        "Service",
+        back_populates="provider",
+        cascade="all, delete-orphan",
+    )
+
+    def __repr__(self) -> str:
+        return (
+            f"<ProviderProfile(id={self.id}, business='{self.business_name}')>"
+        )

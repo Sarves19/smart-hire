@@ -4,7 +4,8 @@ Customer Profile Model
 Stores customer-specific information.
 """
 
-from app.models.user import User
+from __future__ import annotations
+
 from sqlalchemy import ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -44,21 +45,34 @@ class CustomerProfile(BaseModel):
         nullable=True,
     )
 
-customer: Mapped["User"] = relationship(
-    back_populates="customer_profile",
-)
+    # ==========================================
+    # Relationships
+    # ==========================================
 
-bookings: Mapped[list["Booking"]] = relationship(
-    back_populates="customer",
-    cascade="all, delete-orphan",
-)
+    customer: Mapped["User"] = relationship(
+        "User",
+        back_populates="customer_profile",
+    )
 
-reviews: Mapped[list["Review"]] = relationship(
-    back_populates="customer",
-    cascade="all, delete-orphan",
-)
+    bookings: Mapped[list["Booking"]] = relationship(
+        "Booking",
+        back_populates="customer",
+        cascade="all, delete-orphan",
+    )
 
-recommendations: Mapped[list["Recommendation"]] = relationship(
-    back_populates="customer",
-    cascade="all, delete-orphan",
-)
+    reviews: Mapped[list["Review"]] = relationship(
+        "Review",
+        back_populates="customer",
+        cascade="all, delete-orphan",
+    )
+
+    recommendations: Mapped[list["Recommendation"]] = relationship(
+        "Recommendation",
+        back_populates="customer",
+        cascade="all, delete-orphan",
+    )
+
+    def __repr__(self) -> str:
+        return (
+            f"<CustomerProfile(id={self.id}, user_id={self.user_id})>"
+        )

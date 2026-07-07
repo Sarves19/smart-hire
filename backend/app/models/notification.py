@@ -4,6 +4,8 @@ Notification Model
 Stores notifications sent to users.
 """
 
+from __future__ import annotations
+
 from enum import Enum
 
 from sqlalchemy import Boolean, Enum as SqlEnum, ForeignKey, String, Text
@@ -57,11 +59,16 @@ class Notification(BaseModel):
         nullable=False,
     )
 
-user: Mapped["User"] = relationship(
-    back_populates="notifications",
-)
+    # ==========================================
+    # Relationships
+    # ==========================================
 
-def __repr__(self):
+    user: Mapped["User"] = relationship(
+        "User",
+        back_populates="notifications",
+    )
+
+    def __repr__(self) -> str:
         return (
             f"<Notification(id={self.id}, title='{self.title}')>"
         )

@@ -4,6 +4,8 @@ Review Model
 Stores customer reviews for completed services.
 """
 
+from __future__ import annotations
+
 from sqlalchemy import CheckConstraint, ForeignKey, Integer, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -45,26 +47,33 @@ class Review(BaseModel):
         nullable=True,
     )
 
-booking: Mapped["Booking"] = relationship(
-    back_populates="review",
-)
+    # ==========================================
+    # Relationships
+    # ==========================================
 
-customer: Mapped["CustomerProfile"] = relationship(
-    back_populates="reviews",
-)
+    booking: Mapped["Booking"] = relationship(
+        "Booking",
+        back_populates="review",
+    )
 
-service: Mapped["Service"] = relationship(
-    back_populates="reviews",
-)
+    customer: Mapped["CustomerProfile"] = relationship(
+        "CustomerProfile",
+        back_populates="reviews",
+    )
 
-__table_args__ = (
+    service: Mapped["Service"] = relationship(
+        "Service",
+        back_populates="reviews",
+    )
+
+    __table_args__ = (
         CheckConstraint(
             "rating >= 1 AND rating <= 5",
             name="check_rating_range",
         ),
     )
 
-def __repr__(self):
+    def __repr__(self) -> str:
         return (
             f"<Review(id={self.id}, rating={self.rating})>"
         )
