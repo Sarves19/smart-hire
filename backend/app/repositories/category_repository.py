@@ -1,7 +1,7 @@
 """
-Service Repository
+Category Repository
 
-Handles all database operations related to services.
+Handles all database operations related to categories.
 """
 
 from typing import Optional
@@ -9,12 +9,12 @@ from typing import Optional
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.models.service import Service
+from app.models.category import Category
 
 
-class ServiceRepository:
+class CategoryRepository:
     """
-    Repository responsible for Service operations.
+    Repository responsible for Category operations.
     """
 
     def __init__(self, db: Session):
@@ -26,17 +26,17 @@ class ServiceRepository:
 
     def create(
         self,
-        service: Service,
-    ) -> Service:
+        category: Category,
+    ) -> Category:
         """
-        Create a service.
+        Create a category.
         """
 
-        self.db.add(service)
+        self.db.add(category)
         self.db.commit()
-        self.db.refresh(service)
+        self.db.refresh(category)
 
-        return service
+        return category
 
     # =====================================================
     # READ
@@ -44,42 +44,42 @@ class ServiceRepository:
 
     def get_by_id(
         self,
-        service_id: int,
-    ) -> Optional[Service]:
+        category_id: int,
+    ) -> Optional[Category]:
         """
-        Get service by ID.
+        Get category by ID.
         """
 
-        stmt = select(Service).where(
-            Service.id == service_id
+        stmt = select(Category).where(
+            Category.id == category_id
         )
 
         result = self.db.execute(stmt)
 
         return result.scalar_one_or_none()
 
-    def get_by_provider(
+    def get_by_name(
         self,
-        provider_id: int,
-    ) -> list[Service]:
+        name: str,
+    ) -> Optional[Category]:
         """
-        Get all services belonging to a provider.
+        Get category by name.
         """
 
-        stmt = select(Service).where(
-            Service.provider_id == provider_id
+        stmt = select(Category).where(
+            Category.name == name
         )
 
         result = self.db.execute(stmt)
 
-        return list(result.scalars().all())
+        return result.scalar_one_or_none()
 
-    def list_services(self) -> list[Service]:
+    def list_categories(self) -> list[Category]:
         """
-        Return all services.
+        Return all categories.
         """
 
-        stmt = select(Service)
+        stmt = select(Category)
 
         result = self.db.execute(stmt)
 
@@ -91,16 +91,16 @@ class ServiceRepository:
 
     def update(
         self,
-        service: Service,
-    ) -> Service:
+        category: Category,
+    ) -> Category:
         """
-        Update service.
+        Update category.
         """
 
         self.db.commit()
-        self.db.refresh(service)
+        self.db.refresh(category)
 
-        return service
+        return category
 
     # =====================================================
     # DELETE
@@ -108,11 +108,11 @@ class ServiceRepository:
 
     def delete(
         self,
-        service: Service,
+        category: Category,
     ) -> None:
         """
-        Delete service.
+        Delete category.
         """
 
-        self.db.delete(service)
+        self.db.delete(category)
         self.db.commit()

@@ -69,6 +69,16 @@ class RefreshTokenRequest(BaseModel):
     refresh_token: str
 
 
+
+class RefreshTokenResponse(BaseModel):
+    """
+    Response schema for a refreshed access token.
+    """
+
+    access_token: str
+    token_type: str = "bearer"
+
+
 class MessageResponse(BaseModel):
     """
     Generic message response.

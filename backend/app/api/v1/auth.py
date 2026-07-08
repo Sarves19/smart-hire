@@ -8,11 +8,11 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
-from app.core.dependencies import get_current_active_user
-from app.models.user import User
 from app.schemas.auth import (
     LoginRequest,
     MessageResponse,
+    RefreshTokenRequest,
+    RefreshTokenResponse,
     RegisterRequest,
     TokenResponse,
 )
@@ -88,24 +88,32 @@ def login(
 
 
 # =====================================================
-# Get Current User
+# Refresh Access Token
 # =====================================================
 
-@router.get("/me")
-def get_me(
-    current_user: User = Depends(get_current_active_user),
+@router.post(
+    "/refresh",
+    response_model=RefreshTokenResponse,
+)
+def refresh_token(
+    request: RefreshTokenRequest,
+    db: Session = Depends(get_db),
 ):
     """
-    Returns the currently authenticated user.
+    Generate a new access token using a refresh token.
     """
 
-    return {
-        "id": current_user.id,
-        "first_name": current_user.first_name,
-        "last_name": current_user.last_name,
-        "email": current_user.email,
-        "phone_number": current_user.phone_number,
-        "role": current_user.role.value,
-        "is_active": current_user.is_active,
-        "is_verified": current_user.is_verified,
-    }
+    service = AuthService(db)
+
+    try:
+        token = service.refresh_access_token(
+            request.refresh_token
+        )
+
+        return RefreshTokenResponse(**token)
+
+    except ValueError as e:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail=str(e),
+        )
