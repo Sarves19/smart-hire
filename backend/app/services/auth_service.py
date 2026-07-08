@@ -87,3 +87,39 @@ class AuthService:
             "refresh_token": refresh_token,
             "token_type": "bearer",
         }
+    
+        # =====================================================
+    # REFRESH ACCESS TOKEN
+    # =====================================================
+
+    def refresh_access_token(
+        self,
+        refresh_token: str,
+    ) -> dict:
+        """
+        Generate a new access token using a valid refresh token.
+        """
+
+        payload = jwt_manager.verify_token(refresh_token)
+
+        if payload.get("type") != "refresh":
+            raise ValueError("Invalid refresh token.")
+
+        user_id = payload.get("sub")
+
+        if user_id is None:
+            raise ValueError("Invalid refresh token.")
+
+        user = self.user_repository.get_by_id(int(user_id))
+
+        if user is None:
+            raise ValueError("User not found.")
+
+        access_token = jwt_manager.create_access_token(
+            subject=str(user.id)
+        )
+
+        return {
+            "access_token": access_token,
+            "token_type": "bearer",
+        }
