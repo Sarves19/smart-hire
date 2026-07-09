@@ -1,7 +1,7 @@
 """
-Booking Repository
+Notification Repository
 
-Handles all database operations related to bookings.
+Handles all database operations related to notifications.
 """
 
 from typing import Optional
@@ -9,12 +9,12 @@ from typing import Optional
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.models.booking import Booking
+from app.models.notification import Notification
 
 
-class BookingRepository:
+class NotificationRepository:
     """
-    Repository responsible for booking operations.
+    Repository responsible for notification operations.
     """
 
     def __init__(self, db: Session):
@@ -26,17 +26,17 @@ class BookingRepository:
 
     def create(
         self,
-        booking: Booking,
-    ) -> Booking:
+        notification: Notification,
+    ) -> Notification:
         """
-        Create a new booking.
+        Create a notification.
         """
 
-        self.db.add(booking)
+        self.db.add(notification)
         self.db.commit()
-        self.db.refresh(booking)
+        self.db.refresh(notification)
 
-        return booking
+        return notification
 
     # =====================================================
     # READ
@@ -44,58 +44,44 @@ class BookingRepository:
 
     def get_by_id(
         self,
-        booking_id: int,
-    ) -> Optional[Booking]:
+        notification_id: int,
+    ) -> Optional[Notification]:
         """
-        Get booking by ID.
+        Get notification by ID.
         """
 
-        stmt = select(Booking).where(
-            Booking.id == booking_id
+        stmt = select(Notification).where(
+            Notification.id == notification_id
         )
 
         result = self.db.execute(stmt)
 
         return result.scalar_one_or_none()
 
-    def get_customer_bookings(
+    def get_user_notifications(
         self,
-        customer_id: int,
-    ) -> list[Booking]:
+        user_id: int,
+    ) -> list[Notification]:
         """
-        Return bookings of a customer.
+        Return all notifications for a user.
         """
 
-        stmt = select(Booking).where(
-            Booking.customer_id == customer_id
+        stmt = (
+            select(Notification)
+            .where(Notification.user_id == user_id)
+            .order_by(Notification.created_at.desc())
         )
 
         result = self.db.execute(stmt)
 
         return list(result.scalars().all())
 
-    def get_provider_bookings(
-        self,
-        provider_id: int,
-    ) -> list[Booking]:
+    def list_notifications(self) -> list[Notification]:
         """
-        Return bookings of a provider.
+        Return all notifications.
         """
 
-        stmt = select(Booking).where(
-            Booking.provider_id == provider_id
-        )
-
-        result = self.db.execute(stmt)
-
-        return list(result.scalars().all())
-
-    def list_bookings(self) -> list[Booking]:
-        """
-        Return all bookings.
-        """
-
-        stmt = select(Booking)
+        stmt = select(Notification)
 
         result = self.db.execute(stmt)
 
@@ -107,16 +93,16 @@ class BookingRepository:
 
     def update(
         self,
-        booking: Booking,
-    ) -> Booking:
+        notification: Notification,
+    ) -> Notification:
         """
-        Update a booking.
+        Update notification.
         """
 
         self.db.commit()
-        self.db.refresh(booking)
+        self.db.refresh(notification)
 
-        return booking
+        return notification
 
     # =====================================================
     # DELETE
@@ -124,11 +110,11 @@ class BookingRepository:
 
     def delete(
         self,
-        booking: Booking,
+        notification: Notification,
     ) -> None:
         """
-        Delete a booking.
+        Delete notification.
         """
 
-        self.db.delete(booking)
+        self.db.delete(notification)
         self.db.commit()
