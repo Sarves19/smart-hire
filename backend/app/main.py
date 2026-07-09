@@ -6,9 +6,13 @@ from fastapi import FastAPI
 
 from app.api.v1 import (
     auth_router,
+    bookings_router,
     category_router,
     customer_router,
+    notifications_router,
+    payments_router,
     provider_router,
+    reviews_router,
     service_router,
     users_router,
 )
@@ -52,6 +56,26 @@ app.include_router(
 
 app.include_router(
     service_router,
+    prefix="/api/v1",
+)
+
+app.include_router(
+    bookings_router,
+    prefix="/api/v1",
+)
+
+app.include_router(
+    payments_router,
+    prefix="/api/v1",
+)
+
+app.include_router(
+    reviews_router,
+    prefix="/api/v1",
+)
+
+app.include_router(
+    notifications_router,
     prefix="/api/v1",
 )
 

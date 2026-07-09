@@ -1,45 +1,43 @@
 """
-Payment API
+Notification API
 
-Provides endpoints for payment management.
+Provides endpoints for notification management.
 """
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
-from app.models.payment import PaymentStatus
-from app.schemas.payment import (
-    PaymentCreate,
-    PaymentResponse,
-    PaymentStatusUpdate,
-    PaymentUpdate,
+from app.schemas.notification import (
+    NotificationCreate,
+    NotificationResponse,
+    NotificationUpdate,
 )
-from app.services.payment_service import PaymentService
+from app.services.notification_service import NotificationService
 
 router = APIRouter(
-    prefix="/payments",
-    tags=["Payments"],
+    prefix="/notifications",
+    tags=["Notifications"],
 )
 
 
 # =====================================================
-# CREATE PAYMENT
+# CREATE NOTIFICATION
 # =====================================================
 
 @router.post(
     "/",
-    response_model=PaymentResponse,
+    response_model=NotificationResponse,
     status_code=status.HTTP_201_CREATED,
 )
-def create_payment(
-    request: PaymentCreate,
+def create_notification(
+    request: NotificationCreate,
     db: Session = Depends(get_db),
 ):
-    service = PaymentService(db)
+    service = NotificationService(db)
 
     try:
-        return service.create_payment(request)
+        return service.create_notification(request)
 
     except ValueError as e:
         raise HTTPException(
@@ -49,37 +47,37 @@ def create_payment(
 
 
 # =====================================================
-# LIST PAYMENTS
+# LIST NOTIFICATIONS
 # =====================================================
 
 @router.get(
     "/",
-    response_model=list[PaymentResponse],
+    response_model=list[NotificationResponse],
 )
-def list_payments(
+def list_notifications(
     db: Session = Depends(get_db),
 ):
-    service = PaymentService(db)
+    service = NotificationService(db)
 
-    return service.list_payments()
+    return service.list_notifications()
 
 
 # =====================================================
-# GET PAYMENT
+# GET NOTIFICATION
 # =====================================================
 
 @router.get(
-    "/{payment_id}",
-    response_model=PaymentResponse,
+    "/{notification_id}",
+    response_model=NotificationResponse,
 )
-def get_payment(
-    payment_id: int,
+def get_notification(
+    notification_id: int,
     db: Session = Depends(get_db),
 ):
-    service = PaymentService(db)
+    service = NotificationService(db)
 
     try:
-        return service.get_payment(payment_id)
+        return service.get_notification(notification_id)
 
     except ValueError as e:
         raise HTTPException(
@@ -89,23 +87,40 @@ def get_payment(
 
 
 # =====================================================
-# UPDATE PAYMENT
+# GET USER NOTIFICATIONS
+# =====================================================
+
+@router.get(
+    "/user/{user_id}",
+    response_model=list[NotificationResponse],
+)
+def get_user_notifications(
+    user_id: int,
+    db: Session = Depends(get_db),
+):
+    service = NotificationService(db)
+
+    return service.get_user_notifications(user_id)
+
+
+# =====================================================
+# MARK AS READ
 # =====================================================
 
 @router.put(
-    "/{payment_id}",
-    response_model=PaymentResponse,
+    "/{notification_id}",
+    response_model=NotificationResponse,
 )
-def update_payment(
-    payment_id: int,
-    request: PaymentUpdate,
+def update_notification(
+    notification_id: int,
+    request: NotificationUpdate,
     db: Session = Depends(get_db),
 ):
-    service = PaymentService(db)
+    service = NotificationService(db)
 
     try:
-        return service.update_payment(
-            payment_id,
+        return service.update_notification(
+            notification_id,
             request,
         )
 
@@ -117,52 +132,26 @@ def update_payment(
 
 
 # =====================================================
-# UPDATE PAYMENT STATUS
-# =====================================================
-
-@router.patch(
-    "/{payment_id}/status",
-    response_model=PaymentResponse,
-)
-def update_status(
-    payment_id: int,
-    request: PaymentStatusUpdate,
-    db: Session = Depends(get_db),
-):
-    service = PaymentService(db)
-
-    try:
-        return service.update_status(
-            payment_id,
-            PaymentStatus(request.status),
-        )
-
-    except ValueError as e:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=str(e),
-        )
-
-
-# =====================================================
-# DELETE PAYMENT
+# DELETE NOTIFICATION
 # =====================================================
 
 @router.delete(
-    "/{payment_id}",
+    "/{notification_id}",
     status_code=status.HTTP_204_NO_CONTENT,
 )
-def delete_payment(
-    payment_id: int,
+def delete_notification(
+    notification_id: int,
     db: Session = Depends(get_db),
 ):
-    service = PaymentService(db)
+    service = NotificationService(db)
 
     try:
-        service.delete_payment(payment_id)
+        service.delete_notification(notification_id)
 
     except ValueError as e:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=str(e),
         )
+        
+        
