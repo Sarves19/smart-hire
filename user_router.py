@@ -4,8 +4,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from auth_utils import AuthUtils
 from database_config import get_db
 from db_models import User
-from resp_models import UserResponse, CustomerCreate, ProviderCreate, TokenResponse, LoginRequest, ProviderResponse
-from user_repository import UserRepository, ProviderRepository
+from provider_repository import ProviderRepository
+from resp_models import UserResponse, CustomerCreate, TokenResponse, ProviderResponse, ReviewResponse, ReviewCreate
+from user_repository import UserRepository, ReviewRepository
 
 router = APIRouter()
 user_repo = UserRepository()
@@ -19,19 +20,6 @@ async def register_customer(user: CustomerCreate, db: AsyncSession = Depends(get
             detail="User already exists with this email address!"
         )
     user.role = "customer"
-    new_user = await user_repo.create_user(db,user)
-    return new_user
-
-
-@router.post("/register/provider", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
-async def register_provider(user: ProviderCreate, db: AsyncSession = Depends(get_db)):
-    existing_user = await user_repo.get_user_by_email(db, user.email)
-    if existing_user:
-        raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT,
-            detail="User already exists with this email address!"
-        )
-    user.role = "provider"
     new_user = await user_repo.create_user(db,user)
     return new_user
 
@@ -75,3 +63,21 @@ async def get_all_providers(service_type: str = None,location: str = None,db: As
            detail="No service providers found matching your search criteria."
        )
    return providers
+
+
+@router.post("/reviews", response_model=ReviewResponse, status_code=status.HTTP_201_CREATED)
+async def create_new_review(review_data: ReviewCreate, db:AsyncSession = Depends(get_db),current_user: User = Depends(AuthUtils.get_current_user)):
+    if current_user.role != "customer":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Only customers are allowed to write reviews."
+        )
+    try:
+        new_review = await ReviewRepository.create_review(db,review_data=review_data,customer_id=current_user.id)
+        return new_review
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error creating review: {str(e)}"
+        )
+

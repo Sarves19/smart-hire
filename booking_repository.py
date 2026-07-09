@@ -22,6 +22,7 @@ class BookingRepository:
             description=booking_data.description,
             customer_id=current_user_id,
             provider_id=provider.user_id,
+            status="pending",
             booking_date=booking_data.booking_date
         )
 
@@ -59,4 +60,22 @@ class BookingRepository:
         print("==============================================")
 
         return bookings
+
+    @staticmethod
+    async def update_booking_status(db:AsyncSession, booking_id:int, new_status:str, provider_id:int):
+        query = select(Booking).where(Booking.id == booking_id,Booking.provider_id == provider_id)
+        result = await db.execute(query)
+        booking = result.scalar()
+
+        if not booking:
+            raise HTTPException(
+                status_code=404,
+                detail="Booking not found or you are not authorized to update this booking."
+            )
+
+        booking.status = new_status
+
+        await db.commit()
+        await db.refresh(booking)
+        return booking
 

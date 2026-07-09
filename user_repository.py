@@ -1,11 +1,13 @@
+import datetime
 import logging
-from typing import Union
+from http.client import HTTPException
+from typing import Union, Optional
 from auth_utils import AuthUtils
-from sqlalchemy import select
+from sqlalchemy import select, func
 from sqlalchemy.orm import joinedload
 from sqlalchemy.ext.asyncio import AsyncSession
-from db_models import User, Provider
-from resp_models import UserResponse, CustomerCreate, ProviderCreate
+from db_models import User, Provider, Review
+from resp_models import UserResponse, CustomerCreate, ProviderCreate, ReviewCreate, ProviderUpdate
 
 logger = logging.getLogger("smart_hire_logger")
 logging.basicConfig(level=logging.INFO)
@@ -55,36 +57,39 @@ class UserRepository():
         return result.scalar_one_or_none()
 
 
-class ProviderRepository:
+
+class ReviewRepository:
 
     @staticmethod
-    async def get_all_providers(db: AsyncSession, service_type: str = None, location : str = None):
-        query = select(Provider).options(joinedload(Provider.user))
+    async def create_review(db:AsyncSession, review_data: ReviewCreate, customer_id: int):
+        db_review = Review(
+            rating=review_data.rating,
+            comment=review_data.comment,
+            provider_id=review_data.provider_id,
+            customer_id=customer_id,
+            review_date=review_data.review_date,
+        )
+        db.add(db_review)
+        await db.commit()
+        await db.refresh(db_review)
 
-        if service_type:
-            query = query.where(Provider.service_type.ilike(f"%{service_type}"))
+        avg_rating_query = select(func.avg(Review.rating).filter(Review.provider_id == review_data.provider_id))
+        result = await db.execute(avg_rating_query)
+        avg_rating = result.scalar()
 
-        if location:
-            query = query.where(Provider.location.ilike(f"%{location}"))
+        if avg_rating is not None:
+            provider_query = select(Provider).where(Provider.id == review_data.provider_id)
+            provider_result = await db.execute(provider_query)
+            provider = provider_result.scalar()
+
+            if provider:
+                provider.rating = round(float(avg_rating),2)
+                await db.commit()
+
+        return db_review
+
+    @staticmethod
+    async def get_reviews_for_provider(db:AsyncSession,provider_id: int):
+        query = select(Review).where(Review.provider_id == provider_id)
         result = await db.execute(query)
-        providers = result.scalars().all()
-
-        provider_list = []
-        for p in providers:
-            user_name_val = p.user.username if p.user else "Unknown User"
-
-            provider_list.append({
-                "id": p.id,
-                "user_id": p.id,
-                "user_name": user_name_val,
-                "service_type": p.service_type,
-                "experience_years": p.experience_years,
-                "hourly_rate": p.hourly_rate,
-                "location": p.location,
-                "is_available": p.is_available,
-                "rating": p.rating
-            })
-        return provider_list
-
-
-
+        return result.scalars().all()

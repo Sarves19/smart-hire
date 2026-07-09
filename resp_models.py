@@ -1,7 +1,8 @@
 from datetime import datetime
+from decimal import Decimal
 from typing import Optional
 
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
 
 
 class UserBase(BaseModel):
@@ -21,9 +22,8 @@ class ProviderCreate(UserBase):
     location: str
 
 class ProviderResponse(BaseModel):
-    id: int              # providers.id
+    id: int # providers.id
     user_id: int # users.id
-    user_name: str
     service_type: str
     experience_years: int
     hourly_rate: float
@@ -34,19 +34,22 @@ class ProviderResponse(BaseModel):
     class Config:
         from_attributes = True
 
+class ProviderUpdate(BaseModel):
+    bio: Optional[str] = None
+    experience_years: int
+    hourly_rate: float
+    service_type: Optional[str] = None
+    is_available: bool
+    location: Optional[str] = None
+
 
 class UserResponse(UserBase):
     id: int
     role: str
-    provider_profile: ProviderResponse | None = None
+    provider_profile: ProviderResponse = None
 
     class Config:
         from_attributes = True
-
-
-class BookingBase(BaseModel):
-    job_title: str
-    description: str | None = None
 
 class BookingCreate(BaseModel):
     provider_profile_id: int
@@ -64,7 +67,7 @@ class BookingResponse(BaseModel):
     provider_id: int
     job_title: str
     description: Optional[str]
-    status: str
+    status: str = "pending"
     booking_date: datetime
     created_at: datetime
 
@@ -79,3 +82,73 @@ class TokenResponse(BaseModel):
     access_token: str
     token_type:str
     role:str
+
+
+class ReviewCreate(BaseModel):
+    rating: float = Field(..., gte=1.0, lte=5.0, description="rating must be between 1.0 and 5.0" )
+    comment: Optional[str] = Field(None, max_length=500, description="Optional text review")
+    provider_id: int
+    review_date: datetime
+
+class ReviewResponse(BaseModel):
+    id: int
+    rating: float
+    comment: Optional[str]
+    review_date: datetime
+    customer_id: int
+    provider_id: int
+
+    class Config:
+        from_attributes = True
+
+
+class CustomerDashboardMetrics(BaseModel):
+    total_bookings: int
+    pending_bookings: int
+    accepted_bookings:int
+    completed_bookings:int
+    rejected_bookings:int
+
+class ProviderDashboardMetrics(BaseModel):
+    total_bookings: int
+    pending_bookings: int
+    accepted_bookings: int
+    completed_bookings: int
+    rejected_bookings: int
+    average_rating: float
+    total_reviews: int
+
+
+class CategoryCreate(BaseModel):
+    name: str
+    description: Optional[str] = None
+
+class CategoryResponse(BaseModel):
+    category_id: int
+    name: str
+    description: Optional[str]
+    status: bool
+
+    class Config:
+        from_attributes = True
+
+
+class ServiceCreate(BaseModel):
+    category_id: int
+    title: str
+    description: Optional[str] = None
+    price: Decimal
+    duration: str
+
+class ServiceResponse(BaseModel):
+    service_id: int
+    provider_id: int
+    category_id: int
+    title: str
+    description: Optional[str]
+    price: Decimal
+    duration: str
+    status: str
+
+    class Config:
+        from_attributes = True

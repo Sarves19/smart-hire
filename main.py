@@ -1,9 +1,45 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
-from db_models import Base
-from database_config import engine
+
+from auth_utils import AuthUtils
+from provider_router import router as provider_router
+from dashboard_router import router as dashboard_router
+from db_models import Base, Admin
+from database_config import engine, async_session
 from user_router import router as user_router
 from booking_router import router as booking_router
+from category_router import router as category_router
+from sqlalchemy.future import select
+from db_models import User
+
+
+async def seed_admin_user():
+    async with async_session()as db:
+        query = select(User).where(User.email == "admin@smarthire.com")
+        result = await db.execute(query)
+        admin_exists = result.scalar()
+
+        if not admin_exists:
+            hashed_password = AuthUtils.hash_password("Admin123")
+
+            super_admin = User(
+                username="Super Admin",
+                email="admin@smarthire.com",
+                password=hashed_password,
+                role="admin",
+
+            )
+            db.add(super_admin)
+            await db.flush()
+
+            admin_profile = Admin(
+                user_id=super_admin.id,
+            )
+            db.add(admin_profile)
+            await db.commit()
+            print("Admin user created")
+        else:
+            print("Admin user already exists")
 
 
 
@@ -13,11 +49,15 @@ async def lifespan(app:FastAPI):
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
     print("Tables created.")
+    await seed_admin_user()
     yield
 
 app = FastAPI(title="Smart Hire API",lifespan=lifespan)
 app.include_router(user_router, prefix="/users", tags=["Users"])
 app.include_router(booking_router, prefix="/bookings", tags=["Bookings"])
+app.include_router(dashboard_router, prefix="/dashboard", tags=["Dashboard"])
+app.include_router(provider_router, prefix="/provider", tags=["Provider"])
+app.include_router(category_router, prefix="/category", tags=["Category"])
 
 @app.get("/")
 def read_root():
