@@ -1,0 +1,13 @@
+/* Segmented control buttons — auth mode/role tabs, filter tabs elsewhere.
+   Layered on top of .btn so the inactive state reads as a plain tab, not a CTA. */
+.s .btn.seg-btn {
+  background: transparent;
+  color: var(--muted);
+  box-shadow: none;
+}
+.s .btn.seg-btn:hover { filter: none; color: var(--ink2); }
+.s .btn.seg-btn.on {
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: var(--sh-sm);
+}

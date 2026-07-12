@@ -1,0 +1,19 @@
+/* ============================================================
+   Smart Hire — Hi-Fi Design System · "Crisp Modern SaaS"
+   Compiled component layer (loads after Tailwind's base+utilities).
+   Google Fonts are loaded via <link> tags in the base layout head,
+   not @import here, so the browser can start fetching them sooner.
+   ============================================================ */
+@import "tokens";
+@import "base";
+@import "buttons";
+@import "segmented";
+@import "chips-badges";
+@import "cards";
+@import "fields";
+@import "avatars";
+@import "nav";
+@import "data-display";
+@import "stepper";
+@import "phone-frame";
+@import "responsive";

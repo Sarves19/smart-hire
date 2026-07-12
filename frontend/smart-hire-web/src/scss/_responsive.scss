@@ -1,0 +1,185 @@
+/* ============================================================
+   Responsive layer. The component CSS above this file was ported
+   1:1 from the hi-fi handoff's fixed-width desktop canvas; this file
+   adapts it down to tablet/mobile viewports.
+   ============================================================ */
+
+/* ---------- page padding ---------- */
+/* Drop-in replacement for the ad-hoc `padding:Npx 80px` inline styles
+   scattered across the customer pages — pair with class="page-pad"
+   and keep only the vertical padding inline. */
+.page-pad { padding-left: 80px; padding-right: 80px; }
+@media (max-width: 1100px) { .page-pad { padding-left: 40px; padding-right: 40px; } }
+@media (max-width: 640px)  { .page-pad { padding-left: 16px; padding-right: 16px; } }
+
+/* ---------- responsive grids ---------- */
+/* Pair with the column count as a modifier: grid-2 / grid-3 / grid-4 / grid-6.
+   `gap` stays inline per-usage since it varies slightly page to page. */
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 560px) { .grid-2 { grid-template-columns: 1fr; } }
+
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 860px) { .grid-3 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .grid-3 { grid-template-columns: 1fr; } }
+
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 860px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .grid-4 { grid-template-columns: 1fr; } }
+
+.grid-6 { display: grid; grid-template-columns: repeat(6, 1fr); }
+@media (max-width: 860px) { .grid-6 { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 560px) { .grid-6 { grid-template-columns: repeat(2, 1fr); } }
+
+/* 7-wide calendar grid stays 7 columns at any width — narrow columns still work down to ~320px. */
+.grid-7 { display: grid; grid-template-columns: repeat(7, 1fr); }
+
+/* ---------- sticky rails (booking summary, filters, profile preview) ---------- */
+/* These keep a fixed pixel width via inline style on desktop; this class
+   only adds the mobile override, so no per-page width edits are needed. */
+@media (max-width: 860px) {
+  .rail {
+    width: 100% !important;
+    position: static !important;
+    top: auto !important;
+  }
+}
+
+/* A `.grow` sibling next to a `.rail` is often pinned to a `min-width` inline
+   style so it doesn't get squeezed while both sit side by side on desktop.
+   That same min-width would force horizontal scroll once stacked full-width
+   on mobile, so drop it back to the `.grow` class's own default. */
+@media (max-width: 640px) {
+  .s .grow { min-width: 0 !important; }
+}
+
+/* ---------- AI hero input ---------- */
+.ai-hero { width: 100%; max-width: 700px; }
+
+/* ---------- home hero headline (inline font-size:60px in the original) ---------- */
+.hero-title { font-size: 60px; }
+@media (max-width: 760px) { .hero-title { font-size: 42px; } }
+@media (max-width: 480px) { .hero-title { font-size: 32px; } }
+
+/* ---------- generic responsive text/spacing knockdowns ---------- */
+@media (max-width: 640px) {
+  .s .d1 { font-size: 34px; }
+  .s .d2 { font-size: 26px; }
+}
+
+/* ---------- AI input action bar (Add photo / Location / Ask) ---------- */
+@media (max-width: 480px) {
+  .s .ai-bar { flex-wrap: wrap; }
+  .s .ai-bar > .btn.lg { width: 100%; justify-content: center; }
+}
+
+/* ============================================================
+   Customer top nav — collapses nav links into a hamburger panel
+   ============================================================ */
+.s .nav-toggle { display: none; }
+.s .mobile-nav-panel { display: none; }
+
+@media (max-width: 760px) {
+  .s .topnav { padding: 0 16px; gap: 12px; }
+  .s .navlinks { display: none; }
+  .s .nav-toggle { display: grid; order: -1; }
+  .s .mobile-nav-panel[data-open] {
+    display: flex; flex-direction: column; gap: 2px;
+    padding: 8px 16px 14px; border-bottom: 1px solid var(--line); background: var(--card);
+  }
+  .s .mobile-nav-panel a,
+  .s .mobile-nav-panel button {
+    padding: 10px 6px; font-weight: 600; color: var(--ink2); text-align: left; width: 100%;
+    display: flex; align-items: center; border-radius: 8px;
+  }
+  .s .mobile-nav-panel a.on { color: var(--brand-d); background: var(--tint); }
+}
+
+/* ============================================================
+   `.frame` (bodyClass: frame) locks the page to one fixed-height,
+   internally-scrolling app shell — right for a desktop dashboard,
+   wrong for mobile where the page should just scroll normally.
+   Turn it off below the breakpoint where the sidebar becomes a drawer.
+   ============================================================ */
+@media (max-width: 860px) {
+  .frame,
+  .frame .scroll,
+  .frame .shell,
+  .frame .main,
+  .frame .content {
+    height: auto;
+    overflow: visible;
+  }
+}
+
+/* Customer browse: filters + results split pane → stacked on mobile. */
+@media (max-width: 860px) {
+  .browse-split { height: auto !important; overflow: visible !important; flex-direction: column; }
+  .browse-filters { width: 100% !important; overflow: visible !important; border-right: none !important; border-bottom: 1px solid var(--line); }
+  .browse-results { overflow: visible !important; }
+}
+
+/* ============================================================
+   Provider / admin sidebar — off-canvas drawer on mobile
+   ============================================================ */
+.s .menu-toggle { display: none; }
+.s .side-backdrop { display: none; }
+
+@media (max-width: 860px) {
+  .s .menu-toggle { display: grid; }
+  .s .content { padding: 18px 16px; }
+
+  /* The topbar's caller() content (chip groups, export buttons, search…)
+     varies per page and can't all be individually hidden — let the bar
+     wrap to a second line instead of forcing the page wider. */
+  .s .topbar {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 64px;
+    padding: 10px 16px;
+    row-gap: 10px;
+  }
+
+  .s .side {
+    position: fixed; inset: 0 auto 0 0; width: 260px; z-index: 100;
+    transform: translateX(-100%); transition: transform .2s ease; box-shadow: var(--sh-lg);
+  }
+  .s .side[data-open] { transform: translateX(0); }
+
+  .s .side-backdrop[data-open] {
+    display: block; position: fixed; inset: 0; background: rgba(20, 15, 12, .45); z-index: 90;
+  }
+}
+
+/* Topbar furniture that doesn't fit once the sidebar becomes a drawer:
+   admin's search box, and the provider topbar's name/role text. */
+@media (max-width: 700px) {
+  .s .topbar-search { display: none; }
+}
+@media (max-width: 600px) {
+  .s .topbar-usertext { display: none; }
+}
+
+/* ============================================================
+   Auth split screen — brand panel drops away on mobile
+   ============================================================ */
+@media (max-width: 760px) {
+  .s [data-auth-root] { min-height: 100dvh !important; }
+  .s [data-auth-root] > div:first-child { display: none; }
+  .s [data-auth-root] .card.pad { width: 100% !important; }
+}
+
+@media (max-width: 480px) {
+  .s [data-auth-root] .grow.col.center.acenter { padding: 24px 16px !important; }
+}
+
+/* "Service Provider" is too long to sit alongside two siblings in a
+   nowrap flex row once it can't shrink past its own text — stack instead. */
+@media (max-width: 420px) {
+  .s .role-tabs { flex-direction: column; }
+}
+
+/* ============================================================
+   Mobile phone-frame pages — the frame itself already goes
+   edge-to-edge under 480px (see _phone-frame.scss); nothing else
+   to do here.
+   ============================================================ */

@@ -1,0 +1,38 @@
+---
+layout: layouts/base.njk
+---
+{% from "macros/ds.njk" import logo, av %}
+<div class="scroll">
+  <nav class="topnav">
+    <button class="iconbtn nav-toggle" type="button" data-nav-toggle aria-label="Open menu" aria-expanded="false">{% icon "menu", "sm" %}</button>
+    {{ logo(href="/customer/home.html") }}
+    <div class="navlinks" style="margin-left:10px">
+      <a href="/customer/browse.html" class="{% if here == 'Browse' %}on{% endif %}">Browse</a>
+      <a href="/customer/home.html" class="{% if here == 'How it works' %}on{% endif %}">How it works</a>
+      <a href="/provider/dashboard.html" class="{% if here == 'Become a pro' %}on{% endif %}">Become a pro</a>
+    </div>
+    <div class="grow"></div>
+    {% if auth == false %}
+    <a href="/auth/login.html" class="btn ghost sm">Log in</a>
+    <a href="/auth/register.html" class="btn sm">Sign up</a>
+    {% else %}
+    <button class="iconbtn" type="button" aria-label="Notifications">{% icon "bell", "sm" %}</button>
+    <a class="iconbtn" href="/customer/history.html" aria-label="Messages">{% icon "msg", "sm" %}</a>
+    <a href="/customer/history.html" class="row g8 acenter" style="margin-left:4px">{{ av(size=36, color="var(--teal)", text="AR") }}{% icon "chevd", "sm" %}</a>
+    {% endif %}
+  </nav>
+  <div class="mobile-nav-panel" data-nav-panel>
+    <a href="/customer/browse.html" class="{% if here == 'Browse' %}on{% endif %}">Browse</a>
+    <a href="/customer/home.html" class="{% if here == 'How it works' %}on{% endif %}">How it works</a>
+    <a href="/provider/dashboard.html" class="{% if here == 'Become a pro' %}on{% endif %}">Become a pro</a>
+    {% if auth == false %}
+    <a href="/auth/login.html">Log in</a>
+    <a href="/auth/register.html">Sign up</a>
+    {% else %}
+    <a href="/customer/history.html">My bookings</a>
+    {% endif %}
+  </div>
+  <div class="grow">
+    {{ content | safe }}
+  </div>
+</div>

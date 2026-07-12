@@ -1,0 +1,58 @@
+---
+layout: layouts/base.njk
+title: Provider dashboard
+bodyClass: frame
+---
+{% from "macros/shell.njk" import pSidebar, pTopbar %}
+{% from "macros/ds.njk" import stat, av, select, btn %}
+<div class="shell">
+  {{ pSidebar("Dashboard") }}
+  <div class="main">
+    {% call pTopbar("Dashboard", "Monday, 14 June") %}
+    <a href="/provider/add-service.html" class="btn">{% icon "plus", "sm" %} Add service</a>
+    {% endcall %}
+    <div class="content">
+      <div class="grid-4" style="gap:14px;margin-bottom:18px">
+        {{ stat(icon_="money", label="This month", value="$1,240", delta="12%", up=true) }}
+        {{ stat(icon_="briefcase", label="Jobs done", value="18", delta="3", up=true) }}
+        {{ stat(icon_="star", label="Rating", value="4.9", delta="0.1", up=true) }}
+        {{ stat(icon_="bell", label="New requests", value="3") }}
+      </div>
+      <div class="row g16 astart wrap">
+        <div class="grow col g16" style="min-width:380px">
+          <div class="card pad col g14">
+            <div class="row between acenter"><span class="h3">Upcoming bookings</span><a class="xs hl" style="font-weight:700" href="/provider/requests.html">View all</a></div>
+            {% set bookings = [
+              ["Leak & pipe repair", "Anya R.", "Today · 1:00 PM", "Baker St", "var(--teal)", "AR"],
+              ["Tap install", "Lee Morgan", "Tomorrow · 9:00 AM", "High Rd", "var(--violet)", "LM"],
+              ["Drain unblock", "Sam Tan", "Fri · 3:00 PM", "Park Ave", "var(--rose)", "ST"]
+            ] %}
+            {% for b in bookings %}
+            <div class="row between acenter" style="padding:12px 0;border-top:{% if loop.index0 %}1px solid var(--line){% else %}none{% endif %}">
+              <div class="row g12 acenter">{{ av(size=40, color=b[4], text=b[5], sq=true) }}<div><div class="h3" style="font-size:14px">{{ b[0] }}</div><div class="xs mut">{{ b[1] }} · {{ b[3] }}</div></div></div>
+              <div class="row g10 acenter"><span class="sm" style="font-weight:700">{{ b[2] }}</span><a href="/provider/requests.html" class="btn ghost sm">Details</a></div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="col g16 rail" style="width:320px;flex:none">
+          <div class="card pad col g12">
+            <div class="row between acenter"><span class="h3">Earnings</span>{{ select(name="range", options=["6 weeks","12 weeks","This year"]) }}</div>
+            <div class="bar-track">
+              {% for h in [40,58,46,72,64,88,76,94] %}<div class="bar {% if loop.index0 == 7 %}on{% endif %}" style="height:{{ h }}%"></div>{% endfor %}
+            </div>
+            <div class="row between xs mut"><span>Apr 28</span><span>This week</span></div>
+            <div class="divider"></div>
+            <div class="row between acenter"><span class="sm mut">Available to withdraw</span><span class="num" style="font-size:18px">$1,240</span></div>
+            <a href="/provider/earnings.html" class="btn block sm">Withdraw to bank</a>
+          </div>
+          <div class="card pad col g10">
+            <div class="row g8 acenter">{% icon "spark", "sm" %}<span class="h3" style="font-size:14px">AI insight</span></div>
+            <p class="sm mut">You appear in <b style="color:var(--ink)">"emergency leak"</b> searches but have no same-day slot. Open one to win ~4 more jobs/wk.</p>
+            <a class="sm hl" style="font-weight:700" href="/provider/services.html">Open a slot →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

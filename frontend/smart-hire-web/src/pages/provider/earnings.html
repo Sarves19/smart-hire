@@ -1,0 +1,60 @@
+---
+layout: layouts/base.njk
+title: Earnings
+bodyClass: frame
+---
+{% from "macros/shell.njk" import pSidebar, pTopbar %}
+{% from "macros/ds.njk" import stat %}
+{% set ledger = [
+  ["Jun 12", "Leak repair", "Anya R.", 65, "paid"], ["Jun 10", "Tap install", "Lee M.", 45, "paid"],
+  ["Jun 8", "Drain unblock", "Sam T.", 80, "pending"], ["Jun 5", "Boiler service", "Kim P.", 90, "paid"],
+  ["Jun 2", "Emergency callout", "Jo D.", 110, "paid"], ["May 30", "Leak repair", "Ash B.", 65, "paid"]
+] %}
+<div class="shell">
+  {{ pSidebar("Earnings") }}
+  <div class="main">
+    {% call pTopbar("Earnings") %}
+    <div class="row g8" data-chip-group="single">
+      <button type="button" class="chip">Week</button>
+      <button type="button" class="chip on">Month</button>
+      <button type="button" class="chip">Year</button>
+    </div>
+    <button type="button" class="btn ghost">{% icon "download", "sm" %} Export</button>
+    {% endcall %}
+    <div class="content">
+      <div class="grid-4" style="gap:14px;margin-bottom:18px">
+        {{ stat(icon_="money", label="Paid out", value="$1,240", delta="12%", up=true) }}
+        {{ stat(icon_="clock", label="Pending", value="$210") }}
+        {{ stat(icon_="briefcase", label="Jobs", value="18", delta="3", up=true) }}
+        {{ stat(icon_="trend", label="Avg / job", value="$69", delta="4%", up=true) }}
+      </div>
+      <div class="row g16 astart wrap">
+        <div class="card pad col g14 grow" style="min-width:380px">
+          <div class="row between acenter"><span class="h3">Payout history</span><a class="xs hl" style="font-weight:700" href="#">Statements</a></div>
+          <div style="overflow-x:auto">
+          <table class="table">
+            <thead><tr><th>Date</th><th>Job</th><th>Customer</th><th class="tr">Amount</th><th>Status</th></tr></thead>
+            <tbody>
+              {% for l in ledger %}
+              <tr>
+                <td class="mut nowrap">{{ l[0] }}</td>
+                <td style="font-weight:600">{{ l[1] }}</td>
+                <td class="mut">{{ l[2] }}</td>
+                <td class="tr"><span class="num">${{ l[3] }}</span></td>
+                <td>{% if l[4] == "paid" %}<span class="badge ok dot">Paid</span>{% else %}<span class="badge warn dot">Pending</span>{% endif %}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          </div>
+        </div>
+        <div class="card pad col g12 rail" style="width:280px;flex:none">
+          <span class="h3">Next payout</span>
+          <div class="panel col g4"><span class="num" style="font-size:30px">$210</span><span class="xs mut">3 pending jobs · arrives Jun 16</span></div>
+          <div class="row g10 acenter" style="margin-top:4px"><div style="width:40px;height:28px;border-radius:6px;background:var(--ink);color:#fff;display:grid;place-items:center">{% icon "card", "sm" %}</div><div class="grow"><div class="sm" style="font-weight:700">Barclays ••4821</div><div class="xs mut">Default payout method</div></div></div>
+          <button type="button" class="btn block">Withdraw now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

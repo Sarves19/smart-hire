@@ -1,0 +1,87 @@
+/* ============================================================
+   Smart Hire — Design tokens · "Crisp Modern SaaS"
+   Ported 1:1 from the handoff's ds.css custom properties.
+   ============================================================ */
+
+.s {
+  /* palette */
+  --bg: #faf8f5;
+  --card: #ffffff;
+  --card2: #f7f3ee;
+  --ink: #1c1714;
+  --ink2: #43392f;
+  --muted: #7c736c;
+  --faint: #a89f97;
+  --line: #ece7e1;
+  --line2: #e0d9d1;
+  --brand: #ea580c;
+  --brand-d: #c2410c;
+  --brand-ink: #ffffff;
+  --tint: #fdebdf;
+  --tint2: #fdf3ec;
+  --ok: #0e7a4a;
+  --ok-tint: #dcf3e7;
+  --warn: #b45309;
+  --warn-tint: #fdeccf;
+  --danger: #c2362b;
+  --danger-tint: #fbe3df;
+  --info: #0e7490;
+  --info-tint: #d9f0f4;
+  --teal: #0e7490;
+  --violet: #7c3aed;
+  --rose: #be185d;
+
+  /* shape */
+  --r: 14px;
+  --r-sm: 10px;
+  --r-lg: 18px;
+  --r-pill: 999px;
+  --sh-sm: 0 1px 2px rgba(28, 23, 20, 0.06);
+  --sh: 0 1px 2px rgba(28, 23, 20, 0.06), 0 10px 24px -16px rgba(28, 23, 20, 0.22);
+  --sh-lg: 0 2px 4px rgba(28, 23, 20, 0.05), 0 24px 48px -24px rgba(28, 23, 20, 0.3);
+
+  /* type */
+  --fd: "Space Grotesk", system-ui, sans-serif;
+  --fb: "Hanken Grotesk", system-ui, sans-serif;
+  --fm: "Space Mono", ui-monospace, monospace;
+
+  font-family: var(--fb);
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100%;
+  position: relative;
+  line-height: 1.5;
+}
+
+html {
+  height: 100%;
+}
+
+.frame {
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.s * {
+  box-sizing: border-box;
+}
+
+.s a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.s button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+.s ::selection {
+  background: var(--tint);
+  color: var(--brand-d);
+}

@@ -1,0 +1,57 @@
+---
+layout: layouts/base.njk
+title: Booking requests
+bodyClass: frame
+extraScripts:
+  - /assets/js/queue.js
+---
+{% from "macros/shell.njk" import pSidebar, pTopbar %}
+{% from "macros/ds.njk" import av, badge %}
+{% set reqs = [
+  { s: "Emergency leak repair", c: "Anya Roberts", t: "AR", col: "var(--teal)", when: "Today · ASAP", addr: "Baker St, SW1 · 0.8 mi", price: 110, note: "Water coming through the ceiling, urgent!", tag: "urgent" },
+  { s: "Drain unblocking", c: "Sam Tan", t: "ST", col: "var(--rose)", when: "Fri 13 · 3:00 PM", addr: "Park Ave · 2.0 mi", price: 80, note: "Kitchen sink draining slowly for a week.", tag: "" },
+  { s: "Tap & faucet install", c: "Lee Morgan", t: "LM", col: "var(--violet)", when: "Sat 14 · 10:00 AM", addr: "High Rd · 1.4 mi", price: 45, note: "New mixer tap, supplied. Old one to remove.", tag: "" }
+] %}
+<div class="shell">
+  {{ pSidebar("Requests") }}
+  <div class="main">
+    {% call pTopbar("Booking requests", "Respond within 2 hrs to keep your response score high") %}
+    <div class="row g8" data-chip-group="single">
+      <button type="button" class="chip on">New <span data-queue-count>{{ reqs.length }}</span></button>
+      <button type="button" class="chip">Accepted</button>
+      <button type="button" class="chip">Declined</button>
+    </div>
+    {% endcall %}
+    <div class="content">
+      <div class="col g14" style="max-width:860px" data-queue-list>
+        {% for r in reqs %}
+        <div class="card pad col g14" data-queue-card>
+          <div class="row between astart wrap g12">
+            <div class="row g12 acenter">
+              {{ av(size=46, color=r.col, text=r.t, sq=true) }}
+              <div>
+                <div class="row g8 acenter"><span class="h3" style="font-size:15px">{{ r.s }}</span>{% if r.tag %}{{ badge(r.tag, "danger", true) }}{% endif %}</div>
+                <div class="sm mut row g6 acenter">{% icon "user", "sm" %}{{ r.c }} · {% icon "clock", "sm" %}{{ r.when }}</div>
+              </div>
+            </div>
+            <div class="tr"><span class="num" style="font-size:20px">${{ r.price }}</span><div class="xs mut">your rate</div></div>
+          </div>
+          <div class="panel col g6"><span class="row g6 xs mut" style="font-weight:700">{% icon "loc", "sm" %}{{ r.addr }}</span><p class="sm" style="color:var(--ink2)">"{{ r.note }}"</p></div>
+          <div class="row g10 between acenter wrap">
+            <button type="button" class="btn ghost sm">{% icon "msg", "sm" %} Message {{ r.c.split(' ')[0] }}</button>
+            <div class="row g10">
+              <button type="button" class="btn ghost sm" data-queue-remove>{% icon "x", "sm" %} Decline</button>
+              <button type="button" class="btn ok sm" data-queue-remove>{% icon "check", "sm" %} Accept booking</button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        <div class="card pad col g8 acenter" data-queue-empty hidden style="text-align:center;padding:40px">
+          {% icon "checkc" %}
+          <span class="h3">All caught up</span>
+          <span class="sm mut">New requests will appear here.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

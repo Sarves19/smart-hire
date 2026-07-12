@@ -1,0 +1,39 @@
+---
+layout: layouts/base.njk
+title: Mobile · Home
+---
+{% from "macros/mobile.njk" import mShell %}
+{% from "macros/ds.njk" import logo, av, catIcon %}
+{% set head %}
+<div class="mhead">{{ logo() }}<div class="grow"></div>{{ av(size=34, color="var(--teal)", text="AR") }}</div>
+{% endset %}
+{% call mShell(active="Home", head=head) %}
+<div class="col g16" style="padding:18px 16px">
+  <div class="col g8">
+    <span class="ai-pill" style="align-self:flex-start">{% icon "spark", "sm" %} Smart Hire AI</span>
+    <h1 class="d2" style="font-size:30px">What do you need done?</h1>
+    <p class="sm mut">Describe it — we'll match the right verified pro.</p>
+  </div>
+  <form class="ai-wrap" action="/mobile/result.html" method="get">
+    <textarea class="ai-box" name="q" style="font-size:15px;min-height:72px" placeholder="My kitchen sink is leaking…" rows="2"></textarea>
+    <div class="ai-bar">
+      <button type="button" class="btn ghost sm">{% icon "cam", "sm" %} Photo</button>
+      <button type="submit" class="btn sm">{% icon "spark", "sm" %} Ask AI</button>
+    </div>
+  </form>
+  <div class="row g8 wrap" data-chip-group="single">
+    <button type="button" class="chip">fix a tap</button>
+    <button type="button" class="chip">maths tutor</button>
+    <button type="button" class="chip">deep clean</button>
+  </div>
+  <div class="row between acenter"><span class="h3">Categories</span><a class="xs hl" style="font-weight:700" href="/customer/browse.html">All</a></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+    {% for c in cats.slice(0, 4) %}
+    <a href="/customer/browse.html" class="card hover pad col g10" style="padding:14px">
+      {{ catIcon(c.icon, c.tone) }}
+      <div><div class="h3" style="font-size:14px">{{ c.name }}</div><div class="xs mut">{{ c.desc.split(' · ')[0] }}</div></div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endcall %}

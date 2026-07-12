@@ -1,0 +1,72 @@
+---
+layout: layouts/base.njk
+title: Design system
+---
+{% from "macros/ds.njk" import logo, btn, chip, badge, verified, input, select, catIcon, av %}
+
+{% macro swatch(name, varname, hex) %}
+<div class="col g6">
+  <div style="height:56px;border-radius:10px;background:var({{ varname }});box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)"></div>
+  <div class="col"><span class="sm" style="font-weight:700">{{ name }}</span><span class="xs faint" style="font-family:var(--fm)">{{ hex }}</span></div>
+</div>
+{% endmacro %}
+
+<div class="page-pad" style="padding-top:34px;padding-bottom:60px">
+  <div class="row between aend wrap g16" style="margin-bottom:8px">
+    <div class="col g6"><span class="eyebrow">Design system · v1.0</span><span class="d2">Smart Hire — Crisp Modern SaaS</span></div>
+    {{ logo() }}
+  </div>
+  <p class="lead" style="max-width:620px;margin-bottom:28px">The visual language behind every screen: a warm-orange brand on warm neutrals, Space Grotesk for headings, Hanken Grotesk for body, hairline borders and soft shadows. Built for clarity and trust.</p>
+
+  <div class="kicker" style="margin-bottom:12px">Color</div>
+  <div class="grid-6" style="gap:14px;margin-bottom:14px">
+    {{ swatch("Brand", "--brand", "#EA580C") }}
+    {{ swatch("Brand dark", "--brand-d", "#C2410C") }}
+    {{ swatch("Ink", "--ink", "#1C1714") }}
+    {{ swatch("Muted", "--muted", "#7C736C") }}
+    {{ swatch("Background", "--bg", "#FAF8F5") }}
+    {{ swatch("Card", "--card", "#FFFFFF") }}
+  </div>
+  <div class="grid-6" style="gap:14px;margin-bottom:28px">
+    {{ swatch("Tint", "--tint", "#FDEBDF") }}
+    {{ swatch("Success", "--ok", "#0E7A4A") }}
+    {{ swatch("Warning", "--warn", "#B45309") }}
+    {{ swatch("Danger", "--danger", "#C2362B") }}
+    {{ swatch("Info / Teal", "--info", "#0E7490") }}
+    {{ swatch("Line", "--line", "#ECE7E1") }}
+  </div>
+
+  <div class="row g32 astart wrap">
+    <div class="col g14" style="flex:1 1 360px">
+      <div class="kicker">Typography</div>
+      <div class="card pad col g14">
+        <div class="col g2"><span class="xs faint" style="font-family:var(--fm)">Space Grotesk · Display</span><span class="d2">Get any job done</span></div>
+        <div class="divider"></div>
+        <div class="col g2"><span class="xs faint" style="font-family:var(--fm)">Heading 1 / 2 / 3</span><span class="h1">The right pro, found fast</span><span class="h2">Top-rated plumbers near you</span><span class="h3">Booking summary</span></div>
+        <div class="divider"></div>
+        <div class="col g2"><span class="xs faint" style="font-family:var(--fm)">Hanken Grotesk · Body</span><p class="body">Describe what you need in plain words and our AI finds the right service and matched pros.</p><span class="sm mut">Small / muted supporting text</span></div>
+        <div class="divider"></div>
+        <div class="col g2"><span class="xs faint" style="font-family:var(--fm)">Space Mono · Labels &amp; numbers</span><div class="row g16 acenter"><span class="kicker">EYEBROW LABEL</span><span class="num" style="font-size:24px">$1,240</span></div></div>
+      </div>
+    </div>
+
+    <div class="col g14" style="flex:1 1 360px">
+      <div class="kicker">Components</div>
+      <div class="card pad col g16">
+        <div class="col g8"><span class="xs faint">Buttons</span><div class="row g8 wrap">{{ btn(text="Primary", sm=true) }}{{ btn(text="Ghost", kind="ghost", sm=true) }}{{ btn(text="Soft", kind="soft", sm=true) }}{{ btn(text="Success", kind="ok", sm=true) }}{{ btn(text="Danger", kind="danger", sm=true) }}</div></div>
+        <div class="col g8"><span class="xs faint">Chips &amp; badges</span><div class="row g8 wrap acenter">{{ chip("Selected", on=true) }}{{ chip("Default") }}{{ badge("Active", "ok", true) }}{{ badge("Pending", "warn", true) }}{{ badge("Flagged", "danger", true) }}{{ verified() }}</div></div>
+        <div class="col g8"><span class="xs faint">Inputs</span>{{ input(icon_="search", placeholder="Describe your problem…") }}<div class="row g8">{{ select(name="ds-cat", options=["Plumbing"]) }}<div class="input">{% icon "cal", "sm" %}<span class="grow">Tomorrow, 1PM</span></div></div></div>
+        <div class="col g8"><span class="xs faint">Category tiles &amp; avatars</span><div class="row g10 acenter">{{ catIcon("drop") }}{{ catIcon("sparkle", "teal") }}{{ catIcon("book", "violet") }}<div class="grow"></div>{{ av(size=36, color="var(--brand)", text="RP") }}{{ av(size=36, color="var(--teal)", text="MK", sq=true) }}</div></div>
+        <div class="col g8"><span class="xs faint">AI input block</span><div class="ai-wrap"><div class="ai-box" style="font-size:14px;min-height:0;padding:12px 14px">My kitchen sink is leaking…</div><div class="ai-bar"><span class="ai-pill">{% icon "spark", "sm" %} AI</span>{{ btn(text="Ask", sm=true) }}</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kicker" style="margin:28px 0 12px">Principles</div>
+  <div class="grid-3" style="gap:14px">
+    {% set principles = [["spark", "AI leads", "Plain-language input is the hero. The AI interprets, estimates, and matches — the user never has to know the right category."], ["shield", "Trust by default", "Verified badges, ratings, insurance and free cancellation are visible at every decision point."], ["grid", "Calm density", "Hairline borders and generous spacing keep dashboards readable even when data-dense."]] %}
+    {% for p in principles %}
+    <div class="card pad col g8">{{ catIcon(p[0]) }}<span class="h3">{{ p[1] }}</span><p class="sm mut">{{ p[2] }}</p></div>
+    {% endfor %}
+  </div>
+</div>

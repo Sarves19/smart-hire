@@ -1,0 +1,47 @@
+---
+layout: layouts/base.njk
+title: Platform overview
+bodyClass: frame
+---
+{% from "macros/shell.njk" import aSidebar, aTopbar %}
+{% from "macros/ds.njk" import stat, badge %}
+<div class="shell">
+  {{ aSidebar("Overview") }}
+  <div class="main">
+    {{ aTopbar("Platform overview", "Last 7 days") }}
+    <div class="content">
+      <div class="grid-4" style="gap:14px;margin-bottom:18px">
+        {{ stat(icon_="users", label="Customers", value="2,418", delta="6%", up=true) }}
+        {{ stat(icon_="shield", label="Providers", value="312", delta="4%", up=true) }}
+        {{ stat(icon_="cal", label="Bookings / wk", value="186", delta="9%", up=true) }}
+        {{ stat(icon_="money", label="GMV / wk", value="$14.2k", delta="11%", up=true) }}
+      </div>
+      <div class="row g16 astart wrap">
+        <div class="card pad col g14 grow" style="min-width:380px">
+          <div class="row between acenter"><span class="h3">Bookings volume</span><span class="badge">8 weeks</span></div>
+          <div class="bar-track" style="height:160px">
+            {% for h in [44,52,48,60,72,66,80,92] %}<div class="bar {% if loop.index0 == 7 %}on{% endif %}" style="height:{{ h }}%"></div>{% endfor %}
+          </div>
+          <div class="row between xs mut"><span>8 wks ago</span><span>This week</span></div>
+        </div>
+        <div class="col g16 rail" style="width:320px;flex:none">
+          <div class="card pad col g12">
+            <span class="h3">Needs attention</span>
+            {% set attn = [["Pending verifications", 7, "warn", "shield", "/admin/providers.html"], ["Reported accounts", 4, "danger", "flag", "/admin/moderation.html"], ["Flagged reviews", 2, "warn", "star", "/admin/moderation.html"], ["Open disputes", 1, "info", "msg", "/admin/overview.html"]] %}
+            {% for a in attn %}
+            <a href="{{ a[4] }}" class="row between acenter" style="padding:8px 0;border-top:1px solid var(--line)">
+              <span class="row g10 acenter sm">{% icon a[3], "sm" %}{{ a[0] }}</span>
+              <span class="row g8 acenter">{{ badge(a[1], a[2]) }}{% icon "chev", "sm" %}</span>
+            </a>
+            {% endfor %}
+          </div>
+          <div class="card pad col g10">
+            <div class="row g8 acenter">{% icon "spark", "sm" %}<span class="h3" style="font-size:14px">AI moderation</span></div>
+            <p class="sm mut"><b style="color:var(--ink)">3 accounts</b> auto-flagged as likely fake this week (duplicate listings, spam links).</p>
+            <a class="sm hl" style="font-weight:700" href="/admin/moderation.html">Review queue →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

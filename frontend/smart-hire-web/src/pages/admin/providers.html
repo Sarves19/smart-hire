@@ -1,0 +1,59 @@
+---
+layout: layouts/base.njk
+title: Provider verification
+bodyClass: frame
+extraScripts:
+  - /assets/js/queue.js
+---
+{% from "macros/shell.njk" import aSidebar, aTopbar %}
+{% from "macros/ds.njk" import av, badge %}
+{% set q = [
+  { n: "Mira Kaur", t: "MK", c: "var(--info)", cat: "Cleaning", docs: [["ID verified", true], ["Insurance", true], ["DBS check", true]], ok: true, sub: "2 hrs ago" },
+  { n: "Dan Okafor", t: "DO", c: "var(--violet)", cat: "Tutoring", docs: [["ID verified", true], ["DBS check", true]], ok: true, sub: "5 hrs ago" },
+  { n: "Pat Brennan", t: "PB", c: "var(--rose)", cat: "Electrical", docs: [["ID verified", true], ["Licence missing", false]], ok: false, sub: "Yesterday" }
+] %}
+<div class="shell">
+  {{ aSidebar("Providers") }}
+  <div class="main">
+    {% call aTopbar("Provider verification", "7 awaiting review") %}
+    <div class="row g8" data-chip-group="single">
+      <button type="button" class="chip on">Pending <span data-queue-count>{{ q.length }}</span></button>
+      <button type="button" class="chip">Approved</button>
+      <button type="button" class="chip">Rejected</button>
+    </div>
+    {% endcall %}
+    <div class="content">
+      <div class="col g14" style="max-width:880px" data-queue-list>
+        {% for r in q %}
+        <div class="card pad row between acenter wrap g16" data-queue-card>
+          <div class="row g14 acenter">
+            {{ av(size=48, color=r.c, text=r.t, sq=true) }}
+            <div class="col g6">
+              <div class="row g8 acenter"><span class="h3" style="font-size:15px">{{ r.n }}</span>{{ badge(r.cat, "brand") }}<span class="xs faint">submitted {{ r.sub }}</span></div>
+              <div class="row g8 wrap">
+                {% for d in r.docs %}
+                <span class="badge {% if d[1] %}ok{% else %}danger{% endif %}">{% if d[1] %}{% icon "check", "sm" %}{% else %}{% icon "x", "sm" %}{% endif %}{{ d[0] }}</span>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <div class="row g8">
+            <button type="button" class="btn ghost sm">{% icon "eye", "sm" %} View docs</button>
+            {% if r.ok %}
+            <button type="button" class="btn ok sm" data-queue-remove>{% icon "check", "sm" %} Approve</button>
+            {% else %}
+            <button type="button" class="btn ghost sm" style="color:var(--warn)" data-queue-remove>Request info</button>
+            {% endif %}
+            <button type="button" class="btn ghost sm" style="color:var(--danger)" data-queue-remove>Reject</button>
+          </div>
+        </div>
+        {% endfor %}
+        <div class="card pad col g8 acenter" data-queue-empty hidden style="text-align:center;padding:40px">
+          {% icon "checkc" %}
+          <span class="h3">Queue clear</span>
+          <span class="sm mut">No providers waiting on verification.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

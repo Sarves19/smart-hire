@@ -1,0 +1,8 @@
+.s .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--sh-sm); }
+.s .card.pad { padding: 20px; }
+.s .card.flat { box-shadow: none; }
+.s .card.hover { transition: .14s; cursor: pointer; }
+.s .card.hover:hover { border-color: var(--brand); box-shadow: var(--sh); }
+.s .panel { background: var(--card2); border-radius: var(--r); padding: 16px; }
+.s .divider { height: 1px; background: var(--line); width: 100%; }
+.s .vdiv { width: 1px; background: var(--line); align-self: stretch; }

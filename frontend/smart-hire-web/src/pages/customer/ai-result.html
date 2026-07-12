@@ -1,0 +1,55 @@
+---
+layout: layouts/customer.njk
+title: AI match results
+here: Browse
+auth: true
+---
+{% from "macros/ds.njk" import av, stars, verified, badge, btn %}
+<div class="page-pad" style="padding-top:24px;padding-bottom:48px">
+  <a href="/customer/home.html" class="row g8 acenter sm mut" style="margin-bottom:14px;width:fit-content">{% icon "back", "sm" %} Back · <span class="kicker">You asked</span> "my kitchen sink is leaking under the cabinet"</a>
+
+  {# AI interpretation card #}
+  <div class="card pad" style="background:linear-gradient(180deg,var(--tint2),var(--card));margin-bottom:22px">
+    <div class="row between wrap g20">
+      <div class="col g10" style="max-width:460px">
+        <span class="ai-pill" style="align-self:flex-start">{% icon "spark", "sm" %} AI understood your request</span>
+        <div class="h1">Plumbing · <span class="hl">Leak repair</span></div>
+        <div class="row g8 wrap">{{ badge("under-sink leak", "brand") }}{{ badge("likely urgent", "warn") }}{{ badge("water damage risk") }}</div>
+        <p class="sm mut">Based on your description, this looks like a pipe or seal failure under the sink. A plumber can usually fix it in one visit.</p>
+      </div>
+      <div class="col g4 aend tr">
+        <span class="kicker">Estimated price</span>
+        <span class="num" style="font-size:40px">$60–120</span>
+        <span class="xs mut">based on 240 similar jobs nearby</span>
+        <button type="button" class="btn" style="margin-top:8px">{% icon "spark", "sm" %} Refine with AI</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row between aend wrap g10" style="margin-bottom:14px">
+    <span class="h2">Top-rated plumbers near you <span class="mut" style="font-weight:400">· {{ pros.length }} matched</span></span>
+    <div class="row g8 wrap" data-chip-group="single">
+      <button type="button" class="chip on">Best match</button>
+      <button type="button" class="chip">Top rated</button>
+      <button type="button" class="chip">Nearest</button>
+      <button type="button" class="chip">Lowest price</button>
+    </div>
+  </div>
+
+  <div class="col g12">
+    {% for p in pros %}
+    <div class="card pad row g16 acenter wrap">
+      {{ av(size=54, color=p.color, text=p.initials, sq=true) }}
+      <div class="grow col g4">
+        <div class="row g8 acenter"><span class="h3">{{ p.name }}</span>{{ verified() }}{% if loop.index0 == 0 %}{{ badge("Top match", "ok", true) }}{% endif %}</div>
+        <div class="row g8 acenter sm mut">{{ stars(n=p.rating | round) }} <b style="color:var(--ink)">{{ p.rating }}</b> ({{ p.jobs }} jobs) · {% icon "loc", "sm" %}{{ p.dist }} · usually replies in 1 hr</div>
+        <div class="row g6" style="margin-top:2px">{% for t in p.tags %}{{ badge(t) }}{% endfor %}</div>
+      </div>
+      <div class="col aend g8">
+        <div class="tr"><span class="num" style="font-size:22px">${{ p.price }}</span><span class="xs mut"> / visit</span></div>
+        <div class="row g8"><a href="/customer/profile.html" class="btn ghost sm">View profile</a><a href="/customer/booking.html" class="btn sm">Book now</a></div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>

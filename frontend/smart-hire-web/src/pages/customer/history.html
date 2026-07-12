@@ -1,0 +1,58 @@
+---
+layout: layouts/customer.njk
+title: My bookings
+here: Bookings
+auth: true
+---
+{% from "macros/ds.njk" import av, badge %}
+{% set rows = [
+  { s: "Leak & pipe repair", p: "Ravi Patel", t: "RP", c: "var(--brand)", when: "Tomorrow · 1:00 PM", st: "upcoming", price: 70 },
+  { s: "Deep clean (2 bed)", p: "Mira Kaur", t: "MK", c: "var(--teal)", when: "Today · in progress", st: "active", price: 95 },
+  { s: "GCSE maths tutoring", p: "Dan Okafor", t: "DO", c: "var(--violet)", when: "Jun 2 · completed", st: "completed", price: 40 },
+  { s: "TV wall mounting", p: "Sara Lim", t: "SL", c: "var(--rose)", when: "May 28 · completed", st: "completed", price: 55 },
+  { s: "Boiler service", p: "Dan Okafor", t: "DO", c: "var(--violet)", when: "May 20 · cancelled", st: "cancelled", price: 90 }
+] %}
+{% set stMap = { upcoming: ["info", "Upcoming"], active: ["warn", "In progress"], completed: ["ok", "Completed"], cancelled: ["danger", "Cancelled"] } %}
+<div class="page-pad" style="padding-top:26px;padding-bottom:48px">
+  <div class="row between aend wrap g16" style="margin-bottom:20px">
+    <div class="col g4"><span class="kicker">My account</span><span class="h1">My bookings</span></div>
+    <a href="/customer/home.html" class="btn ghost">{% icon "spark", "sm" %} Book something new</a>
+  </div>
+  <div class="row g8 wrap" style="margin-bottom:18px" data-chip-group="single">
+    <button type="button" class="chip on">All <span style="opacity:.6">5</span></button>
+    <button type="button" class="chip">Upcoming</button>
+    <button type="button" class="chip">Active</button>
+    <button type="button" class="chip">Completed</button>
+    <button type="button" class="chip">Cancelled</button>
+  </div>
+  <div class="col g12">
+    {% for r in rows %}
+    {% set kind = stMap[r.st][0] %}
+    {% set label = stMap[r.st][1] %}
+    <div class="card pad row between acenter wrap g16">
+      <div class="row g14 acenter">
+        {{ av(size=48, color=r.c, text=r.t, sq=true) }}
+        <div class="col g4">
+          <div class="row g8 acenter"><span class="h3" style="font-size:15px">{{ r.s }}</span>{{ badge(label, kind, true) }}</div>
+          <div class="sm mut row g6 acenter">{% icon "user", "sm" %}{{ r.p }} · {% icon "clock", "sm" %}{{ r.when }}</div>
+        </div>
+      </div>
+      <div class="row g10 acenter">
+        <span class="num" style="font-size:17px">${{ r.price }}</span>
+        {% if r.st == "completed" %}
+        <button type="button" class="btn ghost sm">Rebook</button>
+        <a href="/customer/review.html" class="btn sm">{% icon "star", "sm" %} Review</a>
+        {% elif r.st == "upcoming" %}
+        <button type="button" class="btn ghost sm">Reschedule</button>
+        <button type="button" class="btn ghost sm">{% icon "msg", "sm" %} Message</button>
+        {% elif r.st == "active" %}
+        <button type="button" class="btn sm">{% icon "loc", "sm" %} Track</button>
+        {% else %}
+        <button type="button" class="btn ghost sm">Rebook</button>
+        {% endif %}
+        <button class="iconbtn" type="button" style="width:34px;height:34px" aria-label="More options">{% icon "dots", "sm" %}</button>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>

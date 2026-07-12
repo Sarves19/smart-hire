@@ -1,0 +1,47 @@
+---
+layout: layouts/customer.njk
+title: Home
+here: Browse
+auth: true
+---
+{% from "macros/ds.njk" import catIcon %}
+<div class="col acenter page-pad" style="padding-top:44px;text-align:center">
+  <span class="ai-pill">{% icon "spark", "sm" %} Powered by Smart Hire AI</span>
+  <h1 class="d1 hero-title" style="margin:18px 0 14px;max-width:720px">What do you need done?</h1>
+  <p class="lead" style="max-width:540px;margin-bottom:28px">Describe it in your own words. Our AI picks the right service, estimates the price, and matches verified pros near you.</p>
+
+  <form class="ai-wrap ai-hero" style="text-align:left" action="/customer/ai-result.html" method="get">
+    <textarea class="ai-box" name="q" placeholder="My kitchen sink is leaking under the cabinet and there's water on the floor…" rows="2"></textarea>
+    <div class="ai-bar">
+      <div class="row g8">
+        <button type="button" class="btn ghost sm">{% icon "cam", "sm" %} Add photo</button>
+        <button type="button" class="btn ghost sm">{% icon "loc", "sm" %} Location</button>
+      </div>
+      <button type="submit" class="btn lg">{% icon "spark", "sm" %} Ask Smart Hire AI</button>
+    </div>
+  </form>
+
+  <div class="row g8 acenter wrap center" style="margin-top:20px;max-width:560px" data-chip-group="single">
+    <span class="kicker">Try</span>
+    <button type="button" class="chip">fix a leaking tap</button>
+    <button type="button" class="chip">maths tutor for GCSE</button>
+    <button type="button" class="chip">deep clean my flat</button>
+    <button type="button" class="chip">mount a TV</button>
+  </div>
+</div>
+
+<div class="page-pad" style="padding-top:40px">
+  <div class="row between aend wrap g10" style="margin-bottom:16px">
+    <div class="col g4"><span class="kicker">Browse by category</span><span class="h2">Popular right now</span></div>
+    <a class="hl row g6" style="font-weight:700;font-size:14px" href="/customer/browse.html">All 40+ services {% icon "arrow", "sm" %}</a>
+  </div>
+  <div class="grid-3" style="gap:16px;padding-bottom:48px">
+    {% for c in cats %}
+    <a href="/customer/browse.html" class="card hover pad row g14 acenter">
+      {{ catIcon(c.icon, c.tone) }}
+      <div class="grow"><div class="h3">{{ c.name }}</div><div class="sm mut">{{ c.desc }}</div></div>
+      {% icon "chev", "sm" %}
+    </a>
+    {% endfor %}
+  </div>
+</div>

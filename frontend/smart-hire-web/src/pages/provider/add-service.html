@@ -1,0 +1,61 @@
+---
+layout: layouts/base.njk
+title: Add a service
+bodyClass: frame
+---
+{% from "macros/shell.njk" import pSidebar, pTopbar %}
+{% from "macros/ds.njk" import field, input, select, av, stars %}
+<div class="shell">
+  {{ pSidebar("My services") }}
+  <div class="main">
+    {% call pTopbar("Add a service", "Services › New") %}
+    <a href="/provider/services.html" class="btn ghost">Cancel</a>
+    <button type="submit" form="add-service-form" class="btn">Publish</button>
+    {% endcall %}
+    <div class="content">
+      <form id="add-service-form" class="row g20 astart wrap" style="max-width:920px;margin:0 auto" action="/api/provider/services" method="post">
+        <div class="grow col g16" style="min-width:360px">
+          <div class="card pad col g16">
+            <span class="h3">Service details</span>
+            {% call field(label="Service title") %}{{ input(name="title", value="Leak & pipe repair") }}{% endcall %}
+            <div class="row g14 wrap">
+              <div class="grow">{% call field(label="Category") %}{{ select(name="category", options=["Plumbing","Electrical","Cleaning","Tutoring","Repairs","Tech support"]) }}{% endcall %}</div>
+              <div class="grow">{% call field(label="Subcategory") %}{{ select(name="subcategory", options=["Leak repair","Installs","Emergency callout"]) }}{% endcall %}</div>
+            </div>
+            {% call field(label="Description") %}{{ input(area=true, name="description", value="City & Guilds qualified. I fix leaks, burst pipes and seal failures — most in a single visit. Fully insured, tidy, and I'll explain what went wrong.") }}{% endcall %}
+          </div>
+          <div class="card pad col g16">
+            <span class="h3">Pricing</span>
+            <div class="row g14 wrap">
+              <div class="grow">{% call field(label="Price model") %}{{ select(name="price_model", options=["Per visit","Hourly","Fixed quote"]) }}{% endcall %}</div>
+              <div class="grow">{% call field(label="Rate (USD)") %}{{ input(name="rate", value="65") }}{% endcall %}</div>
+              <div class="grow">{% call field(label="Typical duration") %}{{ select(name="duration", options=["30 minutes","45 minutes","1 hour","2+ hours"]) }}{% endcall %}</div>
+            </div>
+            <div class="panel row g10 acenter">{% icon "spark", "sm" %}<span class="sm mut"><b style="color:var(--ink)">AI tip:</b> similar plumbers near you charge $58–$78 per visit. $65 is competitive.</span></div>
+          </div>
+          <div class="card pad col g16">
+            <span class="h3">Photos of past work</span>
+            <div class="row g10">
+              <div class="dotpat" style="width:96px;height:96px;border-radius:10px;background:var(--card2);display:grid;place-items:center;color:var(--faint)">{% icon "cam" %}</div>
+              <div class="dotpat" style="width:96px;height:96px;border-radius:10px;background:var(--card2);display:grid;place-items:center;color:var(--faint)">{% icon "cam" %}</div>
+              <button type="button" class="col g4" style="width:96px;height:96px;border-radius:10px;border:1.5px dashed var(--line2);display:grid;place-items:center;color:var(--faint)">{% icon "upload" %}<span class="xs">Upload</span></button>
+            </div>
+          </div>
+        </div>
+
+        {# preview #}
+        <div class="col g10 rail" style="width:280px;flex:none;position:sticky;top:24px">
+          <span class="kicker">Live preview</span>
+          <div class="card pad col g10">
+            <div class="row g10 acenter">{{ av(size=40, color="var(--brand)", text="RP", sq=true) }}<div class="grow"><div class="row g6 acenter"><span class="h3" style="font-size:14px">Ravi Patel</span>{% icon "checkc", "sm" %}</div><div class="row g4 sm mut">{{ stars(n=5, size=12) }} 4.9</div></div></div>
+            <div class="h3" style="font-size:15px">Leak &amp; pipe repair</div>
+            <p class="xs mut">City &amp; Guilds qualified. I fix leaks, burst pipes and seal failures — most in a single visit…</p>
+            <div class="row g6"><span class="badge">45 min</span><span class="badge info">0.8 mi</span></div>
+            <div class="divider"></div>
+            <div class="row between acenter"><span class="num" style="font-size:18px">$65</span><span class="btn sm" style="pointer-events:none">Book</span></div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

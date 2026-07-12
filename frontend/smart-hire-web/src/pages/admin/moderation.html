@@ -1,0 +1,60 @@
+---
+layout: layouts/base.njk
+title: Moderation queue
+bodyClass: frame
+extraScripts:
+  - /assets/js/queue.js
+---
+{% from "macros/shell.njk" import aSidebar, aTopbar %}
+{% from "macros/ds.njk" import av, badge %}
+{% set flags = [
+  { n: "promo_bot_99", t: "P9", role: "Provider", why: "Duplicate listings across 6 categories · 4 user reports · spam links in description", tag: "likely fake", conf: 96 },
+  { n: "gh0st_acc", t: "G", role: "Customer", why: "Multiple chargebacks · 2 reports for no-shows", tag: "review", conf: 61 },
+  { n: "cheap_fix_uk", t: "CF", role: "Provider", why: "Unverified · external payment requests · 3 reports", tag: "likely fake", conf: 89 }
+] %}
+<div class="shell">
+  {{ aSidebar("Moderation") }}
+  <div class="main">
+    {% call aTopbar("Moderation queue", "4 accounts need a decision") %}
+    <div class="row g8" data-chip-group="single">
+      <button type="button" class="chip on">Reported <span data-queue-count>{{ flags.length }}</span></button>
+      <button type="button" class="chip">Resolved</button>
+      <button type="button" class="chip">AI-flagged</button>
+    </div>
+    {% endcall %}
+    <div class="content">
+      <div class="panel row g10 acenter" style="margin-bottom:16px;background:var(--danger-tint)">{% icon "spark", "sm" %}<span class="sm" style="color:var(--danger)"><b>AI auto-flagged 3 accounts</b> as likely fake. Confidence shown per account — please confirm before removing.</span></div>
+      <div class="col g14" style="max-width:880px" data-queue-list>
+        {% for f in flags %}
+        <div class="card pad col g12" data-queue-card>
+          <div class="row between astart wrap g12">
+            <div class="row g12 acenter">
+              {{ av(size=44, color="var(--faint)", text=f.t, sq=true) }}
+              <div>
+                <div class="row g8 acenter"><span class="h3" style="font-size:15px">{{ f.n }}</span>{{ badge(f.role, "brand" if f.role == "Provider" else "info") }}{{ badge(f.tag, "danger" if f.tag == "likely fake" else "warn", true) }}</div>
+                <p class="sm mut" style="margin-top:4px;max-width:520px">{{ f.why }}</p>
+              </div>
+            </div>
+            <div class="col aend g4"><span class="kicker">AI confidence</span><span class="num" style="font-size:22px;color:{% if f.conf > 80 %}var(--danger){% else %}var(--warn){% endif %}">{{ f.conf }}%</span></div>
+          </div>
+          <div class="divider"></div>
+          <div class="row g8 between acenter wrap">
+            <button type="button" class="btn ghost sm">{% icon "eye", "sm" %} View profile &amp; reports</button>
+            <div class="row g8 wrap">
+              <button type="button" class="btn ghost sm" data-queue-remove>Dismiss</button>
+              <button type="button" class="btn ghost sm" style="color:var(--warn)" data-queue-remove>Warn</button>
+              <button type="button" class="btn ghost sm" style="color:var(--warn)" data-queue-remove>Suspend</button>
+              <button type="button" class="btn danger sm" data-queue-remove>{% icon "trash", "sm" %} Remove account</button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        <div class="card pad col g8 acenter" data-queue-empty hidden style="text-align:center;padding:40px">
+          {% icon "checkc" %}
+          <span class="h3">Nothing to review</span>
+          <span class="sm mut">Flagged accounts will show up here.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

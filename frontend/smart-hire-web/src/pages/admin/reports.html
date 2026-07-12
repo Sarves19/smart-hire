@@ -1,0 +1,53 @@
+---
+layout: layouts/base.njk
+title: Reports
+bodyClass: frame
+---
+{% from "macros/shell.njk" import aSidebar, aTopbar %}
+{% from "macros/ds.njk" import stat, av %}
+{% set cats = [["Plumbing", 82, "$4,920"], ["Cleaning", 64, "$3,840"], ["Tutoring", 48, "$2,880"], ["Electrical", 40, "$2,400"], ["Repairs", 28, "$1,680"], ["Tech support", 18, "$1,080"]] %}
+{% set top = [["Ravi Patel", "RP", "var(--brand)", "$1,240"], ["Mira Kaur", "MK", "var(--info)", "$980"], ["Dan Okafor", "DO", "var(--violet)", "$760"], ["Sara Lim", "SL", "var(--rose)", "$690"]] %}
+<div class="shell">
+  {{ aSidebar("Reports") }}
+  <div class="main">
+    {% call aTopbar("Reports", "June 2026") %}
+    <div class="row g8" data-chip-group="single">
+      <button type="button" class="chip">Bookings</button>
+      <button type="button" class="chip on">Revenue</button>
+      <button type="button" class="chip">Categories</button>
+      <button type="button" class="chip">Providers</button>
+    </div>
+    <button type="button" class="btn ghost">{% icon "download", "sm" %} Export CSV</button>
+    {% endcall %}
+    <div class="content">
+      <div class="grid-4" style="gap:14px;margin-bottom:18px">
+        {{ stat(icon_="money", label="Total GMV", value="$56.8k", delta="11%", up=true) }}
+        {{ stat(icon_="card", label="Platform fee", value="$5.7k", delta="11%", up=true) }}
+        {{ stat(icon_="cal", label="Bookings", value="744", delta="8%", up=true) }}
+        {{ stat(icon_="trend", label="Avg order", value="$76", delta="2%", up=true) }}
+      </div>
+      <div class="row g16 astart wrap">
+        <div class="card pad col g14 grow" style="min-width:360px">
+          <span class="h3">Revenue by category</span>
+          <div class="col g14" style="margin-top:4px">
+            {% for c in cats %}
+            <div class="col g6">
+              <div class="row between sm"><span style="font-weight:600">{{ c[0] }}</span><span class="num mut">{{ c[2] }}</span></div>
+              <div class="meter"><i style="width:{{ c[1] }}%"></i></div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="card pad col g12 rail" style="width:280px;flex:none">
+          <span class="h3">Top providers</span>
+          {% for t in top %}
+          <div class="row g10 acenter" style="padding:8px 0;border-top:{% if loop.index0 %}1px solid var(--line){% else %}none{% endif %}">
+            <span class="num" style="width:20px;color:var(--faint)">{{ loop.index }}</span>
+            {{ av(size=32, color=t[2], text=t[1]) }}<span class="sm grow" style="font-weight:600">{{ t[0] }}</span><span class="num sm">{{ t[3] }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

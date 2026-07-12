@@ -1,0 +1,86 @@
+---
+layout: layouts/customer.njk
+title: Leave a review
+here: Bookings
+auth: true
+extraScripts:
+  - /assets/js/review.js
+---
+{% from "macros/ds.njk" import av, verified, stars, starInput, field, input, chip, check %}
+<div class="page-pad" style="padding-top:24px;padding-bottom:48px">
+  <a href="/customer/history.html" class="row g8 acenter sm mut" style="margin-bottom:16px;width:fit-content">{% icon "back", "sm" %} Back to bookings</a>
+  <div class="col g4" style="margin-bottom:22px"><span class="kicker">Leave a review</span><span class="h1">How did your job go?</span></div>
+
+  <div class="row g24 astart wrap">
+    {# left — job recap #}
+    <div class="col g16 rail" style="width:360px;flex:none">
+      <div class="card pad col g16">
+        <div class="row g12 acenter">
+          {{ av(size=52, color="var(--brand)", text="RP", sq=true) }}
+          <div class="grow"><div class="row g6 acenter"><span class="h3" style="font-size:15px">Ravi Patel</span>{{ verified(label="") }}</div><div class="row g4 sm mut">{{ stars(n=5, size=12) }} 4.9 · Plumber</div></div>
+        </div>
+        <div class="divider"></div>
+        <div class="col g8 sm">
+          <div class="row between"><span class="mut">Service</span><span style="font-weight:600">Leak &amp; pipe repair</span></div>
+          <div class="row between"><span class="mut">Completed</span><span style="font-weight:600">June 12, 2026</span></div>
+          <div class="row between"><span class="mut">Duration</span><span style="font-weight:600">35 min</span></div>
+          <div class="row between"><span class="mut">Total paid</span><span class="num">$70</span></div>
+        </div>
+        <div class="panel row g10 acenter">{% icon "shield", "sm" %}<span class="xs mut">Your review is public and helps other customers choose the right pro.</span></div>
+        <a href="/customer/booking.html" class="btn ghost block sm">{% icon "refresh", "sm" %} Book Ravi again</a>
+      </div>
+    </div>
+
+    {# right — review form #}
+    <form class="card pad col g22 grow" style="min-width:420px" action="/api/reviews" method="post">
+      <div class="row between acenter g20 wrap">
+        <div class="col g6"><span class="h3">Your overall rating</span><span class="sm mut">Tap a star to rate your experience.</span></div>
+        <div class="col g4 aend">
+          {{ starInput(name="overall_rating", value=5, size=44, labelTarget="#overall-rating-label") }}
+          <span class="sm hl" id="overall-rating-label" style="font-weight:700">Excellent · 5.0</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      {# sub-ratings #}
+      <div class="col g14">
+        <span class="h3" style="font-size:15px">Rate the details</span>
+        <div class="grid-2" style="gap:14px 32px">
+          <div class="row between acenter"><span class="sm" style="font-weight:600">Quality of work</span>{{ starInput(name="rating_quality", value=5, size=18) }}</div>
+          <div class="row between acenter"><span class="sm" style="font-weight:600">Punctuality</span>{{ starInput(name="rating_punctuality", value=5, size=18) }}</div>
+          <div class="row between acenter"><span class="sm" style="font-weight:600">Value for money</span>{{ starInput(name="rating_value", value=4, size=18) }}</div>
+          <div class="row between acenter"><span class="sm" style="font-weight:600">Communication</span>{{ starInput(name="rating_comm", value=5, size=18) }}</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      {% call field(label="What stood out? (optional)") %}
+      <div class="row g8 wrap" data-chip-group="multi">
+        <button type="button" class="chip on">{% icon "check", "sm chip-check" %}On time</button>
+        <button type="button" class="chip on">{% icon "check", "sm chip-check" %}Tidy</button>
+        <button type="button" class="chip">{% icon "check", "sm chip-check" %}Great value</button>
+        <button type="button" class="chip">{% icon "check", "sm chip-check" %}Friendly</button>
+        <button type="button" class="chip">{% icon "check", "sm chip-check" %}Skilled</button>
+        <button type="button" class="chip on">{% icon "check", "sm chip-check" %}Would rebook</button>
+        <button type="button" class="chip">{% icon "check", "sm chip-check" %}Fair price</button>
+      </div>
+      {% endcall %}
+
+      {% call field(label="Tell others about your experience") %}{{ input(area=true, name="comment", value="Quick, tidy and fixed the leak in 30 minutes. Explained what had gone wrong and cleaned up after. Would definitely book again.") }}{% endcall %}
+
+      {% call field(label="Add photos of the finished work (optional)") %}
+      <div class="row g10">
+        <div class="dotpat" style="width:76px;height:76px;border-radius:10px;background:var(--card2);display:grid;place-items:center;color:var(--faint)">{% icon "cam" %}</div>
+        <div class="dotpat" style="width:76px;height:76px;border-radius:10px;background:var(--card2);display:grid;place-items:center;color:var(--faint)">{% icon "cam" %}</div>
+        <button type="button" style="width:76px;height:76px;border-radius:10px;border:1.5px dashed var(--line2);display:grid;place-items:center;color:var(--faint)">{% icon "plus" %}</button>
+      </div>
+      {% endcall %}
+      <div class="divider"></div>
+
+      <div class="row between acenter wrap g14">
+        {{ check(name="post_public", checked=true, label="Post publicly as Anya R.") }}
+        <div class="row g10"><a href="/customer/history.html" class="btn ghost">Skip for now</a><button type="submit" class="btn lg">Submit review</button></div>
+      </div>
+    </form>
+  </div>
+</div>

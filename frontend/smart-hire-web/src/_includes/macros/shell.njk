@@ -1,0 +1,63 @@
+{# ============ Provider & Admin app shell — sidebar + topbar (ported from provider-hifi.jsx / admin-hifi.jsx) ============ #}
+{% from "macros/ds.njk" import logo, av %}
+
+{% macro pSidebar(here="") %}
+<div class="side" data-sidebar>
+  <div style="padding:4px 10px 8px">{{ logo(sub="Pro", href="/provider/dashboard.html") }}</div>
+  <div class="grp">Workspace</div>
+  <a href="/provider/dashboard.html" class="navitem {% if here == 'Dashboard' %}on{% endif %}">{% icon "home", "sm" %}Dashboard</a>
+  <a href="/provider/services.html" class="navitem {% if here == 'My services' %}on{% endif %}">{% icon "briefcase", "sm" %}My services</a>
+  <a href="/provider/requests.html" class="navitem {% if here == 'Requests' %}on{% endif %}">{% icon "bell", "sm" %}Requests<span class="ct">3</span></a>
+  <a href="/provider/dashboard.html" class="navitem {% if here == 'Bookings' %}on{% endif %}">{% icon "cal", "sm" %}Bookings</a>
+  <a href="/provider/earnings.html" class="navitem {% if here == 'Earnings' %}on{% endif %}">{% icon "money", "sm" %}Earnings</a>
+  <a href="/provider/dashboard.html" class="navitem {% if here == 'Reviews' %}on{% endif %}">{% icon "star", "sm" %}Reviews</a>
+  <a href="/provider/dashboard.html" class="navitem {% if here == 'Messages' %}on{% endif %}">{% icon "msg", "sm" %}Messages</a>
+  <div class="grow"></div>
+  <div class="navitem">{% icon "cog", "sm" %}Settings</div>
+  <div class="card flat pad col g10" style="background:var(--ink);color:#fff;margin-top:8px">
+    <div class="row g8 acenter">{% icon "spark", "sm" %}<span class="sm" style="font-weight:700">Profile 80% complete</span></div>
+    <div class="meter" style="background:rgba(255,255,255,.15)"><i style="width:80%;background:#fff"></i></div>
+    <span class="xs" style="color:rgba(255,255,255,.7)">Add 2 work photos to rank higher in AI matches.</span>
+  </div>
+</div>
+<div class="side-backdrop" data-sidebar-backdrop></div>
+{% endmacro %}
+
+{% macro pTopbar(title="", sub="") %}
+<div class="topbar">
+  <button class="iconbtn menu-toggle" type="button" data-menu-toggle aria-label="Open menu" aria-expanded="false">{% icon "menu", "sm" %}</button>
+  <div class="col g4 grow"><span class="h2">{{ title }}</span>{% if sub %}<span class="xs mut">{{ sub }}</span>{% endif %}</div>
+  {{ caller() if caller }}
+  <button class="iconbtn" type="button" aria-label="Notifications">{% icon "bell", "sm" %}</button>
+  <div class="row g8 acenter">{{ av(size=34, color="var(--brand)", text="RP") }}<div class="col topbar-usertext" style="line-height:1.2"><span class="sm" style="font-weight:700">Ravi P.</span><span class="xs mut">Plumber</span></div></div>
+</div>
+{% endmacro %}
+
+{% macro aSidebar(here="") %}
+<div class="side" data-sidebar>
+  <div style="padding:4px 10px 8px">{{ logo(sub="Admin", href="/admin/overview.html") }}</div>
+  <div class="grp">Manage</div>
+  <a href="/admin/overview.html" class="navitem {% if here == 'Overview' %}on{% endif %}">{% icon "grid", "sm" %}Overview</a>
+  <a href="/admin/users.html" class="navitem {% if here == 'Users' %}on{% endif %}">{% icon "users", "sm" %}Users</a>
+  <a href="/admin/providers.html" class="navitem {% if here == 'Providers' %}on{% endif %}">{% icon "shield", "sm" %}Providers<span class="ct">7</span></a>
+  <a href="/admin/overview.html" class="navitem {% if here == 'Services' %}on{% endif %}">{% icon "briefcase", "sm" %}Services</a>
+  <a href="/admin/overview.html" class="navitem {% if here == 'Bookings' %}on{% endif %}">{% icon "cal", "sm" %}Bookings</a>
+  <a href="/admin/reports.html" class="navitem {% if here == 'Reports' %}on{% endif %}">{% icon "chart", "sm" %}Reports</a>
+  <a href="/admin/moderation.html" class="navitem {% if here == 'Moderation' %}on{% endif %}">{% icon "flag", "sm" %}Moderation<span class="ct" style="background:var(--danger)">4</span></a>
+  <div class="grow"></div>
+  <div class="navitem">{% icon "cog", "sm" %}Platform settings</div>
+  <a href="/auth/login.html" class="navitem">{% icon "logout", "sm" %}Sign out</a>
+</div>
+<div class="side-backdrop" data-sidebar-backdrop></div>
+{% endmacro %}
+
+{% macro aTopbar(title="", sub="") %}
+<div class="topbar">
+  <button class="iconbtn menu-toggle" type="button" data-menu-toggle aria-label="Open menu" aria-expanded="false">{% icon "menu", "sm" %}</button>
+  <div class="col g4 grow"><span class="h2">{{ title }}</span>{% if sub %}<span class="xs mut">{{ sub }}</span>{% endif %}</div>
+  {{ caller() if caller }}
+  <div class="input topbar-search" style="width:220px;padding:8px 12px">{% icon "search", "sm" %}<span class="ph grow">Search anything…</span></div>
+  <button class="iconbtn" type="button" aria-label="Notifications">{% icon "bell", "sm" %}</button>
+  {{ av(size=34, color="var(--ink)", text="SA") }}
+</div>
+{% endmacro %}

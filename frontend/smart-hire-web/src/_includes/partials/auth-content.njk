@@ -1,0 +1,118 @@
+{# ============ Auth — one shared login + one register for all roles (ported from auth-hifi.jsx) ============ #}
+{% from "macros/ds.njk" import logo, field, input, select, check, btn %}
+
+<div class="scroll">
+  <div class="row" style="min-height:100%" data-auth-root data-role="{{ initialRole or 'customer' }}" data-mode="{{ initialMode or 'login' }}">
+
+    {# ---------- left brand panel — role-aware copy ---------- #}
+    <div class="col center" style="width:46%;flex:none;gap:28px;background:var(--ink);color:#fff;padding:40px 44px;position:relative;overflow:hidden">
+      <div class="dotpat" style="position:absolute;inset:0;opacity:.06;pointer-events:none"></div>
+      <div style="position:relative">{{ logo() }}</div>
+
+      <div class="col g20" style="position:relative" data-role-panel="customer">
+        <div class="ai-pill" style="align-self:flex-start;background:rgba(255,255,255,.14);color:#fff">{% icon "spark", "sm" %} AI-powered matching</div>
+        <div class="d2" style="color:#fff;font-size:38px">Get any job done by a trusted local pro.</div>
+        <p class="lead" style="color:rgba(255,255,255,.72);font-size:16px">Describe what you need in plain words. Smart Hire's AI finds the right service and matches verified providers near you.</p>
+        <div class="row g24" style="margin-top:6px">
+          <div class="col"><span class="num" style="font-size:26px;color:#fff">12k+</span><span style="font-size:13px;color:rgba(255,255,255,.6)">verified pros</span></div>
+          <div class="col"><span class="num" style="font-size:26px;color:#fff">4.9★</span><span style="font-size:13px;color:rgba(255,255,255,.6)">avg rating</span></div>
+          <div class="col"><span class="num" style="font-size:26px;color:#fff">80k+</span><span style="font-size:13px;color:rgba(255,255,255,.6)">jobs done</span></div>
+        </div>
+      </div>
+
+      <div class="col g20" style="position:relative;display:none" data-role-panel="provider">
+        <div class="ai-pill" style="align-self:flex-start;background:rgba(255,255,255,.14);color:#fff">{% icon "briefcase", "sm" %} For service providers</div>
+        <div class="d2" style="color:#fff;font-size:38px">Turn your skills into steady work.</div>
+        <p class="lead" style="color:rgba(255,255,255,.72);font-size:16px">List your services, get matched to nearby jobs by our AI, and get paid securely — all in one place.</p>
+        <div class="row g24" style="margin-top:6px">
+          <div class="col"><span class="num" style="font-size:26px;color:#fff">$1,240</span><span style="font-size:13px;color:rgba(255,255,255,.6)">avg / month</span></div>
+          <div class="col"><span class="num" style="font-size:26px;color:#fff">&lt;1 hr</span><span style="font-size:13px;color:rgba(255,255,255,.6)">to first job</span></div>
+          <div class="col"><span class="num" style="font-size:26px;color:#fff">0%</span><span style="font-size:13px;color:rgba(255,255,255,.6)">signup fee</span></div>
+        </div>
+      </div>
+
+      <div class="col g20" style="position:relative;display:none" data-role-panel="admin">
+        <div class="ai-pill" style="align-self:flex-start;background:rgba(255,255,255,.14);color:#fff">{% icon "shield", "sm" %} Operations console</div>
+        <div class="d2" style="color:#fff;font-size:38px">Smart Hire Operations Console.</div>
+        <p class="lead" style="color:rgba(255,255,255,.72);font-size:16px">Manage users, verify providers, review reports and moderate the platform. Authorized personnel only.</p>
+        <div class="row g24" style="margin-top:6px">
+          <div class="col"><span class="num" style="font-size:26px;color:#fff">2,418</span><span style="font-size:13px;color:rgba(255,255,255,.6)">users</span></div>
+          <div class="col"><span class="num" style="font-size:26px;color:#fff">312</span><span style="font-size:13px;color:rgba(255,255,255,.6)">providers</span></div>
+          <div class="col"><span class="num" style="font-size:26px;color:#fff">99.9%</span><span style="font-size:13px;color:rgba(255,255,255,.6)">uptime</span></div>
+        </div>
+      </div>
+
+      <div class="row g8" style="color:rgba(255,255,255,.55);font-size:12.5px;position:relative">{% icon "shield", "sm" %} Bank-level encryption · GDPR compliant</div>
+    </div>
+
+    {# ---------- right form ---------- #}
+    <div class="grow col center acenter" style="padding:40px">
+      <div class="card pad col g18" style="width:408px">
+        <div class="col acenter g10" style="text-align:center">
+          {{ logo() }}
+          <div class="ai-pill">{% icon "spark", "sm" %} AI-powered matching</div>
+        </div>
+
+        {# mode tabs — toggles login/register with no page navigation #}
+        <div class="row g8" style="background:var(--card2);padding:4px;border-radius:12px">
+          <button type="button" class="btn seg-btn block sm" data-mode-tab="login">Log in</button>
+          <button type="button" class="btn seg-btn block sm" data-mode-tab="register">Register</button>
+        </div>
+
+        {# role select — segmented control shared by both forms #}
+        <div class="field">
+          <label>I am a…</label>
+          <div class="row g6 role-tabs" style="background:var(--card2);padding:4px;border-radius:10px">
+            <button type="button" class="btn seg-btn block sm" data-role-tab="customer" style="gap:6px;padding:9px 8px">{% icon "user", "sm" %}Customer</button>
+            <button type="button" class="btn seg-btn block sm" data-role-tab="provider" style="gap:6px;padding:9px 8px">{% icon "briefcase", "sm" %}Service Provider</button>
+            <button type="button" class="btn seg-btn block sm" data-role-tab="admin" style="gap:6px;padding:9px 8px">{% icon "shield", "sm" %}Admin</button>
+          </div>
+        </div>
+
+        {# ---------- login form ---------- #}
+        <form class="col g18" data-mode-panel="login" action="/api/auth/login" method="post">
+          <input type="hidden" name="role" value="customer" data-role-input>
+          <div class="col g4" style="text-align:center"><div class="h1">Welcome back</div><div class="mut body">Log in to your Smart Hire account.</div></div>
+
+          {% call field(label="Email") %}{{ input(icon_="user", name="email", id="login-email", placeholder="anya.roberts@email.com") }}{% endcall %}
+          {% call field(label="Password") %}{{ input(icon_="shield", name="password", type="password") }}{% endcall %}
+
+          <div class="row between acenter sm">
+            {{ check(name="remember", checked=true, label="Remember me") }}
+            <a class="hl" style="font-weight:700" href="#">Forgot password?</a>
+          </div>
+          {{ btn(text="Log in", lg=true, block=true, type="submit") }}
+          <div class="row g12 acenter"><div class="divider"></div><span class="xs faint nowrap">OR CONTINUE WITH</span><div class="divider"></div></div>
+          <div class="row g10"><button type="button" class="btn ghost block sm">Google</button><button type="button" class="btn ghost block sm">Apple</button></div>
+          <p class="tc xs mut">New to Smart Hire? <button type="button" class="hl" style="font-weight:700;background:none;border:none;padding:0" data-mode-tab="register">Create an account</button></p>
+        </form>
+
+        {# ---------- register form ---------- #}
+        <form class="col g16" data-mode-panel="register" style="display:none" action="/api/auth/register" method="post">
+          <input type="hidden" name="role" value="customer" data-role-input>
+          <div class="col g4" style="text-align:center"><div class="h1">Create your account</div><div class="mut body">Join Smart Hire in a couple of minutes.</div></div>
+
+          {% call field(label="Full name") %}{{ input(icon_="user", name="name", id="register-name", placeholder="Anya Roberts") }}{% endcall %}
+          {% call field(label="Email") %}{{ input(icon_="user", name="email", id="register-email", placeholder="anya.roberts@email.com") }}{% endcall %}
+
+          <div class="row g12" data-role-only="provider" style="display:none">
+            <div class="grow">{% call field(label="Primary trade") %}{{ select(name="trade", options=["Plumbing","Electrical","Cleaning","Tutoring","Repairs","Tech support"]) }}{% endcall %}</div>
+            <div class="grow">{% call field(label="Service area") %}{{ input(icon_="loc", name="area") }}{% endcall %}</div>
+          </div>
+          <div data-role-only="admin" style="display:none">
+            {% call field(label="Invitation code") %}{{ input(icon_="shield", name="invite") }}{% endcall %}
+          </div>
+
+          {% call field(label="Password") %}{{ input(icon_="shield", name="password", type="password") }}{% endcall %}
+
+          <div class="panel row g8 acenter" data-role-only="provider" style="display:none">{% icon "shield", "sm" %}<span class="xs mut">We verify ID, insurance & qualifications before you go live.</span></div>
+          <div class="panel row g8 acenter" data-role-only="admin" style="display:none">{% icon "shield", "sm" %}<span class="xs mut">Invite-only. All admin actions are logged & audited.</span></div>
+
+          {{ check(name="terms", checked=true, label="I agree to the Terms & Privacy Policy") }}
+          {{ btn(text="Create account", lg=true, block=true, type="submit", extraClass="js-register-submit") }}
+          <p class="tc xs mut">Already have an account? <button type="button" class="hl" style="font-weight:700;background:none;border:none;padding:0" data-mode-tab="login">Log in</button></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

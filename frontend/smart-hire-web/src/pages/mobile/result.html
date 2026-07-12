@@ -1,0 +1,31 @@
+---
+layout: layouts/base.njk
+title: Mobile · AI match
+---
+{% from "macros/mobile.njk" import mShell %}
+{% from "macros/ds.njk" import av, stars, badge %}
+{% set head %}
+<div class="mhead">
+  <a href="/mobile/home.html" class="iconbtn" style="width:34px;height:34px">{% icon "back", "sm" %}</a>
+  <div class="grow col" style="line-height:1.2"><span class="sm" style="font-weight:700">AI match</span><span class="xs mut">"sink leaking"</span></div>
+</div>
+{% endset %}
+{% call mShell(active="Browse", head=head) %}
+<div class="col g14" style="padding:16px 16px">
+  <div class="card pad col g10" style="background:linear-gradient(180deg,var(--tint2),var(--card))">
+    <span class="ai-pill" style="align-self:flex-start">{% icon "spark", "sm" %} AI understood</span>
+    <div class="row between aend"><div class="h2">Plumbing · <span class="hl">Leak repair</span></div><div class="tr"><div class="num" style="font-size:22px">$60–120</div><div class="xs mut">est.</div></div></div>
+    <div class="row g6 wrap">{{ badge("under-sink", "brand") }}{{ badge("urgent", "warn") }}</div>
+  </div>
+  <div class="row between acenter"><span class="h3" style="font-size:15px">{{ pros.length }} matched pros</span><span class="chip on">Best match</span></div>
+  <div class="col g10">
+    {% for p in pros.slice(0, 3) %}
+    <a href="/mobile/profile.html" class="card pad row g12 acenter">
+      {{ av(size=44, color=p.color, text=p.initials, sq=true) }}
+      <div class="grow col g4"><div class="row g6 acenter"><span class="h3" style="font-size:14px">{{ p.name }}</span>{% icon "checkc", "sm" %}</div><div class="row g4 sm mut">{{ stars(n=p.rating | round, size=12) }} {{ p.rating }} · {{ p.dist }}</div></div>
+      <div class="col aend g6"><span class="num" style="font-size:16px">${{ p.price }}</span><span class="btn sm" style="pointer-events:none">Book</span></div>
+    </a>
+    {% endfor %}
+  </div>
+</div>
+{% endcall %}

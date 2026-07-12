@@ -1,0 +1,24 @@
+{
+  "name": "smart-hire-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Smart Hire — Crisp Modern SaaS design handoff rebuilt in HTML + Tailwind + SCSS + JS",
+  "scripts": {
+    "clean": "rimraf _site",
+    "build:sass": "sass src/scss/main.scss:_site/assets/css/main.css --no-source-map --style=compressed",
+    "build:tailwind": "tailwindcss -i ./src/css/tailwind.css -o ./_site/assets/css/tailwind.css --minify",
+    "build:eleventy": "eleventy",
+    "build": "npm run clean && npm run build:eleventy && npm run build:sass && npm run build:tailwind",
+    "watch:sass": "sass src/scss/main.scss:_site/assets/css/main.css --watch --no-source-map",
+    "watch:tailwind": "tailwindcss -i ./src/css/tailwind.css -o ./_site/assets/css/tailwind.css --watch",
+    "watch:eleventy": "eleventy --serve --watch",
+    "dev": "npm run build:eleventy && npm run build:sass && npm run build:tailwind && concurrently -k -n eleventy,sass,tailwind -c blue,magenta,green \"npm:watch:eleventy\" \"npm:watch:sass\" \"npm:watch:tailwind\""
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "concurrently": "^9.0.1",
+    "rimraf": "^6.0.1",
+    "sass": "^1.79.4",
+    "tailwindcss": "^3.4.13"
+  }
+}

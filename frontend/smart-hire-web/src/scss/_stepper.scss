@@ -1,0 +1,19 @@
+/* ---------- booking stepper ---------- */
+.s .step-num {
+  width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center;
+  font-size: 13px; background: var(--card2); color: var(--muted);
+}
+.s .step-item .step-label { color: var(--muted); font-weight: 500; }
+.s .step-item.on .step-num { background: var(--brand); color: #fff; }
+.s .step-item.on .step-label { color: var(--ink); font-weight: 700; }
+.s .step-item.done .step-num { background: var(--ok); color: #fff; }
+.s .step-line { width: 28px; height: 1.5px; background: var(--line2); }
+
+/* ---------- booking calendar ---------- */
+.s .cal-day {
+  padding: 9px 0; border-radius: 9px; font-size: 14px; font-weight: 500; cursor: pointer;
+  background: transparent; color: var(--ink); font-family: var(--fb); width: 100%;
+}
+.s .cal-day:hover:not(.disabled) { background: var(--card2); }
+.s .cal-day.selected { background: var(--brand); color: #fff; font-weight: 700; }
+.s .cal-day.disabled { color: var(--faint); text-decoration: line-through; cursor: not-allowed; }

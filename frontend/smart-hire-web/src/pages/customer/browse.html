@@ -1,0 +1,74 @@
+---
+layout: layouts/customer.njk
+title: Browse
+here: Browse
+auth: true
+bodyClass: frame
+---
+{% from "macros/ds.njk" import av, stars, select, field, check %}
+<div class="row browse-split" style="height:100%;overflow:hidden">
+  {# filters #}
+  <div class="col g20 browse-filters" style="width:244px;flex:none;padding:24px 22px;border-right:1px solid var(--line);overflow:auto">
+    <div class="row between acenter"><span class="h3">Filters</span><a class="xs hl" style="font-weight:700" href="/customer/browse.html">Clear</a></div>
+    {% call field(label="Category") %}{{ select(name="category", options=["Plumbing","Electrical","Cleaning","Tutoring","Repairs","Tech support"]) }}{% endcall %}
+    <div class="field">
+      <label>Minimum rating</label>
+      <div class="row g6" data-chip-group="single">
+        <button type="button" class="chip">Any</button>
+        <button type="button" class="chip">4.0+</button>
+        <button type="button" class="chip on">4.5+</button>
+        <button type="button" class="chip">4.8+</button>
+      </div>
+    </div>
+    <div class="field">
+      <label>Price / visit</label>
+      <div class="meter" style="margin-top:6px"><i style="width:64%"></i></div>
+      <div class="row between xs mut" style="margin-top:6px"><span>$30</span><span>$120</span></div>
+    </div>
+    <div class="field">
+      <label>Distance</label>
+      <div class="row g6 wrap" data-chip-group="single">
+        <button type="button" class="chip">1 mi</button>
+        <button type="button" class="chip on">3 mi</button>
+        <button type="button" class="chip">5 mi</button>
+        <button type="button" class="chip">10 mi</button>
+      </div>
+    </div>
+    {% call field(label="Availability") %}
+    <div class="col g8">
+      {{ check(name="avail_today", checked=true, label="Today") }}
+      {{ check(name="avail_week", label="This week") }}
+      {{ check(name="avail_weekend", label="Weekends") }}
+    </div>
+    {% endcall %}
+  </div>
+
+  {# results #}
+  <div class="grow col browse-results" style="overflow:hidden">
+    <div class="row g12 acenter wrap" style="padding:18px 26px;border-bottom:1px solid var(--line);flex:none">
+      <div class="input grow" style="max-width:none">{% icon "search", "sm" %}<span class="grow">Plumbing</span><span class="badge brand">AI suggest</span></div>
+      {{ select(name="sort", options=["Sort: Best match","Sort: Top rated","Sort: Nearest","Sort: Lowest price"]) }}
+      <div class="row g4" style="background:var(--card2);border-radius:9px;padding:3px">
+        <button class="iconbtn" type="button" style="width:32px;height:32px;background:var(--card);box-shadow:var(--sh-sm)" aria-label="Grid view">{% icon "grid", "sm" %}</button>
+        <button class="iconbtn" type="button" style="width:32px;height:32px;box-shadow:none" aria-label="List view">{% icon "list", "sm" %}</button>
+      </div>
+    </div>
+    <div class="grow" style="overflow:auto;padding:20px 26px">
+      <div class="sm mut" style="margin-bottom:14px">Showing <b style="color:var(--ink)">24 providers</b> for "Plumbing" near SW1</div>
+      <div class="grid-2" style="gap:16px">
+        {% for p in (pros.concat(pros.slice(0, 2))) %}
+        <div class="card hover pad col g12">
+          <div class="row g12 acenter">
+            {{ av(size=46, color=p.color, text=p.initials, sq=true) }}
+            <div class="grow"><div class="row g6 acenter"><span class="h3">{{ p.name }}</span>{% icon "checkc", "sm" %}</div><div class="row g6 acenter sm mut">{{ stars(n=p.rating | round, size=13) }} {{ p.rating }} · {{ p.jobs }} jobs</div></div>
+            <button class="iconbtn" type="button" style="width:34px;height:34px" data-toggle-active aria-label="Save">{% icon "heart", "sm" %}</button>
+          </div>
+          <div class="row g6 wrap">{% for t in p.tags %}<span class="badge">{{ t }}</span>{% endfor %}<span class="badge info">{{ p.dist }}</span></div>
+          <div class="divider"></div>
+          <div class="row between acenter"><span class="sm mut">from <b class="num" style="color:var(--ink);font-size:17px">${{ p.price }}</b></span><a href="/customer/booking.html" class="btn sm">Book</a></div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

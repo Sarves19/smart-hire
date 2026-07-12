@@ -1,0 +1,24 @@
+{# ============ Mobile shell (ported from mobile-hifi.jsx MShell) ============ #}
+{% from "macros/ds.njk" import statusBar, mobileTabbar %}
+
+{% macro mShell(active="Home", head="") %}
+<div class="phone-stage">
+  <div class="phone-frame">
+    <div class="phone-notch"></div>
+    <div class="phone-screen">
+      <div class="frame" style="display:flex;flex-direction:column;height:100%">
+        {{ statusBar() }}
+        {% if head %}{{ head | safe }}{% endif %}
+        <div class="grow" style="overflow:auto">
+          {{ caller() }}
+        </div>
+        {{ mobileTabbar(active) }}
+      </div>
+    </div>
+  </div>
+</div>
+{% endmacro %}
+
+{% macro mhead(content) %}
+<div class="mhead">{{ content | safe }}</div>
+{% endmacro %}

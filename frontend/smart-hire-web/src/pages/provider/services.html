@@ -1,0 +1,45 @@
+---
+layout: layouts/base.njk
+title: My services
+bodyClass: frame
+---
+{% from "macros/shell.njk" import pSidebar, pTopbar %}
+{% set svc = [
+  ["Leak & pipe repair", "Plumbing", 65, "live", 132],
+  ["Tap & faucet install", "Plumbing", 45, "live", 64],
+  ["Drain unblocking", "Plumbing", 80, "live", 38],
+  ["Emergency callout", "Plumbing", 110, "live", 21],
+  ["Boiler service", "Plumbing", 90, "paused", 12]
+] %}
+<div class="shell">
+  {{ pSidebar("My services") }}
+  <div class="main">
+    {% call pTopbar("My services", "5 services · 4 live") %}
+    <a href="/provider/add-service.html" class="btn">{% icon "plus", "sm" %} Add service</a>
+    {% endcall %}
+    <div class="content">
+      <div class="card" style="overflow:auto">
+        <table class="table">
+          <thead><tr><th>Service</th><th>Category</th><th>Rate</th><th>Bookings</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+            {% for s in svc %}
+            <tr class="rowhover">
+              <td><div class="row g12 acenter"><div class="dotpat" style="width:40px;height:40px;border-radius:9px;background:var(--tint);color:var(--brand);display:grid;place-items:center">{% icon "drop", "sm" %}</div><span style="font-weight:700">{{ s[0] }}</span></div></td>
+              <td class="mut">{{ s[1] }}</td>
+              <td><span class="num">${{ s[2] }}</span> <span class="xs mut">/visit</span></td>
+              <td class="mut">{{ s[4] }} jobs</td>
+              <td>{% if s[3] == "live" %}<span class="badge ok dot">Live</span>{% else %}<span class="badge warn dot">Paused</span>{% endif %}</td>
+              <td>
+                <div class="row g6 aend">
+                  <a href="/provider/add-service.html" class="iconbtn" style="width:32px;height:32px" aria-label="Edit">{% icon "edit", "sm" %}</a>
+                  <button class="iconbtn" type="button" style="width:32px;height:32px" aria-label="More options">{% icon "dots", "sm" %}</button>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

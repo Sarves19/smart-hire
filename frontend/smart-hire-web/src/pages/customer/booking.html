@@ -1,0 +1,131 @@
+---
+layout: layouts/customer.njk
+title: Book Ravi Patel
+here: Browse
+auth: true
+extraScripts:
+  - /assets/js/booking.js
+---
+{% from "macros/ds.njk" import av, stars, verified, field, input %}
+<div class="page-pad" style="padding-top:24px;padding-bottom:48px">
+  <a href="/customer/profile.html" class="row g8 acenter sm mut" style="margin-bottom:16px;width:fit-content">{% icon "back", "sm" %} Back to Ravi's profile</a>
+
+  <div class="row between aend wrap g16" style="margin-bottom:22px">
+    <div class="col g4"><span class="kicker">Booking</span><span class="h1">Leak &amp; pipe repair</span></div>
+
+    {# stepper #}
+    <div class="row g8 acenter" data-stepper>
+      <div class="row g8 acenter step-item on" data-step-item="1"><span class="num step-num">1</span><span class="sm step-label">When</span></div>
+      <div class="step-line"></div>
+      <div class="row g8 acenter step-item" data-step-item="2"><span class="num step-num">2</span><span class="sm step-label">Details</span></div>
+      <div class="step-line"></div>
+      <div class="row g8 acenter step-item" data-step-item="3"><span class="num step-num">3</span><span class="sm step-label">Confirm</span></div>
+    </div>
+  </div>
+
+  <div class="row g24 astart wrap">
+    <div class="grow col g22" style="min-width:420px">
+
+      {# ---------- step 1 · When ---------- #}
+      <div data-step-panel="1" class="col g22">
+        <div class="card pad col g14">
+          <span class="h3">Choose a date</span>
+          <div class="row between acenter">
+            <span class="sm" style="font-weight:700">June 2026</span>
+            <div class="row g6">
+              <button class="iconbtn" type="button" style="width:32px;height:32px" aria-label="Previous month">{% icon "back", "sm" %}</button>
+              <button class="iconbtn" type="button" style="width:32px;height:32px" aria-label="Next month">{% icon "arrow", "sm" %}</button>
+            </div>
+          </div>
+          <div class="grid-7" style="gap:6px" data-calendar data-selected-day="10">
+            {% for d in ["M","T","W","T","F","S","S"] %}<div class="tc xs faint" style="font-weight:700;padding-bottom:4px">{{ d }}</div>{% endfor %}
+            {% for i in range(1, 31) %}
+            {% if i < 4 %}
+            <div class="tc cal-day disabled" aria-disabled="true">{{ i }}</div>
+            {% else %}
+            <button type="button" class="tc cal-day {% if i == 10 %}selected{% endif %}" data-day="{{ i }}">{{ i }}</button>
+            {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        <div class="card pad col g14">
+          <span class="h3">Available times <span class="mut sm" style="font-weight:400">· <span data-summary-date-label>Wed 10 June</span></span></span>
+          <div class="row g8 wrap" data-chip-group="single" data-time-group>
+            <button type="button" class="chip" data-time="9:00 AM">9:00 AM</button>
+            <button type="button" class="chip" data-time="10:30 AM">10:30 AM</button>
+            <button type="button" class="chip on" data-time="1:00 PM">1:00 PM</button>
+            <button type="button" class="chip" data-time="3:00 PM">3:00 PM</button>
+            <button type="button" class="chip" data-time="4:30 PM">4:30 PM</button>
+            <button type="button" class="chip" data-time="6:00 PM">6:00 PM</button>
+          </div>
+        </div>
+        <div class="row g10" style="justify-content:flex-end">
+          <button type="button" class="btn lg" data-step-next>Continue to details</button>
+        </div>
+      </div>
+
+      {# ---------- step 2 · Details ---------- #}
+      <div data-step-panel="2" class="col g22" hidden>
+        <div class="card pad col g14">
+          <span class="h3">Job details</span>
+          {% call field(label="Service address") %}{{ input(icon_="loc", name="address", value="123 Baker Street, Flat 2, London SW1") }}{% endcall %}
+          {% call field(label="Describe the problem (helps your pro prepare)") %}{{ input(area=true, name="notes", value="Leak is under the kitchen cabinet, water pooling. Cabinet is fitted so access is a bit tight. Bring a bucket and torch.") }}{% endcall %}
+          {% call field(label="Add photos") %}
+          <div class="row g10">
+            <div class="dotpat" style="width:76px;height:76px;border-radius:10px;background:var(--card2);display:grid;place-items:center;color:var(--faint)">{% icon "cam" %}</div>
+            <div class="dotpat" style="width:76px;height:76px;border-radius:10px;background:var(--card2);display:grid;place-items:center;color:var(--faint)">{% icon "cam" %}</div>
+            <button type="button" style="width:76px;height:76px;border-radius:10px;border:1.5px dashed var(--line2);display:grid;place-items:center;color:var(--faint)">{% icon "plus" %}</button>
+          </div>
+          {% endcall %}
+        </div>
+        <div class="row g10 between">
+          <button type="button" class="btn ghost lg" data-step-back>Back</button>
+          <button type="button" class="btn lg" data-step-next>Continue to confirm</button>
+        </div>
+      </div>
+
+      {# ---------- step 3 · Confirm ---------- #}
+      <div data-step-panel="3" class="col g22" hidden>
+        <div class="card pad col g16">
+          <span class="h3">Review your booking</span>
+          <div class="panel row g12 acenter">
+            {{ av(size=42, color="var(--brand)", text="RP", sq=true) }}
+            <div class="grow"><div class="h3" style="font-size:14px">Ravi Patel</div><div class="row g4 sm mut">{{ stars(n=5, size=12) }} 4.9</div></div>
+            {{ verified(label="") }}
+          </div>
+          <div class="col g8 sm">
+            <div class="row between"><span class="mut">Service</span><span style="font-weight:600">Leak &amp; pipe repair</span></div>
+            <div class="row between"><span class="mut">Date</span><span style="font-weight:600" data-summary-date>Wed 10 June</span></div>
+            <div class="row between"><span class="mut">Time</span><span style="font-weight:600" data-summary-time>1:00 PM</span></div>
+            <div class="row between"><span class="mut">Address</span><span style="font-weight:600">123 Baker Street, Flat 2</span></div>
+          </div>
+          <div class="panel row g8 acenter">{% icon "shield", "sm" %}<span class="xs mut">You won't be charged until the job is confirmed.</span></div>
+        </div>
+        <div class="row g10 between">
+          <button type="button" class="btn ghost lg" data-step-back>Back</button>
+          <a href="/customer/history.html" class="btn ok lg">{% icon "check", "sm" %} Confirm booking</a>
+        </div>
+      </div>
+    </div>
+
+    {# summary rail — persists across all steps #}
+    <div class="card pad col g12 rail" style="width:290px;flex:none;position:sticky;top:24px">
+      <span class="h3">Booking summary</span>
+      <div class="row g12 acenter panel">
+        {{ av(size=42, color="var(--brand)", text="RP", sq=true) }}
+        <div class="grow"><div class="h3" style="font-size:14px">Ravi Patel</div><div class="row g4 sm mut">{{ stars(n=5, size=12) }} 4.9</div></div>
+        {{ verified(label="") }}
+      </div>
+      <div class="col g8 sm" style="margin-top:4px">
+        <div class="row between"><span class="mut">Service</span><span style="font-weight:600">Leak &amp; pipe repair</span></div>
+        <div class="row between"><span class="mut">Date</span><span style="font-weight:600" data-summary-date>Wed 10 June</span></div>
+        <div class="row between"><span class="mut">Time</span><span style="font-weight:600" data-summary-time>1:00 PM</span></div>
+        <div class="divider" style="margin:4px 0"></div>
+        <div class="row between"><span class="mut">Visit fee</span><span class="num">$65</span></div>
+        <div class="row between"><span class="mut">Service fee</span><span class="num">$5</span></div>
+      </div>
+      <div class="row between acenter" style="padding-top:4px;border-top:1px solid var(--line)"><span class="h3">Total</span><span class="num" style="font-size:24px">$70</span></div>
+      <div class="row g6 xs faint center">{% icon "shield", "sm" %} You won't be charged until the job is confirmed</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+/* Phone frame used to present the mobile screens (390×844 reference frame). */
+.phone-stage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--card2, #f7f3ee);
+  padding: 32px 16px;
+}
+.phone-frame {
+  width: 390px;
+  height: 844px;
+  border-radius: 46px;
+  background: #0c0a09;
+  padding: 12px;
+  box-shadow: 0 2px 4px rgba(28, 23, 20, .05), 0 30px 60px -20px rgba(28, 23, 20, .45);
+  flex: none;
+}
+.phone-frame .phone-screen {
+  width: 100%;
+  height: 100%;
+  border-radius: 36px;
+  overflow: hidden;
+  position: relative;
+  background: var(--bg);
+}
+.phone-frame .phone-notch {
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 120px; height: 26px;
+  background: #0c0a09;
+  border-radius: 0 0 16px 16px;
+  z-index: 40;
+}
+
+/* on an actual phone viewport, drop the decorative bezel and go edge-to-edge */
+@media (max-width: 480px) {
+  .phone-stage { padding: 0; min-height: 100dvh; }
+  .phone-frame { width: 100%; height: 100dvh; border-radius: 0; padding: 0; box-shadow: none; }
+  .phone-frame .phone-screen { border-radius: 0; }
+  .phone-frame .phone-notch { display: none; }
+}

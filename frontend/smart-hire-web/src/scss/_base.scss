@@ -1,0 +1,47 @@
+/* .col/.row set `display` via a class, which otherwise beats the UA
+   stylesheet's [hidden]{display:none} on source order — force it back. */
+[hidden] {
+  display: none !important;
+}
+
+/* ---------- typography helpers ---------- */
+.s .d1 { font-family: var(--fd); font-weight: 700; letter-spacing: -.03em; line-height: 1.02; font-size: 46px; }
+.s .d2 { font-family: var(--fd); font-weight: 700; letter-spacing: -.03em; line-height: 1.04; font-size: 34px; }
+.s .h1 { font-family: var(--fd); font-weight: 700; letter-spacing: -.02em; line-height: 1.1; font-size: 26px; }
+.s .h2 { font-family: var(--fd); font-weight: 700; letter-spacing: -.02em; line-height: 1.15; font-size: 20px; }
+.s .h3 { font-family: var(--fd); font-weight: 600; letter-spacing: -.01em; font-size: 16px; }
+.s .lead { font-size: 17px; color: var(--muted); font-weight: 500; line-height: 1.5; }
+.s .body { font-size: 15px; }
+.s .sm { font-size: 13.5px; }
+.s .xs { font-size: 12px; }
+.s .mut { color: var(--muted); }
+.s .faint { color: var(--faint); }
+.s .eyebrow { font-family: var(--fm); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--brand); font-weight: 700; }
+.s .kicker { font-family: var(--fm); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+.s .num { font-family: var(--fd); font-weight: 700; letter-spacing: -.02em; font-feature-settings: 'tnum'; }
+
+/* ---------- layout utils ---------- */
+.s .row { display: flex; align-items: center; }
+.s .col { display: flex; flex-direction: column; }
+.s .wrap { flex-wrap: wrap; }
+.s .grow { flex: 1; min-width: 0; }
+.s .between { justify-content: space-between; }
+.s .center { justify-content: center; }
+.s .acenter { align-items: center; }
+.s .astart { align-items: flex-start; }
+.s .aend { align-items: flex-end; }
+.s .g4 { gap: 4px; } .s .g6 { gap: 6px; } .s .g8 { gap: 8px; } .s .g10 { gap: 10px; } .s .g12 { gap: 12px; }
+.s .g14 { gap: 14px; } .s .g16 { gap: 16px; } .s .g20 { gap: 20px; } .s .g24 { gap: 24px; } .s .g28 { gap: 28px; } .s .g32 { gap: 32px; }
+.s .scroll { min-height: 100%; display: flex; flex-direction: column; }
+.frame .scroll,
+.frame.scroll { height: 100%; overflow: hidden; }
+
+/* misc */
+.s .pin { position: relative; }
+.s .dotpat { background-image: radial-gradient(var(--line2) 1px, transparent 1px); background-size: 18px 18px; }
+.s .hl { color: var(--brand); }
+.s .strike { text-decoration: line-through; color: var(--faint); }
+.s .ring { box-shadow: 0 0 0 3px var(--tint); }
+.s .nowrap { white-space: nowrap; }
+.s .tr { text-align: right; }
+.s .tc { text-align: center; }

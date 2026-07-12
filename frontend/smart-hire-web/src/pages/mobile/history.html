@@ -1,0 +1,47 @@
+---
+layout: layouts/base.njk
+title: Mobile · My bookings
+---
+{% from "macros/mobile.njk" import mShell %}
+{% from "macros/ds.njk" import av, badge %}
+{% set head %}
+<div class="mhead"><span class="h2 grow">My bookings</span><button class="iconbtn" type="button" style="width:34px;height:34px" aria-label="Filter">{% icon "filter", "sm" %}</button></div>
+{% endset %}
+{% set rows = [
+  ["Leak & pipe repair", "Ravi P.", "RP", "var(--brand)", "Tomorrow 1PM", "upcoming"],
+  ["Deep clean", "Mira K.", "MK", "var(--teal)", "In progress", "active"],
+  ["GCSE maths", "Dan O.", "DO", "var(--violet)", "Jun 2 · done", "completed"],
+  ["TV mounting", "Sara L.", "SL", "var(--rose)", "May 28 · done", "completed"]
+] %}
+{% set stMap = { upcoming: ["info", "Upcoming"], active: ["warn", "Active"], completed: ["ok", "Done"] } %}
+{% call mShell(active="Bookings", head=head) %}
+<div class="col g12" style="padding:14px 16px">
+  <div class="row g8" data-chip-group="single">
+    <button type="button" class="chip on">All</button>
+    <button type="button" class="chip">Upcoming</button>
+    <button type="button" class="chip">Done</button>
+  </div>
+  {% for r in rows %}
+  {% set kind = stMap[r[5]][0] %}
+  {% set label = stMap[r[5]][1] %}
+  <div class="card pad col g10">
+    <div class="row g12 acenter">
+      {{ av(size=42, color=r[3], text=r[2], sq=true) }}
+      <div class="grow"><div class="h3" style="font-size:14px">{{ r[0] }}</div><div class="xs mut">{{ r[1] }} · {{ r[4] }}</div></div>
+      {{ badge(label, kind, true) }}
+    </div>
+    <div class="row g8">
+      {% if r[5] == "completed" %}
+      <button type="button" class="btn ghost sm block">Rebook</button>
+      <a href="/customer/review.html" class="btn sm block">{% icon "star", "sm" %} Review</a>
+      {% elif r[5] == "active" %}
+      <button type="button" class="btn sm block">{% icon "loc", "sm" %} Track pro</button>
+      {% else %}
+      <button type="button" class="btn ghost sm block">Reschedule</button>
+      <button type="button" class="btn ghost sm block">{% icon "msg", "sm" %} Message</button>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endcall %}

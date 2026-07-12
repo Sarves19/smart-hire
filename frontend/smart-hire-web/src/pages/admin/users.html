@@ -1,0 +1,57 @@
+---
+layout: layouts/base.njk
+title: Users
+bodyClass: frame
+---
+{% from "macros/shell.njk" import aSidebar, aTopbar %}
+{% from "macros/ds.njk" import av, badge %}
+{% set users = [
+  ["Anya Roberts", "anya.r@email.com", "Customer", "var(--teal)", "AR", "Jun 2", "active"],
+  ["Ravi Patel", "ravi.p@email.com", "Provider", "var(--brand)", "RP", "Jan 8", "active"],
+  ["Sam Tan", "sam.t@email.com", "Customer", "var(--rose)", "ST", "May 30", "active"],
+  ["promo_bot_99", "x99@temp-mail.co", "Provider", "var(--faint)", "P9", "Jun 13", "flagged"],
+  ["Lee Morgan", "lee.m@email.com", "Customer", "var(--violet)", "LM", "Apr 11", "active"],
+  ["Mira Kaur", "mira.k@email.com", "Provider", "var(--info)", "MK", "Feb 19", "active"],
+  ["gh0st_acc", "noreply@temp.io", "Customer", "var(--faint)", "G", "Jun 9", "suspended"]
+] %}
+{% set stB = { active: ["ok", "Active"], flagged: ["danger", "Flagged"], suspended: ["warn", "Suspended"] } %}
+<div class="shell">
+  {{ aSidebar("Users") }}
+  <div class="main">
+    {% call aTopbar("Users", "2,418 total") %}
+    <button type="button" class="btn ghost">{% icon "download", "sm" %} Export</button>
+    {% endcall %}
+    <div class="content">
+      <div class="row g8 wrap" style="margin-bottom:16px" data-chip-group="single">
+        <button type="button" class="chip on">All 2,418</button>
+        <button type="button" class="chip">Customers</button>
+        <button type="button" class="chip">Providers</button>
+        <button type="button" class="chip">Flagged 1</button>
+        <button type="button" class="chip">Suspended 1</button>
+      </div>
+      <div class="card" style="overflow:auto">
+        <table class="table">
+          <thead><tr><th>User</th><th>Role</th><th>Joined</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+            {% for u in users %}
+            {% set kind = stB[u[6]][0] %}
+            {% set label = stB[u[6]][1] %}
+            <tr class="rowhover">
+              <td><div class="row g12 acenter">{{ av(size=36, color=u[3], text=u[4]) }}<div><div style="font-weight:700">{{ u[0] }}</div><div class="xs mut">{{ u[1] }}</div></div></div></td>
+              <td>{{ badge(u[2], "brand" if u[2] == "Provider" else "info") }}</td>
+              <td class="mut nowrap">{{ u[5] }}</td>
+              <td>{{ badge(label, kind, true) }}</td>
+              <td>
+                <div class="row g6 aend">
+                  <button class="iconbtn" type="button" style="width:32px;height:32px" aria-label="View">{% icon "eye", "sm" %}</button>
+                  <button class="iconbtn" type="button" style="width:32px;height:32px" aria-label="More options">{% icon "dots", "sm" %}</button>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

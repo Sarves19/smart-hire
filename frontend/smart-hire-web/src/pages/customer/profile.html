@@ -1,0 +1,61 @@
+---
+layout: layouts/customer.njk
+title: Ravi Patel · Plumber
+here: Browse
+auth: true
+---
+{% from "macros/ds.njk" import av, stars, verified, badge, btn %}
+<div style="height:116px;background:linear-gradient(120deg,var(--brand),var(--brand-d))"></div>
+<div class="row g24 astart wrap page-pad" style="padding-top:0;padding-bottom:48px;margin-top:-38px">
+  <div class="grow" style="min-width:420px">
+    <div class="row g16 acenter wrap" style="margin-bottom:20px">
+      {{ av(size=92, color="var(--brand)", text="RP", sq=true, ring=true, style="box-shadow:0 0 0 4px var(--bg)") }}
+      <div class="col g6" style="padding-top:30px">
+        <div class="row g10 acenter"><span class="h1">Ravi Patel</span>{{ verified() }}</div>
+        <div class="row g10 acenter wrap sm mut"><span class="row g4">{{ stars(n=5) }} <b style="color:var(--ink)">4.9</b> (132 reviews)</span> · {% icon "loc", "sm" %}Westminster, 0.8 mi · 5 yrs experience</div>
+      </div>
+    </div>
+    <div class="row g8 wrap" style="margin-bottom:22px">
+      {{ badge("Plumbing", "brand") }}{{ badge("Leak repair") }}{{ badge("Tap & faucet installs") }}{{ badge("Drain unblocking") }}{{ badge("Emergency callout", "info") }}
+    </div>
+    <div class="col g10" style="margin-bottom:24px">
+      <span class="h3">About</span>
+      <p class="body mut" style="max-width:560px">City &amp; Guilds qualified plumber with 5 years of domestic experience. Specialise in leaks, installs and emergency callouts. Tidy, punctual, and fully insured — most jobs done in a single visit.</p>
+    </div>
+    <div class="col g12" style="margin-bottom:24px">
+      <span class="h3">Services &amp; rates</span>
+      {% set services = [["Leak & pipe repair", "Most popular", 65], ["Tap & faucet install", "~45 min", 45], ["Drain unblocking", "~1 hr", 80], ["Emergency callout", "Same day", 110]] %}
+      {% for s in services %}
+      <div class="card flat pad row between acenter" style="border:1px solid var(--line)">
+        <div><div class="h3" style="font-size:15px">{{ s[0] }}</div><div class="xs mut">{{ s[1] }}</div></div>
+        <div class="row g12 acenter"><span class="num" style="font-size:18px">${{ s[2] }}</span><a href="/customer/booking.html" class="btn ghost sm">Add</a></div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="col g12">
+      <div class="row between acenter"><span class="h3">Reviews <span class="mut" style="font-weight:400">· 132</span></span><a class="xs hl" style="font-weight:700" href="#reviews">See all</a></div>
+      {% set reviews = [["Anya R.", "var(--teal)", 5, "Quick, tidy and fixed the leak in 30 minutes. Explained what went wrong. Would book again."], ["Sam T.", "var(--violet)", 5, "Came same day for an emergency. Professional and fair price."]] %}
+      {% for r in reviews %}
+      <div class="card flat pad col g8" style="border:1px solid var(--line)">
+        <div class="row between acenter"><div class="row g10 acenter">{{ av(size=32, color=r[1], text=r[0][0]) }}<span class="h3" style="font-size:14px">{{ r[0] }}</span><span class="xs faint">2 weeks ago</span></div>{{ stars(n=r[2]) }}</div>
+        <p class="sm mut">{{ r[3] }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {# booking rail #}
+  <div class="card pad col g14 rail" style="width:280px;flex:none;position:sticky;top:24px;margin-top:24px">
+    <div class="row between acenter"><span class="h3">Book Ravi</span>{{ badge("Available today", "ok", true) }}</div>
+    {% from "macros/ds.njk" import field, select, input %}
+    {% call field(label="Service") %}{{ select(name="service", options=["Leak & pipe repair — $65","Tap & faucet install — $45","Drain unblocking — $80","Emergency callout — $110"]) }}{% endcall %}
+    {% call field(label="Date & time") %}{{ input(icon_="cal", name="datetime", placeholder="Tomorrow, 1:00 PM") }}{% endcall %}
+    <div class="divider"></div>
+    <div class="row between"><span class="sm mut">Visit fee</span><span class="num">$65</span></div>
+    <div class="row between"><span class="sm mut">Service fee</span><span class="num">$5</span></div>
+    <div class="row between acenter"><span class="h3">Total</span><span class="num" style="font-size:22px">$70</span></div>
+    <a href="/customer/booking.html" class="btn block lg">Book now</a>
+    <div class="row g8"><button type="button" class="btn ghost block sm" data-toggle-active>{% icon "heart", "sm" %} Save</button><button type="button" class="btn ghost block sm">{% icon "msg", "sm" %} Message</button></div>
+    <div class="row g6 xs faint center">{% icon "shield", "sm" %} Free cancellation up to 24 hrs</div>
+  </div>
+</div>

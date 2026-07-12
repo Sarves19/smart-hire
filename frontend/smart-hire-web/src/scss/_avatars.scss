@@ -1,0 +1,26 @@
+.s .av {
+  border-radius: 50%; display: grid; place-items: center; color: #fff; font-weight: 700;
+  font-family: var(--fd); flex: none; letter-spacing: -.02em;
+}
+.s .av.sq { border-radius: 11px; }
+.s .av-ring { box-shadow: 0 0 0 2px var(--card), 0 0 0 3.5px var(--brand); }
+
+.s .stars { display: inline-flex; gap: 1px; color: var(--brand); }
+.s .stars.muted { color: var(--line2); }
+.s .stars svg { display: block; }
+
+.s .star-input { display: inline-flex; gap: 6px; }
+.s .star-input button { padding: 0; line-height: 0; }
+.s .star-input svg { transition: fill .1s; }
+
+.s .ic { width: 20px; height: 20px; stroke: currentColor; stroke-width: 1.85; fill: none; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.s .ic.fill { fill: currentColor; stroke: none; }
+.s .ic.sm { width: 16px; height: 16px; }
+.s .ic.lg { width: 26px; height: 26px; }
+
+.s .cat-ico { width: 44px; height: 44px; border-radius: 11px; background: var(--tint); color: var(--brand); display: grid; place-items: center; flex: none; }
+.s .cat-ico.teal { background: var(--info-tint); color: var(--info); }
+.s .cat-ico.violet { background: #efe7fd; color: var(--violet); }
+.s .cat-ico.green { background: var(--ok-tint); color: var(--ok); }
+.s .cat-ico.rose { background: #fce4ee; color: var(--rose); }
+.s .cat-ico.amber { background: var(--warn-tint); color: var(--warn); }

@@ -1,0 +1,122 @@
+{# ============ Smart Hire — shared DS macros (ported from ds.jsx) ============ #}
+
+{% macro logo(name="Smart Hire", sub="", href="/") %}
+<a class="logo" href="{{ href }}">
+  <span class="mark">{% icon "spark" %}</span>
+  <span>{{ name }}{% if sub %}<span style="color:var(--muted);font-weight:600"> · {{ sub }}</span>{% endif %}</span>
+</a>
+{% endmacro %}
+
+{% macro av(size=40, color="var(--brand)", text="RP", sq=false, ring=false, style="") %}
+<span class="av {% if sq %}sq{% endif %} {% if ring %}av-ring{% endif %}" style="width:{{ size }}px;height:{{ size }}px;background:{{ color }};font-size:{{ (size * 0.38) | round }}px;{{ style }}">{{ text }}</span>
+{% endmacro %}
+
+{% macro stars(n=5, total=5, size=14) %}
+<span class="stars" style="font-size:0">
+  {% for i in range(0, total) %}
+  <svg width="{{ size }}" height="{{ size }}" viewBox="0 0 24 24" style="fill:{% if i < n %}var(--brand){% else %}var(--line2){% endif %}"><path d="M12 3l2.6 5.7 6.4.7-4.8 4.3 1.3 6.3L12 17.8 6.5 20.3l1.3-6.3L3 9.7l6.4-.7z" /></svg>
+  {% endfor %}
+</span>
+{% endmacro %}
+
+{% macro starInput(name="rating", value=5, size=32, labelTarget="") %}
+<span>
+  <span class="star-input" data-star-input data-value="{{ value }}" {% if labelTarget %}data-label-target="{{ labelTarget }}"{% endif %}>
+    {% for i in range(1, 6) %}
+    <button type="button" class="star-btn" data-value="{{ i }}" aria-label="Rate {{ i }} star{{ 's' if i != 1 }}">
+      <svg width="{{ size }}" height="{{ size }}" viewBox="0 0 24 24" style="fill:{% if i <= value %}var(--brand){% else %}var(--line2){% endif %}"><path d="M12 3l2.6 5.7 6.4.7-4.8 4.3 1.3 6.3L12 17.8 6.5 20.3l1.3-6.3L3 9.7l6.4-.7z" /></svg>
+    </button>
+    {% endfor %}
+  </span>
+  <input type="hidden" name="{{ name }}" value="{{ value }}" />
+</span>
+{% endmacro %}
+
+{% macro badge(text, kind="", dot=false) %}
+<span class="badge {{ kind }} {% if dot %}dot{% endif %}">{{ text }}</span>
+{% endmacro %}
+
+{% macro verified(label="Verified") %}
+<span class="verified">{% icon "checkc", "sm" %}{{ label }}</span>
+{% endmacro %}
+
+{% macro btn(text="", kind="", sm=false, lg=false, block=false, icon_="", href=none, type="button", extraClass="", attrs="") %}
+{% set classes = "btn " + kind + " " + ("sm" if sm) + " " + ("lg" if lg) + " " + ("block" if block) + " " + extraClass %}
+{% if href %}
+<a href="{{ href }}" class="{{ classes }}" {{ attrs | safe }}>{% if icon_ %}{% icon icon_, "sm" %}{% endif %}{{ text }}{{ caller() if caller }}</a>
+{% else %}
+<button type="{{ type }}" class="{{ classes }}" {{ attrs | safe }}>{% if icon_ %}{% icon icon_, "sm" %}{% endif %}{{ text }}{{ caller() if caller }}</button>
+{% endif %}
+{% endmacro %}
+
+{% macro chip(text, on=false, brand=false, extraClass="", attrs="") %}
+<button type="button" class="chip {% if on %}on{% endif %} {% if brand %}brand{% endif %} {{ extraClass }}" {{ attrs | safe }}>{{ text }}</button>
+{% endmacro %}
+
+{% macro field(label="") %}
+<div class="field">
+  {% if label %}<label>{{ label }}</label>{% endif %}
+  {{ caller() }}
+</div>
+{% endmacro %}
+
+{% macro input(icon_="", placeholder="", value="", name="", id="", type="text", area=false, focus=false) %}
+<div class="input {% if focus %}focus{% endif %} {% if area %}area{% endif %}">
+  {% if icon_ %}{% icon icon_, "sm" %}{% endif %}
+  {% if area %}
+  <textarea class="grow" style="border:none;background:none;outline:none;font:inherit;color:inherit;resize:vertical;width:100%" name="{{ name }}" id="{{ id or name }}" placeholder="{{ placeholder }}" rows="3">{{ value }}</textarea>
+  {% else %}
+  <input class="grow" style="border:none;background:none;outline:none;font:inherit;color:inherit;width:100%" type="{{ type }}" name="{{ name }}" id="{{ id or name }}" placeholder="{{ placeholder }}" value="{{ value }}" />
+  {% endif %}
+  {{ caller() if caller }}
+</div>
+{% endmacro %}
+
+{% macro select(name="", id="", options=[], selected="") %}
+<div class="input select-wrap">
+  <select class="grow" style="border:none;background:none;outline:none;font:inherit;color:inherit;width:100%;appearance:none" name="{{ name }}" id="{{ id or name }}">
+    {% for opt in options %}
+    <option value="{{ opt }}" {% if opt == selected %}selected{% endif %}>{{ opt }}</option>
+    {% endfor %}
+  </select>
+  {% icon "chevd", "sm" %}
+</div>
+{% endmacro %}
+
+{% macro check(name="", checked=false, label="", value="on") %}
+<label class="check">
+  <input type="checkbox" name="{{ name }}" value="{{ value }}" {% if checked %}checked{% endif %} />
+  <span class="box">{% icon "check", "sm" %}</span>
+  {% if label %}<span>{{ label }}</span>{% endif %}
+</label>
+{% endmacro %}
+
+{% macro stat(icon_="", label="", value="", delta="", up=true) %}
+<div class="stat">
+  <div class="lab">{% if icon_ %}{% icon icon_, "sm" %}{% endif %}{{ label }}</div>
+  <div class="row between acenter">
+    <span class="val">{{ value }}</span>
+    {% if delta %}<span class="delta {% if up %}up{% else %}down{% endif %}">{% if up %}↑{% else %}↓{% endif %} {{ delta }}</span>{% endif %}
+  </div>
+</div>
+{% endmacro %}
+
+{% macro catIcon(icon_, tone="") %}
+<span class="cat-ico {{ tone }}">{% icon icon_ %}</span>
+{% endmacro %}
+
+{% macro statusBar(dark=false) %}
+<div class="row between acenter" style="padding:8px 18px 4px;font-size:12.5px;font-weight:700;color:{% if dark %}#fff{% else %}var(--ink){% endif %};flex:none">
+  <span>9:41</span>
+  <span class="row g6">{% icon "bolt", "sm" %}<span style="font-family:var(--fm);font-size:11px">5G</span></span>
+</div>
+{% endmacro %}
+
+{% macro mobileTabbar(active="Home") %}
+<div class="tabbar">
+  <a href="/mobile/home.html" class="t {% if active == 'Home' %}on{% endif %}">{% icon "home", "sm" %}Home</a>
+  <a href="/customer/browse.html" class="t {% if active == 'Browse' %}on{% endif %}">{% icon "search", "sm" %}Browse</a>
+  <a href="/mobile/history.html" class="t {% if active == 'Bookings' %}on{% endif %}">{% icon "cal", "sm" %}Bookings</a>
+  <a href="/mobile/home.html" class="t {% if active == 'Account' %}on{% endif %}">{% icon "user", "sm" %}Account</a>
+</div>
+{% endmacro %}
