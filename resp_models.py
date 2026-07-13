@@ -9,6 +9,7 @@ class UserBase(BaseModel):
     username:str
     email:str
     password: str
+    phone: str
 
 class CustomerCreate(UserBase):
     role: str = "customer"
@@ -46,7 +47,7 @@ class ProviderUpdate(BaseModel):
 class UserResponse(UserBase):
     id: int
     role: str
-    provider_profile: ProviderResponse = None
+    provider_profile: ProviderResponse | None = None
 
     class Config:
         from_attributes = True
@@ -139,16 +140,48 @@ class ServiceCreate(BaseModel):
     description: Optional[str] = None
     price: Decimal
     duration: str
+    status: Optional[str] = "active"
 
 class ServiceResponse(BaseModel):
     service_id: int
     provider_id: int
     category_id: int
     title: str
-    description: Optional[str]
+    description: Optional[str] = None
     price: Decimal
     duration: str
     status: str
 
     class Config:
         from_attributes = True
+
+class ServiceUpdate(BaseModel):
+    price: Decimal
+    status: str
+
+
+class NotificationCreate(BaseModel):
+    user_id: int
+    message: int
+    type: str
+
+class NotificationResponse(BaseModel):
+    notification_id:int
+    user_id: int
+    message: str
+    type: str
+    is_read: bool
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
+class PaymentInitializeSchema(BaseModel):
+    booking_id: int
+    amount: Decimal
+    method: str
+
+
+class PaymentCompleteSchema(BaseModel):
+    transaction_id: str

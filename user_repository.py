@@ -1,13 +1,15 @@
-import datetime
+
 import logging
-from http.client import HTTPException
-from typing import Union, Optional
+from typing import Union
+
+from fastapi import HTTPException
+
 from auth_utils import AuthUtils
 from sqlalchemy import select, func
 from sqlalchemy.orm import joinedload
 from sqlalchemy.ext.asyncio import AsyncSession
-from db_models import User, Provider, Review
-from resp_models import UserResponse, CustomerCreate, ProviderCreate, ReviewCreate, ProviderUpdate
+from db_models import User, Provider, Review, Category, Service
+from resp_models import UserResponse, CustomerCreate, ProviderCreate, ReviewCreate
 
 logger = logging.getLogger("smart_hire_logger")
 logging.basicConfig(level=logging.INFO)
@@ -18,16 +20,13 @@ class UserRepository():
     @staticmethod
     async def create_user(db:AsyncSession, user_data:Union[CustomerCreate, ProviderCreate])-> UserResponse:
 
-        print(user_data.password)
-        print(type(user_data.password))
-        print(len(user_data.password.encode("utf-8")))
-
         hashed_password = AuthUtils.hash_password(user_data.password)
 
         db_user= User(
             username=user_data.username,
             email=user_data.email,
             password=hashed_password,
+            phone=user_data.phone,
             role=user_data.role
         )
         db.add(db_user)
@@ -35,6 +34,17 @@ class UserRepository():
         await db.refresh(db_user)
 
         if user_data.role == "provider" and user_data.service_type:
+
+            category_query = await db.execute(
+                select(Category).where(func.lower(Category.name) == func.lower(user_data.service_type)))
+            category = category_query.scalars().first()
+
+            if not category:
+                raise HTTPException(
+                    status_code=400,
+                    detail= f"rejected: {user_data.service_type} is not in the system. Please choose a valid service_type."
+                )
+
             db_provider= Provider(
                 service_type=user_data.service_type,
                 experience_years=user_data.experience_years,
@@ -45,9 +55,22 @@ class UserRepository():
                 user_id=db_user.id
             )
             db.add(db_provider)
+            await  db.flush()
+
+            db_service = Service(
+                provider_id=db_provider.id,
+                category_id=category.category_id,
+                title=f"{category.name} Service by {db_user.username}",
+                description=f"Professional {category.name} services offered by {db_user.username}",
+                price=user_data.hourly_rate,
+                duration="1 hour",
+                status="active"
+
+            )
+            db.add(db_service)
+
             await db.commit()
         await db.refresh(db_user, attribute_names=["provider_profile"])
-
         return db_user
 
     @staticmethod

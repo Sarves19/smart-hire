@@ -1,6 +1,10 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 
+from starlette.middleware.cors import CORSMiddleware
+from payment_router import router as payment_router
+from service_router import router as service_router
+from notification_router import router as notification_router
 from auth_utils import AuthUtils
 from provider_router import router as provider_router
 from dashboard_router import router as dashboard_router
@@ -26,6 +30,7 @@ async def seed_admin_user():
                 username="Super Admin",
                 email="admin@smarthire.com",
                 password=hashed_password,
+                phone="0771234567",
                 role="admin",
 
             )
@@ -52,12 +57,26 @@ async def lifespan(app:FastAPI):
     await seed_admin_user()
     yield
 
+
 app = FastAPI(title="Smart Hire API",lifespan=lifespan)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods={"*"},
+    allow_headers={"*"},
+
+)
+
 app.include_router(user_router, prefix="/users", tags=["Users"])
 app.include_router(booking_router, prefix="/bookings", tags=["Bookings"])
 app.include_router(dashboard_router, prefix="/dashboard", tags=["Dashboard"])
 app.include_router(provider_router, prefix="/provider", tags=["Provider"])
 app.include_router(category_router, prefix="/category", tags=["Category"])
+app.include_router(service_router, prefix="/service", tags=["Service"])
+app.include_router(notification_router, prefix="/notification", tags=["Notification"])
+app.include_router(payment_router, prefix="/Payment", tags=["Payment"])
 
 @app.get("/")
 def read_root():
