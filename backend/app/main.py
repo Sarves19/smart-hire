@@ -5,6 +5,7 @@ Smart Hire Application Entry Point
 from fastapi import FastAPI
 
 from app.api.v1 import (
+    admin_router,
     auth_router,
     bookings_router,
     category_router,
@@ -12,11 +13,13 @@ from app.api.v1 import (
     notifications_router,
     payments_router,
     provider_router,
+    recommendations_router,
     reviews_router,
     service_router,
     users_router,
 )
 from app.core.config import settings
+from app.core.handlers import register_exception_handlers
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -24,6 +27,12 @@ app = FastAPI(
     debug=settings.DEBUG,
     description="AI-Powered Service Marketplace",
 )
+
+# =====================================================
+# Register Global Exception Handlers
+# =====================================================
+
+register_exception_handlers(app)
 
 # =====================================================
 # API Routers
@@ -79,6 +88,16 @@ app.include_router(
     prefix="/api/v1",
 )
 
+app.include_router(
+    recommendations_router,
+    prefix="/api/v1",
+)
+
+app.include_router(
+    admin_router,
+    prefix="/api/v1",
+)
+
 # =====================================================
 # Root Endpoint
 # =====================================================
@@ -107,4 +126,7 @@ def health_check():
     return {
         "status": "healthy",
         "application": settings.APP_NAME,
+        "version": settings.APP_VERSION,
+        "environment": settings.APP_ENV,
     }
+

@@ -4,7 +4,6 @@ Smart Hire Configuration Module
 
 from functools import lru_cache
 
-from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -45,10 +44,13 @@ class Settings(BaseSettings):
     REFRESH_TOKEN_EXPIRE_DAYS: int
 
     # =====================================================
-    # AI
+    # AI / OpenRouter
     # =====================================================
 
-    OPENROUTER_API_KEY: str = ""
+    OPENROUTER_API_KEY: str = "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"
+
+    OPENROUTER_MODEL: str = "openai/gpt-4.1-mini"
+
     LANGCHAIN_API_KEY: str = ""
 
     # =====================================================
@@ -73,7 +75,7 @@ class Settings(BaseSettings):
 
 
 @lru_cache
-def get_settings():
+def get_settings() -> Settings:
     return Settings()
 
 

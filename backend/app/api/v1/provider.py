@@ -8,8 +8,8 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
-from app.core.dependencies import get_current_active_user
-from app.models.user import User
+from app.core.dependencies import require_role
+from app.models.user import User, UserRole
 from app.schemas.provider import (
     ProviderProfileCreate,
     ProviderProfileResponse,
@@ -34,7 +34,9 @@ router = APIRouter(
 )
 def create_profile(
     request: ProviderProfileCreate,
-    current_user: User = Depends(get_current_active_user),
+    current_user: User = Depends(
+        require_role(UserRole.PROVIDER.value)
+    ),
     db: Session = Depends(get_db),
 ):
     """
@@ -65,7 +67,9 @@ def create_profile(
     response_model=ProviderProfileResponse,
 )
 def get_profile(
-    current_user: User = Depends(get_current_active_user),
+    current_user: User = Depends(
+        require_role(UserRole.PROVIDER.value)
+    ),
     db: Session = Depends(get_db),
 ):
     """
@@ -94,7 +98,9 @@ def get_profile(
 )
 def update_profile(
     request: ProviderProfileUpdate,
-    current_user: User = Depends(get_current_active_user),
+    current_user: User = Depends(
+        require_role(UserRole.PROVIDER.value)
+    ),
     db: Session = Depends(get_db),
 ):
     """
@@ -114,3 +120,4 @@ def update_profile(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=str(e),
         )
+    
