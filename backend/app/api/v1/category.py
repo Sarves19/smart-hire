@@ -8,6 +8,8 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
+from app.core.dependencies import require_role
+from app.models.user import User, UserRole
 from app.schemas.category import (
     CategoryCreate,
     CategoryResponse,
@@ -22,7 +24,7 @@ router = APIRouter(
 
 
 # =====================================================
-# CREATE CATEGORY
+# CREATE CATEGORY (ADMIN ONLY)
 # =====================================================
 
 @router.post(
@@ -33,6 +35,9 @@ router = APIRouter(
 def create_category(
     request: CategoryCreate,
     db: Session = Depends(get_db),
+    current_user: User = Depends(
+        require_role(UserRole.ADMIN.value)
+    ),
 ):
     """
     Create a new category.
@@ -51,7 +56,7 @@ def create_category(
 
 
 # =====================================================
-# GET CATEGORY
+# GET CATEGORY (ALL AUTHENTICATED USERS)
 # =====================================================
 
 @router.get(
@@ -79,7 +84,7 @@ def get_category(
 
 
 # =====================================================
-# LIST CATEGORIES
+# LIST CATEGORIES (ALL AUTHENTICATED USERS)
 # =====================================================
 
 @router.get(
@@ -99,7 +104,7 @@ def list_categories(
 
 
 # =====================================================
-# UPDATE CATEGORY
+# UPDATE CATEGORY (ADMIN ONLY)
 # =====================================================
 
 @router.put(
@@ -110,6 +115,9 @@ def update_category(
     category_id: int,
     request: CategoryUpdate,
     db: Session = Depends(get_db),
+    current_user: User = Depends(
+        require_role(UserRole.ADMIN.value)
+    ),
 ):
     """
     Update category.
@@ -131,7 +139,7 @@ def update_category(
 
 
 # =====================================================
-# DELETE CATEGORY
+# DELETE CATEGORY (ADMIN ONLY)
 # =====================================================
 
 @router.delete(
@@ -141,6 +149,9 @@ def update_category(
 def delete_category(
     category_id: int,
     db: Session = Depends(get_db),
+    current_user: User = Depends(
+        require_role(UserRole.ADMIN.value)
+    ),
 ):
     """
     Delete category.

@@ -8,8 +8,8 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
-from app.core.dependencies import get_current_active_user
-from app.models.user import User
+from app.core.dependencies import require_role
+from app.models.user import User, UserRole
 from app.schemas.service import (
     ServiceCreate,
     ServiceResponse,
@@ -34,7 +34,12 @@ router = APIRouter(
 )
 def create_service(
     request: ServiceCreate,
-    current_user: User = Depends(get_current_active_user),
+    current_user: User = Depends(
+        require_role(
+            UserRole.PROVIDER.value,
+            UserRole.ADMIN.value,
+        )
+    ),
     db: Session = Depends(get_db),
 ):
     """
@@ -115,6 +120,12 @@ def get_service(
 def update_service(
     service_id: int,
     request: ServiceUpdate,
+    current_user: User = Depends(
+        require_role(
+            UserRole.PROVIDER.value,
+            UserRole.ADMIN.value,
+        )
+    ),
     db: Session = Depends(get_db),
 ):
     """
@@ -146,6 +157,12 @@ def update_service(
 )
 def delete_service(
     service_id: int,
+    current_user: User = Depends(
+        require_role(
+            UserRole.PROVIDER.value,
+            UserRole.ADMIN.value,
+        )
+    ),
     db: Session = Depends(get_db),
 ):
     """
@@ -162,3 +179,5 @@ def delete_service(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=str(e),
         )
+    
+    

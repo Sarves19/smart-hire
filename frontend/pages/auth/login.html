@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login | Smart Hire</title>
+
+    <!-- Bootstrap -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!-- Google Font -->
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind -->
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Authentication CSS -->
+
+    <link
+        rel="stylesheet"
+        href="../../assets/css/auth.css">
+
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <!-- ==========================================
+            LEFT PANEL
+    =========================================== -->
+
+    <div class="left-panel">
+
+        <div class="brand">
+
+            <i class="bi bi-lightning-charge-fill"></i>
+
+            Smart Hire
+
+        </div>
+
+        <h1>
+
+            AI Powered
+            <br>
+            Service Marketplace
+
+        </h1>
+
+        <p>
+
+            Connect with trusted professionals
+            using intelligent AI recommendations.
+
+        </p>
+
+        <img
+            src="../../assets/images/auth-illustration.svg"
+            alt="Authentication Illustration">
+
+    </div>
+
+    <!-- ==========================================
+            RIGHT PANEL
+    =========================================== -->
+
+    <div class="right-panel">
+
+        <div class="login-card">
+
+            <span class="welcome">
+
+                Welcome Back 👋
+
+            </span>
+
+            <h2>
+
+                Login to Smart Hire
+
+            </h2>
+
+            <p>
+
+                Continue your journey with Smart Hire.
+
+            </p>
+
+            <!-- Login Form -->
+
+            <form
+                id="loginForm">
+
+                <!-- Email -->
+
+                <div class="input-group-custom">
+
+                    <label>
+
+                        Email Address
+
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required>
+
+                </div>
+
+                <!-- Password -->
+
+                <div class="input-group-custom">
+
+                    <label>
+
+                        Password
+
+                    </label>
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            required>
+
+                        <i
+                            class="bi bi-eye"
+                            id="togglePassword"></i>
+
+                    </div>
+
+                </div>
+
+                <!-- Options -->
+
+                <div class="login-options">
+
+                    <label>
+
+                        <input
+                            type="checkbox">
+
+                        Remember Me
+
+                    </label>
+
+                    <a
+                        href="forgot-password.html">
+
+                        Forgot Password?
+
+                    </a>
+
+                </div>
+
+                <!-- Login -->
+
+                <button
+                    class="login-btn"
+                    type="submit">
+
+                    Login
+
+                </button>
+
+                <!-- Divider -->
+
+                <div class="divider">
+
+                    <span>
+
+                        OR
+
+                    </span>
+
+                </div>
+
+                <!-- Google -->
+
+                <button
+                    type="button"
+                    class="google-btn">
+
+                    <i class="bi bi-google"></i>
+
+                    Continue with Google
+
+                </button>
+
+            </form>
+
+            <!-- Register -->
+
+            <div class="register-link">
+
+                Don't have an account?
+
+                <a href="register.html">
+
+                    Register
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="../../assets/js/auth.js"></script>
+
+</body>
+
+</html>

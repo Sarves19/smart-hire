@@ -1,0 +1,1166 @@
+/* ==========================================================
+   SMART HIRE AUTHENTICATION
+   Login & Register Styles
+========================================================== */
+
+/* ==========================
+   Google Font
+========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+/* ==========================
+   Body
+========================== */
+
+body{
+
+    background:#F8FAFC;
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+}
+
+/* ==========================
+   Main Layout
+========================== */
+
+.login-container{
+
+    display:flex;
+
+    min-height:100vh;
+
+}
+
+/* ==========================================================
+   LEFT PANEL
+========================================================== */
+
+.left-panel{
+
+    width:50%;
+
+    background:linear-gradient(135deg,#2563EB,#1D4ED8);
+
+    color:white;
+
+    padding:70px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+/* Decorative circles */
+
+.left-panel::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:420px;
+
+    height:420px;
+
+    background:rgba(255,255,255,.08);
+
+    border-radius:50%;
+
+    top:-120px;
+
+    left:-120px;
+
+}
+
+.left-panel::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:280px;
+
+    height:280px;
+
+    background:rgba(255,255,255,.06);
+
+    border-radius:50%;
+
+    bottom:-80px;
+
+    right:-80px;
+
+}
+
+/* ==========================
+   Brand
+========================== */
+
+.brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-size:34px;
+
+    font-weight:700;
+
+    margin-bottom:70px;
+
+    z-index:2;
+
+}
+
+.brand i{
+
+    font-size:40px;
+
+}
+
+/* ==========================
+   Heading
+========================== */
+
+.left-panel h1{
+
+    font-size:56px;
+
+    font-weight:700;
+
+    line-height:1.2;
+
+    margin-bottom:25px;
+
+    z-index:2;
+
+}
+
+/* ==========================
+   Description
+========================== */
+
+.left-panel p{
+
+    font-size:18px;
+
+    line-height:1.9;
+
+    opacity:.95;
+
+    max-width:500px;
+
+    margin-bottom:50px;
+
+    z-index:2;
+
+}
+
+/* ==========================
+   Illustration
+========================== */
+
+.left-panel img{
+
+    width:100%;
+
+    max-width:520px;
+
+    margin:auto;
+
+    z-index:2;
+
+}
+
+/* ==========================================================
+   RIGHT PANEL
+========================================================== */
+
+.right-panel{
+
+    width:50%;
+
+    background:#F8FAFC;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:60px;
+
+}
+
+/* ==========================
+   Login Card
+========================== */
+
+.login-card{
+
+    width:100%;
+
+    max-width:500px;
+
+    background:white;
+
+    padding:55px;
+
+    border-radius:25px;
+
+    box-shadow:0 25px 60px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+}
+
+.login-card:hover{
+
+    transform:translateY(-6px);
+
+}
+
+/* ==========================
+   Welcome
+========================== */
+
+.welcome{
+
+    display:inline-block;
+
+    background:#DBEAFE;
+
+    color:#2563EB;
+
+    padding:8px 18px;
+
+    border-radius:30px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    margin-bottom:20px;
+
+}
+
+/* ==========================
+   Title
+========================== */
+
+.login-card h2{
+
+    font-size:36px;
+
+    color:#0F172A;
+
+    font-weight:700;
+
+    margin-bottom:12px;
+
+}
+
+/* ==========================
+   Subtitle
+========================== */
+
+.login-card p{
+
+    color:#64748B;
+
+    margin-bottom:35px;
+
+    line-height:1.8;
+
+}
+
+/* ==========================================================
+   FORM
+========================================================== */
+
+#loginForm{
+
+    width:100%;
+
+}
+
+/* ==========================================================
+   INPUT GROUP
+========================================================== */
+
+.input-group-custom{
+
+    margin-bottom:25px;
+
+}
+
+.input-group-custom label{
+
+    display:block;
+
+    margin-bottom:10px;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    color:#334155;
+
+}
+
+/* ==========================================================
+   INPUT
+========================================================== */
+
+.input-group-custom input{
+
+    width:100%;
+
+    height:58px;
+
+    border:2px solid #E2E8F0;
+
+    border-radius:14px;
+
+    padding:0 18px;
+
+    font-size:16px;
+
+    outline:none;
+
+    transition:.3s;
+
+    background:#FFFFFF;
+
+}
+
+.input-group-custom input:focus{
+
+    border-color:#2563EB;
+
+    box-shadow:0 0 0 4px rgba(37,99,235,.10);
+
+}
+
+.input-group-custom input::placeholder{
+
+    color:#94A3B8;
+
+}
+
+/* ==========================================================
+   PASSWORD
+========================================================== */
+
+.password-wrapper{
+
+    position:relative;
+
+}
+
+.password-wrapper input{
+
+    padding-right:55px;
+
+}
+
+.password-wrapper i{
+
+    position:absolute;
+
+    top:50%;
+
+    right:18px;
+
+    transform:translateY(-50%);
+
+    font-size:20px;
+
+    color:#64748B;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.password-wrapper i:hover{
+
+    color:#2563EB;
+
+}
+
+/* ==========================================================
+   REMEMBER + FORGOT
+========================================================== */
+
+.login-options{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:30px;
+
+    font-size:15px;
+
+}
+
+.login-options label{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:#475569;
+
+    cursor:pointer;
+
+}
+
+.login-options input{
+
+    width:18px;
+
+    height:18px;
+
+    accent-color:#2563EB;
+
+}
+
+.login-options a{
+
+    color:#2563EB;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+}
+
+.login-options a:hover{
+
+    text-decoration:underline;
+
+}
+
+/* ==========================================================
+   LOGIN BUTTON
+========================================================== */
+
+.login-btn{
+
+    width:100%;
+
+    height:58px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#2563EB;
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.login-btn:hover{
+
+    background:#1D4ED8;
+
+    transform:translateY(-2px);
+
+    box-shadow:0 15px 30px rgba(37,99,235,.25);
+
+}
+
+/* ==========================================================
+   DIVIDER
+========================================================== */
+
+.divider{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin:35px 0;
+
+    position:relative;
+
+}
+
+.divider::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    width:100%;
+
+    height:1px;
+
+    background:#E2E8F0;
+
+}
+
+.divider span{
+
+    background:#FFFFFF;
+
+    padding:0 18px;
+
+    color:#94A3B8;
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+/* ==========================================================
+   GOOGLE BUTTON
+========================================================== */
+
+.google-btn{
+
+    width:100%;
+
+    height:58px;
+
+    border:2px solid #E2E8F0;
+
+    background:#FFFFFF;
+
+    border-radius:14px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.google-btn i{
+
+    margin-right:10px;
+
+    color:#EA4335;
+
+}
+
+.google-btn:hover{
+
+    background:#F8FAFC;
+
+    border-color:#2563EB;
+
+}
+
+/* ==========================================================
+   REGISTER
+========================================================== */
+
+.register-link{
+
+    text-align:center;
+
+    margin-top:35px;
+
+    color:#64748B;
+
+}
+
+.register-link a{
+
+    text-decoration:none;
+
+    color:#2563EB;
+
+    font-weight:700;
+
+}
+
+.register-link a:hover{
+
+    text-decoration:underline;
+
+}
+
+
+/* ==========================================================
+   ANIMATIONS
+========================================================== */
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+@keyframes float{
+
+    0%{
+
+        transform:translateY(0px);
+
+    }
+
+    50%{
+
+        transform:translateY(-15px);
+
+    }
+
+    100%{
+
+        transform:translateY(0px);
+
+    }
+
+}
+
+@keyframes pulse{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.05);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+/* ==========================================================
+   APPLY ANIMATIONS
+========================================================== */
+
+.left-panel img{
+
+    animation:float 5s ease-in-out infinite;
+
+}
+
+.login-card{
+
+    animation:fadeUp .8s ease;
+
+}
+
+/* ==========================================================
+   BUTTON HOVER
+========================================================== */
+
+.login-btn:active{
+
+    transform:scale(.98);
+
+}
+
+.google-btn:active{
+
+    transform:scale(.98);
+
+}
+
+/* ==========================================================
+   INPUT ANIMATION
+========================================================== */
+
+.input-group-custom input{
+
+    transition:
+
+    border-color .3s,
+
+    box-shadow .3s,
+
+    transform .25s;
+
+}
+
+.input-group-custom input:focus{
+
+    transform:translateY(-2px);
+
+}
+
+/* ==========================================================
+   BRAND
+========================================================== */
+
+.brand{
+
+    transition:.3s;
+
+}
+
+.brand:hover{
+
+    transform:scale(1.03);
+
+}
+
+/* ==========================================================
+   LEFT PANEL CONTENT
+========================================================== */
+
+.left-panel h1{
+
+    animation:fadeUp .8s ease;
+
+}
+
+.left-panel p{
+
+    animation:fadeUp 1s ease;
+
+}
+
+/* ==========================================================
+   CARD HOVER
+========================================================== */
+
+.login-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.login-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:250px;
+
+    height:250px;
+
+    background:rgba(37,99,235,.04);
+
+    border-radius:50%;
+
+    top:-120px;
+
+    right:-120px;
+
+}
+
+.login-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+
+    height:180px;
+
+    background:rgba(37,99,235,.03);
+
+    border-radius:50%;
+
+    bottom:-90px;
+
+    left:-90px;
+
+}
+
+/* ==========================================================
+   SOCIAL BUTTON EFFECT
+========================================================== */
+
+.google-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 15px 30px rgba(0,0,0,.08);
+
+}
+
+/* ==========================================================
+   LINKS
+========================================================== */
+
+.register-link a,
+
+.login-options a{
+
+    transition:.3s;
+
+}
+
+.register-link a:hover,
+
+.login-options a:hover{
+
+    color:#1D4ED8;
+
+}
+
+/* ==========================================================
+   SCROLLBAR
+========================================================== */
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#2563EB;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#F8FAFC;
+
+}
+
+/* ==========================================================
+   RESPONSIVE DESIGN
+========================================================== */
+
+/* ==========================
+   Large Tablets
+========================== */
+
+@media (max-width:1200px){
+
+    .left-panel{
+
+        padding:50px;
+
+    }
+
+    .left-panel h1{
+
+        font-size:46px;
+
+    }
+
+    .login-card{
+
+        padding:45px;
+
+    }
+
+}
+
+/* ==========================
+   Tablets
+========================== */
+
+@media (max-width:992px){
+
+    .login-container{
+
+        flex-direction:column;
+
+    }
+
+    .left-panel{
+
+        width:100%;
+
+        min-height:350px;
+
+        text-align:center;
+
+        align-items:center;
+
+        padding:60px 30px;
+
+    }
+
+    .left-panel img{
+
+        max-width:320px;
+
+        margin-top:30px;
+
+    }
+
+    .right-panel{
+
+        width:100%;
+
+        padding:50px 25px;
+
+    }
+
+    .brand{
+
+        margin-bottom:40px;
+
+    }
+
+}
+
+/* ==========================
+   Mobile
+========================== */
+
+@media (max-width:768px){
+
+    .left-panel{
+
+        display:none;
+
+    }
+
+    .right-panel{
+
+        width:100%;
+
+        min-height:100vh;
+
+        padding:25px;
+
+        background:linear-gradient(
+            135deg,
+            #EFF6FF,
+            #F8FAFC
+        );
+
+    }
+
+    .login-card{
+
+        max-width:100%;
+
+        padding:35px 25px;
+
+        border-radius:20px;
+
+    }
+
+    .login-card h2{
+
+        font-size:30px;
+
+    }
+
+    .login-card p{
+
+        font-size:15px;
+
+    }
+
+    .login-btn,
+
+    .google-btn{
+
+        height:54px;
+
+    }
+
+}
+
+/* ==========================
+   Small Phones
+========================== */
+
+@media (max-width:480px){
+
+    .login-card{
+
+        padding:30px 20px;
+
+    }
+
+    .login-card h2{
+
+        font-size:26px;
+
+    }
+
+    .welcome{
+
+        font-size:13px;
+
+        padding:6px 14px;
+
+    }
+
+    .input-group-custom label{
+
+        font-size:14px;
+
+    }
+
+    .input-group-custom input{
+
+        height:52px;
+
+        font-size:15px;
+
+    }
+
+    .login-options{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:12px;
+
+    }
+
+    .login-btn{
+
+        font-size:16px;
+
+    }
+
+    .google-btn{
+
+        font-size:15px;
+
+    }
+
+    .register-link{
+
+        font-size:15px;
+
+    }
+
+}
+
+/* ==========================
+   Landscape Phones
+========================== */
+
+@media (max-height:700px){
+
+    .right-panel{
+
+        padding:20px;
+
+    }
+
+    .login-card{
+
+        padding:30px;
+
+    }
+
+}
+
+/* ==========================================================
+   TOAST
+========================================================== */
+
+.toast-message{
+
+    position:fixed;
+
+    top:25px;
+
+    right:25px;
+
+    color:white;
+
+    padding:16px 22px;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    opacity:0;
+
+    transform:translateX(50px);
+
+    transition:.35s;
+
+    z-index:9999;
+
+    box-shadow:0 15px 30px rgba(0,0,0,.15);
+
+}
+
+.toast-message.show{
+
+    opacity:1;
+
+    transform:translateX(0);
+
+}
+
+.login-btn:disabled{
+
+    opacity:.8;
+
+    cursor:not-allowed;
+
+}
