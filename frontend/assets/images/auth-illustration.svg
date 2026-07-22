@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="500"
+    height="420"
+    viewBox="0 0 500 420"
+    fill="none">
+
+    <defs>
+
+        <!-- Background Gradient -->
+
+        <linearGradient
+            id="bgGradient"
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="100%">
+
+            <stop offset="0%" stop-color="#60A5FA"/>
+
+            <stop offset="100%" stop-color="#2563EB"/>
+
+        </linearGradient>
+
+        <!-- Phone Gradient -->
+
+        <linearGradient
+            id="phoneGradient"
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="100%">
+
+            <stop offset="0%" stop-color="#FFFFFF"/>
+
+            <stop offset="100%" stop-color="#EEF5FF"/>
+
+        </linearGradient>
+
+        <!-- Screen -->
+
+        <linearGradient
+            id="screenGradient"
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="100%">
+
+            <stop offset="0%" stop-color="#3B82F6"/>
+
+            <stop offset="100%" stop-color="#1D4ED8"/>
+
+        </linearGradient>
+
+        <!-- Shadow -->
+
+        <filter id="shadow">
+
+            <feDropShadow
+                dx="0"
+                dy="12"
+                stdDeviation="12"
+                flood-color="#0F172A"
+                flood-opacity=".20"/>
+
+        </filter>
+
+    </defs>
+
+    <!-- Decorative Background -->
+
+    <circle
+        cx="250"
+        cy="210"
+        r="180"
+        fill="white"
+        opacity=".08"/>
+
+    <circle
+        cx="110"
+        cy="60"
+        r="10"
+        fill="white"
+        opacity=".35"/>
+
+    <circle
+        cx="420"
+        cy="80"
+        r="8"
+        fill="white"
+        opacity=".35"/>
+
+    <circle
+        cx="440"
+        cy="300"
+        r="8"
+        fill="white"
+        opacity=".30"/>
+
+    <circle
+        cx="70"
+        cy="330"
+        r="10"
+        fill="white"
+        opacity=".30"/>
+
+    <!-- Phone -->
+
+    <g filter="url(#shadow)">
+
+        <rect
+            x="175"
+            y="40"
+            width="150"
+            height="320"
+            rx="30"
+            fill="url(#phoneGradient)"
+            stroke="#2563EB"
+            stroke-width="5"/>
+
+        <!-- Camera -->
+
+        <rect
+            x="235"
+            y="55"
+            width="30"
+            height="6"
+            rx="3"
+            fill="#CBD5E1"/>
+
+        <!-- Screen -->
+
+        <rect
+            x="190"
+            y="75"
+            width="120"
+            height="245"
+            rx="14"
+            fill="url(#screenGradient)"/>
+
+    </g>
+
+    <!-- Smart Hire Logo -->
+
+    <circle
+        cx="250"
+        cy="110"
+        r="24"
+        fill="white"
+        opacity=".95"/>
+
+    <path
+        d="M238 112
+           C238 102 246 96 255 96
+           C264 96 272 102 272 112
+           C272 122 264 128 255 128
+           C246 128 238 122 238 112Z"
+        fill="#2563EB"/>
+
+    <circle
+        cx="255"
+        cy="108"
+        r="6"
+        fill="white"/>
+
+    <!-- Login Header -->
+
+    <rect
+        x="205"
+        y="150"
+        width="90"
+        height="10"
+        rx="5"
+        fill="white"
+        opacity=".95"/>
+
+    <rect
+        x="220"
+        y="170"
+        width="60"
+        height="6"
+        rx="3"
+        fill="#BFDBFE"/>
+
+    <!-- Email Field -->
+
+    <rect
+        x="205"
+        y="200"
+        width="90"
+        height="16"
+        rx="8"
+        fill="white"
+        opacity=".95"/>
+
+    <!-- Password Field -->
+
+    <rect
+        x="205"
+        y="230"
+        width="90"
+        height="16"
+        rx="8"
+        fill="white"
+        opacity=".95"/>
+
+    <!-- Login Button -->
+
+    <rect
+        x="215"
+        y="270"
+        width="70"
+        height="18"
+        rx="9"
+        fill="#FFFFFF"/>
+
+    <text
+        x="250"
+        y="283"
+        text-anchor="middle"
+        font-size="9"
+        font-family="Arial"
+        font-weight="700"
+        fill="#2563EB">
+
+        LOGIN
+
+    </text>
+
+    <!-- Lock Icon -->
+
+    <circle
+        cx="390"
+        cy="170"
+        r="38"
+        fill="white"
+        opacity=".95"/>
+
+    <rect
+        x="378"
+        y="170"
+        width="24"
+        height="24"
+        rx="5"
+        fill="#2563EB"/>
+
+    <path
+        d="M382 170
+           V162
+           C382 154 387 149 390 149
+           C393 149 398 154 398 162
+           V170"
+        stroke="#2563EB"
+        stroke-width="4"
+        stroke-linecap="round"
+        fill="none"/>
+
+    <circle
+        cx="390"
+        cy="181"
+        r="3"
+        fill="white"/>
+
+    <!-- User Avatar -->
+
+    <circle
+        cx="110"
+        cy="185"
+        r="40"
+        fill="white"
+        opacity=".95"/>
+
+    <!-- Head -->
+
+    <circle
+        cx="110"
+        cy="172"
+        r="13"
+        fill="#2563EB"/>
+
+    <!-- Body -->
+
+    <path
+        d="M88 210
+           C88 194 100 188 110 188
+           C120 188 132 194 132 210"
+        fill="#2563EB"/>
+
+    <!-- AI Assistant -->
+
+    <circle
+        cx="250"
+        cy="345"
+        r="24"
+        fill="#FACC15"/>
+
+    <text
+        x="250"
+        y="350"
+        text-anchor="middle"
+        font-size="13"
+        font-family="Arial"
+        font-weight="700"
+        fill="white">
+
+        AI
+
+    </text>
+
+    <!-- Connection Lines -->
+
+    <line
+        x1="150"
+        y1="185"
+        x2="175"
+        y2="185"
+        stroke="white"
+        stroke-width="4"
+        stroke-linecap="round"/>
+
+    <line
+        x1="325"
+        y1="185"
+        x2="352"
+        y2="185"
+        stroke="white"
+        stroke-width="4"
+        stroke-linecap="round"/>
+
+    <line
+        x1="250"
+        y1="320"
+        x2="250"
+        y2="300"
+        stroke="white"
+        stroke-width="4"
+        stroke-linecap="round"/>
+
+    <!-- Cloud -->
+
+    <g opacity=".95">
+
+        <ellipse
+            cx="390"
+            cy="90"
+            rx="26"
+            ry="13"
+            fill="white"/>
+
+        <circle
+            cx="375"
+            cy="86"
+            r="10"
+            fill="white"/>
+
+        <circle
+            cx="392"
+            cy="80"
+            r="14"
+            fill="white"/>
+
+        <circle
+            cx="408"
+            cy="87"
+            r="11"
+            fill="white"/>
+
+    </g>
+
+    <!-- Shield -->
+
+    <path
+        d="M100 300
+           L120 292
+           L140 300
+           V320
+           C140 336 126 346 120 350
+           C114 346 100 336 100 320
+           Z"
+        fill="white"
+        opacity=".95"/>
+
+    <path
+        d="M112 320
+           L118 326
+           L129 312"
+        fill="none"
+        stroke="#22C55E"
+        stroke-width="4"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+    <!-- Notification Badge -->
+
+    <circle
+        cx="340"
+        cy="95"
+        r="12"
+        fill="#EF4444"/>
+
+    <text
+        x="340"
+        y="100"
+        text-anchor="middle"
+        font-size="10"
+        font-family="Arial"
+        font-weight="700"
+        fill="white">
+
+        1
+
+    </text>
+
+    <!-- Floating Dashboard Card -->
+
+    <g opacity=".96">
+
+        <rect
+            x="55"
+            y="60"
+            width="70"
+            height="48"
+            rx="10"
+            fill="white"/>
+
+        <rect
+            x="67"
+            y="73"
+            width="40"
+            height="5"
+            rx="3"
+            fill="#2563EB"/>
+
+        <rect
+            x="67"
+            y="85"
+            width="28"
+            height="4"
+            rx="2"
+            fill="#CBD5E1"/>
+
+        <rect
+            x="67"
+            y="94"
+            width="20"
+            height="4"
+            rx="2"
+            fill="#CBD5E1"/>
+
+    </g>
+
+    <!-- Analytics Card -->
+
+    <g opacity=".96">
+
+        <rect
+            x="365"
+            y="255"
+            width="72"
+            height="52"
+            rx="10"
+            fill="white"/>
+
+        <rect
+            x="378"
+            y="290"
+            width="8"
+            height="10"
+            rx="2"
+            fill="#60A5FA"/>
+
+        <rect
+            x="391"
+            y="280"
+            width="8"
+            height="20"
+            rx="2"
+            fill="#3B82F6"/>
+
+        <rect
+            x="404"
+            y="270"
+            width="8"
+            height="30"
+            rx="2"
+            fill="#2563EB"/>
+
+    </g>
+
+    <!-- Chat Bubble -->
+
+    <g opacity=".95">
+
+        <rect
+            x="60"
+            y="255"
+            width="60"
+            height="36"
+            rx="10"
+            fill="white"/>
+
+        <polygon
+            points="78,291 86,291 80,300"
+            fill="white"/>
+
+        <circle
+            cx="78"
+            cy="273"
+            r="2.5"
+            fill="#2563EB"/>
+
+        <circle
+            cx="90"
+            cy="273"
+            r="2.5"
+            fill="#2563EB"/>
+
+        <circle
+            cx="102"
+            cy="273"
+            r="2.5"
+            fill="#2563EB"/>
+
+    </g>
+
+    <!-- Floating Stars -->
+
+    <polygon
+        points="250,25 253,33 262,33 255,38 258,47 250,42 242,47 245,38 238,33 247,33"
+        fill="white"
+        opacity=".9"/>
+
+    <polygon
+        points="430,145 433,151 440,151 435,156 437,163 430,159 423,163 425,156 420,151 427,151"
+        fill="white"
+        opacity=".75"/>
+
+    <polygon
+        points="72,150 75,156 82,156 77,161 79,168 72,164 65,168 67,161 62,156 69,156"
+        fill="white"
+        opacity=".75"/>
+
+    <!-- Small Floating Circles -->
+
+    <circle
+        cx="155"
+        cy="95"
+        r="5"
+        fill="white"
+        opacity=".45"/>
+
+    <circle
+        cx="350"
+        cy="335"
+        r="6"
+        fill="white"
+        opacity=".45"/>
+
+    <circle
+        cx="415"
+        cy="220"
+        r="4"
+        fill="white"
+        opacity=".50"/>
+
+    <circle
+        cx="85"
+        cy="215"
+        r="5"
+        fill="white"
+        opacity=".50"/>
+
+    <!-- Smart Hire Label -->
+
+    <text
+        x="250"
+        y="395"
+        text-anchor="middle"
+        font-size="18"
+        font-family="Arial"
+        font-weight="700"
+        fill="white">
+
+        Smart Hire
+
+    </text>
+
+    <text
+        x="250"
+        y="412"
+        text-anchor="middle"
+        font-size="11"
+        font-family="Arial"
+        fill="white"
+        opacity=".85">
+
+        Secure AI Powered Login
+
+    </text>
+
+</svg>

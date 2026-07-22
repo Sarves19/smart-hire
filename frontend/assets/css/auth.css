@@ -1,0 +1,3178 @@
+/*==========================================================
+  SMART HIRE
+  Authentication Stylesheet
+
+  Pages:
+  • Login
+  • Register
+  • Forgot Password
+  • Verify OTP
+  • Reset Password
+
+  Version : 1.0
+==========================================================*/
+
+
+/*==========================================================
+  GOOGLE FONT
+==========================================================*/
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
+
+/*==========================================================
+  CSS VARIABLES
+==========================================================*/
+
+:root{
+
+    /* Primary */
+
+    --primary:#2563EB;
+    --primary-dark:#1D4ED8;
+    --primary-light:#DBEAFE;
+
+    /* Success */
+
+    --success:#22C55E;
+
+    /* Warning */
+
+    --warning:#F59E0B;
+
+    /* Danger */
+
+    --danger:#EF4444;
+
+    /* Information */
+
+    --info:#0EA5E9;
+
+    /* Background */
+
+    --background:#F8FAFC;
+    --surface:#FFFFFF;
+
+    /* Text */
+
+    --text-primary:#0F172A;
+    --text-secondary:#475569;
+    --text-muted:#94A3B8;
+
+    /* Borders */
+
+    --border:#E2E8F0;
+
+    /* Radius */
+
+    --radius-sm:8px;
+    --radius-md:12px;
+    --radius-lg:18px;
+    --radius-xl:24px;
+
+    /* Shadows */
+
+    --shadow-sm:
+        0 6px 12px rgba(15,23,42,.05);
+
+    --shadow-md:
+        0 12px 24px rgba(15,23,42,.08);
+
+    --shadow-lg:
+        0 20px 45px rgba(15,23,42,.12);
+
+    /* Transition */
+
+    --transition:.30s ease;
+
+}
+
+
+/*==========================================================
+  RESET
+==========================================================*/
+
+*,
+*::before,
+*::after{
+
+    margin:0;
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+
+/*==========================================================
+  HTML
+==========================================================*/
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+
+/*==========================================================
+  BODY
+==========================================================*/
+
+body{
+
+    font-family:"Poppins",sans-serif;
+
+    background:var(--background);
+
+    color:var(--text-primary);
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+    line-height:1.6;
+
+    -webkit-font-smoothing:antialiased;
+
+    -moz-osx-font-smoothing:grayscale;
+
+}
+
+
+/*==========================================================
+  LINKS
+==========================================================*/
+
+a{
+
+    color:inherit;
+
+    text-decoration:none;
+
+}
+
+
+/*==========================================================
+  BUTTONS
+==========================================================*/
+
+button{
+
+    border:none;
+
+    outline:none;
+
+    background:none;
+
+    font-family:inherit;
+
+    cursor:pointer;
+
+}
+
+
+/*==========================================================
+  INPUTS
+==========================================================*/
+
+input,
+textarea,
+select{
+
+    font-family:inherit;
+
+    outline:none;
+
+}
+
+
+/*==========================================================
+  IMAGES
+==========================================================*/
+
+img{
+
+    display:block;
+
+    max-width:100%;
+
+}
+
+
+/*==========================================================
+  LISTS
+==========================================================*/
+
+ul,
+ol{
+
+    list-style:none;
+
+}
+
+
+/*==========================================================
+  MAIN LAYOUT
+==========================================================*/
+
+.login-container{
+
+    width:100%;
+
+    min-height:100vh;
+
+    display:flex;
+
+}
+
+
+/*==========================================================
+  COMMON UTILITIES
+==========================================================*/
+
+.text-center{
+
+    text-align:center;
+
+}
+
+.w-100{
+
+    width:100%;
+
+}
+
+.d-flex{
+
+    display:flex;
+
+}
+
+.align-center{
+
+    align-items:center;
+
+}
+
+.justify-center{
+
+    justify-content:center;
+
+}
+
+.mt-1{margin-top:8px;}
+.mt-2{margin-top:16px;}
+.mt-3{margin-top:24px;}
+.mt-4{margin-top:32px;}
+
+.mb-1{margin-bottom:8px;}
+.mb-2{margin-bottom:16px;}
+.mb-3{margin-bottom:24px;}
+.mb-4{margin-bottom:32px;}
+
+
+/*==========================================================
+  TEXT SELECTION
+==========================================================*/
+
+::selection{
+
+    background:var(--primary);
+
+    color:#FFFFFF;
+
+}
+
+/*==========================================================
+  LEFT PANEL
+==========================================================*/
+
+.left-panel{
+
+    width:50%;
+
+    min-height:100vh;
+
+    position:relative;
+
+    overflow:hidden;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    padding:70px;
+
+    color:#FFFFFF;
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--primary-dark)
+    );
+
+}
+
+
+/*==========================================================
+  DECORATIVE CIRCLES
+==========================================================*/
+
+.left-panel::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:420px;
+
+    height:420px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.08);
+
+    top:-140px;
+
+    left:-140px;
+
+}
+
+.left-panel::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:280px;
+
+    height:280px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.05);
+
+    bottom:-90px;
+
+    right:-90px;
+
+}
+
+
+/*==========================================================
+  CONTENT LAYER
+==========================================================*/
+
+.left-panel>*{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+
+/*==========================================================
+  BRAND
+==========================================================*/
+
+.brand{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    margin-bottom:60px;
+
+    font-size:30px;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+
+}
+
+.brand i{
+
+    font-size:34px;
+
+}
+
+
+/*==========================================================
+  HERO TITLE
+==========================================================*/
+
+.left-panel h1{
+
+    max-width:560px;
+
+    margin-bottom:22px;
+
+    font-size:54px;
+
+    font-weight:700;
+
+    line-height:1.15;
+
+    letter-spacing:-1px;
+
+}
+
+
+/*==========================================================
+  HERO DESCRIPTION
+==========================================================*/
+
+.left-panel p{
+
+    max-width:520px;
+
+    margin-bottom:45px;
+
+    font-size:18px;
+
+    line-height:1.8;
+
+    opacity:.92;
+
+}
+
+
+/*==========================================================
+  HERO IMAGE
+==========================================================*/
+
+.left-panel img{
+
+    width:100%;
+
+    max-width:470px;
+
+    margin-top:15px;
+
+    animation:floating 6s ease-in-out infinite;
+
+}
+
+
+/*==========================================================
+  SMALL BADGE
+==========================================================*/
+
+.hero-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    width:max-content;
+
+    padding:10px 18px;
+
+    margin-bottom:30px;
+
+    border-radius:50px;
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(10px);
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+.hero-badge i{
+
+    font-size:16px;
+
+}
+
+
+/*==========================================================
+  FEATURE LIST
+==========================================================*/
+
+.hero-features{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:16px;
+
+    margin-top:30px;
+
+}
+
+.hero-features li{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    font-size:15px;
+
+    opacity:.95;
+
+}
+
+.hero-features li i{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:34px;
+
+    height:34px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.12);
+
+    font-size:15px;
+
+}
+
+
+/*==========================================================
+  ANIMATIONS
+==========================================================*/
+
+@keyframes floating{
+
+    0%{
+
+        transform:translateY(0px);
+
+    }
+
+    50%{
+
+        transform:translateY(-12px);
+
+    }
+
+    100%{
+
+        transform:translateY(0px);
+
+    }
+
+}
+
+@keyframes fadeInUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(35px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+/*==========================================================
+  ENTRY ANIMATION
+==========================================================*/
+
+.brand{
+
+    animation:fadeInUp .6s ease;
+
+}
+
+.left-panel h1{
+
+    animation:fadeInUp .8s ease;
+
+}
+
+.left-panel p{
+
+    animation:fadeInUp 1s ease;
+
+}
+
+.hero-badge{
+
+    animation:fadeInUp 1.2s ease;
+
+}
+
+.hero-features{
+
+    animation:fadeInUp 1.4s ease;
+
+}
+
+
+/*==========================================================
+  HOVER EFFECT
+==========================================================*/
+
+.brand{
+
+    transition:var(--transition);
+
+}
+
+.brand:hover{
+
+    transform:scale(1.03);
+
+}
+
+/*==========================================================
+  RIGHT PANEL
+==========================================================*/
+
+.right-panel{
+
+    width:50%;
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:40px;
+
+    background:var(--background);
+
+}
+
+
+/*==========================================================
+  AUTH CARD
+==========================================================*/
+
+.login-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    width:100%;
+
+    max-width:470px;
+
+    background:var(--surface);
+
+    border-radius:var(--radius-xl);
+
+    padding:40px;
+
+    box-shadow:var(--shadow-lg);
+
+    animation:cardFade .7s ease;
+
+}
+
+
+/*==========================================================
+  CARD DECORATION
+==========================================================*/
+
+.login-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+
+    height:220px;
+
+    border-radius:50%;
+
+    background:rgba(37,99,235,.05);
+
+    top:-120px;
+
+    right:-120px;
+
+}
+
+.login-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:170px;
+
+    height:170px;
+
+    border-radius:50%;
+
+    background:rgba(37,99,235,.03);
+
+    bottom:-90px;
+
+    left:-90px;
+
+}
+
+
+/*==========================================================
+  CARD CONTENT
+==========================================================*/
+
+.login-card>*{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+
+/*==========================================================
+  WELCOME BADGE
+==========================================================*/
+
+.welcome{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:8px 16px;
+
+    margin-bottom:20px;
+
+    border-radius:50px;
+
+    background:var(--primary-light);
+
+    color:var(--primary);
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.welcome i{
+
+    font-size:15px;
+
+}
+
+
+/*==========================================================
+  PAGE TITLE
+==========================================================*/
+
+.login-card h2{
+
+    margin-bottom:10px;
+
+    color:var(--text-primary);
+
+    font-size:34px;
+
+    font-weight:700;
+
+    line-height:1.2;
+
+}
+
+
+/*==========================================================
+  PAGE DESCRIPTION
+==========================================================*/
+
+.login-card p{
+
+    margin-bottom:30px;
+
+    color:var(--text-secondary);
+
+    font-size:15px;
+
+    line-height:1.7;
+
+}
+
+
+/*==========================================================
+  FORM
+==========================================================*/
+
+#loginForm,
+#registerForm,
+#forgotPasswordForm,
+#verifyOtpForm,
+#resetPasswordForm{
+
+    width:100%;
+
+}
+
+
+/*==========================================================
+  FORM SPACING
+==========================================================*/
+
+.form-section{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+
+/*==========================================================
+  SECTION TITLE
+==========================================================*/
+
+.form-title{
+
+    margin-bottom:12px;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    color:var(--text-primary);
+
+}
+
+
+/*==========================================================
+  SMALL DESCRIPTION
+==========================================================*/
+
+.form-description{
+
+    margin-bottom:20px;
+
+    color:var(--text-secondary);
+
+    font-size:14px;
+
+    line-height:1.6;
+
+}
+
+
+/*==========================================================
+  CARD HOVER
+==========================================================*/
+
+.login-card{
+
+    transition:var(--transition);
+
+}
+
+.login-card:hover{
+
+    transform:translateY(-4px);
+
+}
+
+
+/*==========================================================
+  ENTRY ANIMATION
+==========================================================*/
+
+@keyframes cardFade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/*==========================================================
+  INPUT GROUP
+==========================================================*/
+
+.input-group-custom{
+
+    margin-bottom:18px;
+
+}
+
+.input-group-custom label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    color:var(--text-secondary);
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+
+/*==========================================================
+  INPUTS
+==========================================================*/
+
+.input-group-custom input,
+.input-group-custom textarea,
+.input-group-custom select{
+
+    width:100%;
+
+    height:50px;
+
+    padding:0 16px;
+
+    border:2px solid var(--border);
+
+    border-radius:var(--radius-md);
+
+    background:#FFFFFF;
+
+    color:var(--text-primary);
+
+    font-size:15px;
+
+    transition:var(--transition);
+
+}
+
+.input-group-custom textarea{
+
+    min-height:120px;
+
+    padding:14px 16px;
+
+    resize:vertical;
+
+}
+
+.input-group-custom input::placeholder,
+.input-group-custom textarea::placeholder{
+
+    color:var(--text-muted);
+
+}
+
+
+/*==========================================================
+  INPUT STATES
+==========================================================*/
+
+.input-group-custom input:focus,
+.input-group-custom textarea:focus,
+.input-group-custom select:focus{
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+
+}
+
+
+/*==========================================================
+  VALID INPUT
+==========================================================*/
+
+.input-group-custom input.is-valid{
+
+    border-color:var(--success);
+
+}
+
+
+/*==========================================================
+  INVALID INPUT
+==========================================================*/
+
+.input-group-custom input.is-invalid{
+
+    border-color:var(--danger);
+
+}
+
+
+/*==========================================================
+  PASSWORD WRAPPER
+==========================================================*/
+
+.password-wrapper{
+
+    position:relative;
+
+}
+
+.password-wrapper input{
+
+    padding-right:52px;
+
+}
+
+
+/*==========================================================
+  PASSWORD TOGGLE
+==========================================================*/
+
+.password-toggle{
+
+    position:absolute;
+
+    top:50%;
+
+    right:15px;
+
+    transform:translateY(-50%);
+
+    width:32px;
+
+    height:32px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border:none;
+
+    background:transparent;
+
+    color:var(--text-muted);
+
+    cursor:pointer;
+
+    transition:var(--transition);
+
+}
+
+.password-toggle:hover{
+
+    color:var(--primary);
+
+}
+
+.password-toggle i{
+
+    font-size:18px;
+
+}
+
+
+/*==========================================================
+  PASSWORD STRENGTH
+==========================================================*/
+
+.password-strength{
+
+    margin-top:12px;
+
+}
+
+.progress{
+
+    width:100%;
+
+    height:6px;
+
+    border-radius:50px;
+
+    overflow:hidden;
+
+    background:#E2E8F0;
+
+}
+
+.progress-bar{
+
+    width:0;
+
+    height:100%;
+
+    transition:width .35s ease;
+
+}
+
+#strengthText{
+
+    display:block;
+
+    margin-top:8px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+
+/*==========================================================
+  PASSWORD RULES
+==========================================================*/
+
+.password-rules{
+
+    margin-top:14px;
+
+}
+
+.password-rules ul{
+
+    padding:0;
+
+    margin:0;
+
+}
+
+.password-rules li{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-bottom:8px;
+
+    font-size:13px;
+
+    color:var(--text-secondary);
+
+}
+
+.password-rules li i{
+
+    font-size:15px;
+
+}
+
+
+/*==========================================================
+  LOGIN OPTIONS
+==========================================================*/
+
+.login-options{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin:18px 0 24px;
+
+    font-size:14px;
+
+}
+
+.login-options label{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    cursor:pointer;
+
+    color:var(--text-secondary);
+
+}
+
+.login-options input{
+
+    width:16px;
+
+    height:16px;
+
+    accent-color:var(--primary);
+
+}
+
+.login-options a{
+
+    color:var(--primary);
+
+    font-weight:600;
+
+}
+
+.login-options a:hover{
+
+    text-decoration:underline;
+
+}
+
+
+/*==========================================================
+  OTP INPUTS
+==========================================================*/
+
+.otp-container{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:12px;
+
+    margin:20px 0;
+
+}
+
+.otp-input{
+
+    width:55px;
+
+    height:55px;
+
+    border:2px solid var(--border);
+
+    border-radius:var(--radius-md);
+
+    text-align:center;
+
+    font-size:22px;
+
+    font-weight:700;
+
+    transition:var(--transition);
+
+}
+
+.otp-input:focus{
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+
+}
+
+
+/*==========================================================
+  HELPER TEXT
+==========================================================*/
+
+.helper-text{
+
+    margin-top:6px;
+
+    font-size:13px;
+
+    color:var(--text-muted);
+
+}
+/*==========================================================
+  PRIMARY BUTTON
+==========================================================*/
+
+.login-btn{
+
+    width:100%;
+
+    height:52px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    border:none;
+
+    border-radius:var(--radius-md);
+
+    background:linear-gradient(
+        135deg,
+        var(--primary),
+        var(--primary-dark)
+    );
+
+    color:#FFFFFF;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+
+    box-shadow:var(--shadow-sm);
+
+}
+
+.login-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:var(--shadow-md);
+
+}
+
+.login-btn:active{
+
+    transform:scale(.98);
+
+}
+
+.login-btn:disabled{
+
+    opacity:.75;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+    box-shadow:none;
+
+}
+
+.login-btn i{
+
+    font-size:16px;
+
+}
+
+
+/*==========================================================
+  BUTTON LOADING STATE
+==========================================================*/
+
+.login-btn .spinner-border{
+
+    width:18px;
+
+    height:18px;
+
+}
+
+
+/*==========================================================
+  GOOGLE BUTTON
+==========================================================*/
+
+.google-btn{
+
+    width:100%;
+
+    height:52px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    border:2px solid var(--border);
+
+    border-radius:var(--radius-md);
+
+    background:#FFFFFF;
+
+    color:var(--text-primary);
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:var(--transition);
+
+}
+
+.google-btn i{
+
+    color:#EA4335;
+
+    font-size:18px;
+
+}
+
+.google-btn:hover{
+
+    border-color:var(--primary);
+
+    background:#F8FAFC;
+
+    transform:translateY(-2px);
+
+    box-shadow:var(--shadow-sm);
+
+}
+
+.google-btn:active{
+
+    transform:scale(.98);
+
+}
+
+
+/*==========================================================
+  DIVIDER
+==========================================================*/
+
+.divider{
+
+    position:relative;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin:24px 0;
+
+}
+
+.divider::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:100%;
+
+    height:1px;
+
+    background:var(--border);
+
+}
+
+.divider span{
+
+    position:relative;
+
+    padding:0 16px;
+
+    background:#FFFFFF;
+
+    color:var(--text-muted);
+
+    font-size:13px;
+
+    z-index:1;
+
+}
+
+
+/*==========================================================
+  BOTTOM LINKS
+==========================================================*/
+
+.register-link{
+
+    margin-top:24px;
+
+    text-align:center;
+
+    color:var(--text-secondary);
+
+    font-size:14px;
+
+}
+
+.register-link a{
+
+    color:var(--primary);
+
+    font-weight:600;
+
+    transition:var(--transition);
+
+}
+
+.register-link a:hover{
+
+    color:var(--primary-dark);
+
+    text-decoration:underline;
+
+}
+
+
+/*==========================================================
+  TEXT LINKS
+==========================================================*/
+
+.text-link{
+
+    color:var(--primary);
+
+    font-weight:600;
+
+    transition:var(--transition);
+
+}
+
+.text-link:hover{
+
+    color:var(--primary-dark);
+
+    text-decoration:underline;
+
+}
+
+
+/*==========================================================
+  ICON BUTTONS
+==========================================================*/
+
+.icon-btn{
+
+    width:42px;
+
+    height:42px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:50%;
+
+    background:#FFFFFF;
+
+    color:var(--text-secondary);
+
+    transition:var(--transition);
+
+}
+
+.icon-btn:hover{
+
+    background:var(--primary-light);
+
+    color:var(--primary);
+
+}
+
+
+/*==========================================================
+  BUTTON RIPPLE EFFECT
+==========================================================*/
+
+.login-btn,
+.google-btn{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.login-btn::after,
+.google-btn::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:0;
+
+    height:0;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.25);
+
+    top:50%;
+
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    transition:width .45s ease,height .45s ease;
+
+}
+
+.login-btn:active::after,
+.google-btn:active::after{
+
+    width:300px;
+
+    height:300px;
+
+}
+
+
+/*==========================================================
+  BUTTON FOCUS
+==========================================================*/
+
+.login-btn:focus-visible,
+.google-btn:focus-visible{
+
+    outline:3px solid rgba(37,99,235,.25);
+
+    outline-offset:3px;
+
+}
+/*==========================================================
+  REGISTER PAGE
+==========================================================*/
+
+#registerForm{
+
+    animation:fadeInUp .6s ease;
+
+}
+
+
+/*==========================================================
+  ROLE SELECTION
+==========================================================*/
+
+.role-selection{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:16px;
+
+    margin:18px 0 24px;
+
+}
+
+
+/*==========================================================
+  ROLE CARD
+==========================================================*/
+
+.role-card{
+
+    position:relative;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:22px 18px;
+
+    border:2px solid var(--border);
+
+    border-radius:var(--radius-lg);
+
+    background:var(--surface);
+
+    cursor:pointer;
+
+    transition:var(--transition);
+
+    user-select:none;
+
+}
+
+.role-card:hover{
+
+    border-color:var(--primary);
+
+    transform:translateY(-4px);
+
+    box-shadow:var(--shadow-md);
+
+}
+
+
+/*==========================================================
+  HIDE RADIO BUTTON
+==========================================================*/
+
+.role-card input[type="radio"]{
+
+    display:none;
+
+}
+
+
+/*==========================================================
+  ROLE ICON
+==========================================================*/
+
+.role-card i{
+
+    font-size:32px;
+
+    color:var(--primary);
+
+    margin-bottom:12px;
+
+    transition:var(--transition);
+
+}
+
+
+/*==========================================================
+  ROLE TITLE
+==========================================================*/
+
+.role-card span{
+
+    font-size:15px;
+
+    font-weight:600;
+
+    color:var(--text-primary);
+
+}
+
+
+/*==========================================================
+  SELECTED ROLE
+==========================================================*/
+
+.role-card:has(input:checked){
+
+    border-color:var(--primary);
+
+    background:var(--primary-light);
+
+    box-shadow:0 12px 28px rgba(37,99,235,.18);
+
+}
+
+.role-card:has(input:checked) i{
+
+    transform:scale(1.1);
+
+}
+
+
+/*==========================================================
+  TERMS & CONDITIONS
+==========================================================*/
+
+.form-check{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:12px;
+
+    margin:20px 0;
+
+}
+
+
+/*==========================================================
+  CHECKBOX
+==========================================================*/
+
+.form-check-input{
+
+    width:18px;
+
+    height:18px;
+
+    margin-top:3px;
+
+    accent-color:var(--primary);
+
+    cursor:pointer;
+
+}
+
+
+/*==========================================================
+  TERMS LABEL
+==========================================================*/
+
+.form-check-label{
+
+    color:var(--text-secondary);
+
+    font-size:14px;
+
+    line-height:1.7;
+
+}
+
+.form-check-label a{
+
+    color:var(--primary);
+
+    font-weight:600;
+
+    transition:var(--transition);
+
+}
+
+.form-check-label a:hover{
+
+    color:var(--primary-dark);
+
+    text-decoration:underline;
+
+}
+
+
+/*==========================================================
+  REQUIRED FIELD
+==========================================================*/
+
+.required{
+
+    color:var(--danger);
+
+    margin-left:3px;
+
+}
+
+
+/*==========================================================
+  OPTIONAL TEXT
+==========================================================*/
+
+.optional{
+
+    color:var(--text-muted);
+
+    font-size:12px;
+
+    font-weight:500;
+
+    margin-left:4px;
+
+}
+
+
+/*==========================================================
+  FIELD ERROR
+==========================================================*/
+
+.field-error{
+
+    margin-top:6px;
+
+    color:var(--danger);
+
+    font-size:13px;
+
+}
+
+
+/*==========================================================
+  FIELD SUCCESS
+==========================================================*/
+
+.field-success{
+
+    margin-top:6px;
+
+    color:var(--success);
+
+    font-size:13px;
+
+}
+
+
+/*==========================================================
+  PASSWORD REQUIREMENT BOX
+==========================================================*/
+
+.password-requirements{
+
+    margin-top:14px;
+
+    padding:14px 16px;
+
+    border:1px solid var(--border);
+
+    border-radius:var(--radius-md);
+
+    background:#FAFBFC;
+
+}
+
+.password-requirements h6{
+
+    margin-bottom:10px;
+
+    font-size:14px;
+
+    color:var(--text-primary);
+
+    font-weight:600;
+
+}
+/*==========================================================
+  TOAST NOTIFICATIONS
+==========================================================*/
+
+.toast-message{
+
+    position:fixed;
+
+    top:24px;
+
+    right:24px;
+
+    min-width:320px;
+
+    max-width:420px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:16px 20px;
+
+    border-radius:var(--radius-md);
+
+    color:#FFFFFF;
+
+    font-size:14px;
+
+    font-weight:500;
+
+    box-shadow:var(--shadow-lg);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transform:translateX(60px);
+
+    transition:
+        opacity .35s ease,
+        transform .35s ease,
+        visibility .35s ease;
+
+    z-index:9999;
+
+}
+
+.toast-message.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+    transform:translateX(0);
+
+}
+
+.toast-message i{
+
+    font-size:18px;
+
+    flex-shrink:0;
+
+}
+
+
+/*==========================================================
+  TOAST TYPES
+==========================================================*/
+
+.toast-success{
+
+    background:var(--success);
+
+}
+
+.toast-error{
+
+    background:var(--danger);
+
+}
+
+.toast-warning{
+
+    background:var(--warning);
+
+}
+
+.toast-info{
+
+    background:var(--info);
+
+}
+
+
+/*==========================================================
+  ALERT BOXES
+==========================================================*/
+
+.alert{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:12px;
+
+    padding:14px 16px;
+
+    border-radius:var(--radius-md);
+
+    margin-bottom:18px;
+
+    font-size:14px;
+
+}
+
+.alert i{
+
+    margin-top:2px;
+
+    font-size:18px;
+
+}
+
+.alert-success{
+
+    background:#ECFDF5;
+
+    color:#166534;
+
+    border:1px solid #BBF7D0;
+
+}
+
+.alert-error{
+
+    background:#FEF2F2;
+
+    color:#991B1B;
+
+    border:1px solid #FECACA;
+
+}
+
+.alert-warning{
+
+    background:#FFFBEB;
+
+    color:#92400E;
+
+    border:1px solid #FDE68A;
+
+}
+
+.alert-info{
+
+    background:#EFF6FF;
+
+    color:#1E40AF;
+
+    border:1px solid #BFDBFE;
+
+}
+
+
+/*==========================================================
+  LOADING OVERLAY
+==========================================================*/
+
+.loading-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(255,255,255,.75);
+
+    backdrop-filter:blur(4px);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:var(--transition);
+
+    z-index:9998;
+
+}
+
+.loading-overlay.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+
+/*==========================================================
+  LOADER
+==========================================================*/
+
+.loader{
+
+    width:56px;
+
+    height:56px;
+
+    border:5px solid rgba(37,99,235,.15);
+
+    border-top-color:var(--primary);
+
+    border-radius:50%;
+
+    animation:spin .8s linear infinite;
+
+}
+
+
+/*==========================================================
+  BUTTON LOADING
+==========================================================*/
+
+.spinner-border{
+
+    display:inline-block;
+
+    width:18px;
+
+    height:18px;
+
+    border:2px solid rgba(255,255,255,.4);
+
+    border-top-color:#FFFFFF;
+
+    border-radius:50%;
+
+    animation:spin .8s linear infinite;
+
+}
+
+
+/*==========================================================
+  STATUS BADGES
+==========================================================*/
+
+.badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:6px 12px;
+
+    border-radius:999px;
+
+    font-size:12px;
+
+    font-weight:600;
+
+}
+
+.badge-success{
+
+    background:#DCFCE7;
+
+    color:#166534;
+
+}
+
+.badge-warning{
+
+    background:#FEF3C7;
+
+    color:#92400E;
+
+}
+
+.badge-danger{
+
+    background:#FEE2E2;
+
+    color:#991B1B;
+
+}
+
+.badge-info{
+
+    background:#DBEAFE;
+
+    color:#1D4ED8;
+
+}
+
+
+/*==========================================================
+  DISABLED STATE
+==========================================================*/
+
+.disabled{
+
+    pointer-events:none;
+
+    opacity:.6;
+
+}
+
+
+/*==========================================================
+  ANIMATIONS
+==========================================================*/
+
+@keyframes spin{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+@keyframes toastSlide{
+
+    from{
+
+        opacity:0;
+
+        transform:translateX(60px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateX(0);
+
+    }
+
+}
+
+@keyframes pulse{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.05);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+
+/*==========================================================
+  FEEDBACK UTILITIES
+==========================================================*/
+
+.animate-pulse{
+
+    animation:pulse 1.5s infinite;
+
+}
+
+.animate-spin{
+
+    animation:spin .8s linear infinite;
+
+}
+/*==========================================================
+  RESPONSIVE DESIGN
+==========================================================*/
+
+
+/*==========================================================
+  LARGE LAPTOPS
+==========================================================*/
+
+@media (max-width:1200px){
+
+    .left-panel{
+
+        padding:60px 50px;
+
+    }
+
+    .left-panel h1{
+
+        font-size:46px;
+
+    }
+
+    .left-panel p{
+
+        font-size:17px;
+
+    }
+
+    .left-panel img{
+
+        max-width:420px;
+
+    }
+
+    .login-card{
+
+        max-width:440px;
+
+        padding:36px;
+
+    }
+
+}
+
+
+/*==========================================================
+  TABLETS
+==========================================================*/
+
+@media (max-width:992px){
+
+    .login-container{
+
+        flex-direction:column;
+
+    }
+
+    .left-panel{
+
+        width:100%;
+
+        min-height:360px;
+
+        padding:50px 30px;
+
+        justify-content:center;
+
+        align-items:center;
+
+        text-align:center;
+
+    }
+
+    .left-panel h1{
+
+        font-size:40px;
+
+        max-width:650px;
+
+    }
+
+    .left-panel p{
+
+        max-width:650px;
+
+    }
+
+    .left-panel img{
+
+        max-width:280px;
+
+        margin-top:20px;
+
+    }
+
+    .hero-features{
+
+        align-items:center;
+
+    }
+
+    .right-panel{
+
+        width:100%;
+
+        min-height:auto;
+
+        padding:40px 20px;
+
+    }
+
+    .login-card{
+
+        max-width:540px;
+
+    }
+
+}
+
+
+/*==========================================================
+  MOBILE
+==========================================================*/
+
+@media (max-width:768px){
+
+    .left-panel{
+
+        display:none;
+
+    }
+
+    .right-panel{
+
+        width:100%;
+
+        min-height:100vh;
+
+        padding:20px;
+
+        background:linear-gradient(
+            135deg,
+            #EFF6FF,
+            #F8FAFC
+        );
+
+    }
+
+    .login-card{
+
+        max-width:100%;
+
+        padding:28px 22px;
+
+        border-radius:var(--radius-lg);
+
+    }
+
+    .login-card h2{
+
+        font-size:28px;
+
+    }
+
+    .login-card p{
+
+        font-size:14px;
+
+    }
+
+    .role-selection{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .hero-features{
+
+        display:none;
+
+    }
+
+    .login-btn,
+    .google-btn{
+
+        height:48px;
+
+    }
+
+    .otp-container{
+
+        gap:10px;
+
+    }
+
+    .otp-input{
+
+        width:50px;
+
+        height:50px;
+
+        font-size:20px;
+
+    }
+
+}
+
+
+/*==========================================================
+  SMALL PHONES
+==========================================================*/
+
+@media (max-width:480px){
+
+    .right-panel{
+
+        padding:16px;
+
+    }
+
+    .login-card{
+
+        padding:22px 18px;
+
+    }
+
+    .welcome{
+
+        font-size:12px;
+
+        padding:6px 12px;
+
+    }
+
+    .login-card h2{
+
+        font-size:24px;
+
+    }
+
+    .input-group-custom label{
+
+        font-size:13px;
+
+    }
+
+    .input-group-custom input{
+
+        height:46px;
+
+        font-size:14px;
+
+    }
+
+    .password-toggle{
+
+        right:12px;
+
+    }
+
+    .login-options{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:12px;
+
+    }
+
+    .login-btn,
+    .google-btn{
+
+        font-size:14px;
+
+    }
+
+    .register-link{
+
+        font-size:13px;
+
+    }
+
+    .toast-message{
+
+        left:16px;
+
+        right:16px;
+
+        min-width:auto;
+
+        max-width:none;
+
+    }
+
+    .otp-input{
+
+        width:44px;
+
+        height:44px;
+
+        font-size:18px;
+
+    }
+
+}
+
+
+/*==========================================================
+  LANDSCAPE MOBILE
+==========================================================*/
+
+@media (max-height:700px){
+
+    .right-panel{
+
+        padding:18px;
+
+    }
+
+    .login-card{
+
+        padding:24px;
+
+    }
+
+    .left-panel{
+
+        padding:40px;
+
+    }
+
+}
+
+
+/*==========================================================
+  EXTRA SMALL DEVICES
+==========================================================*/
+
+@media (max-width:360px){
+
+    .login-card{
+
+        padding:18px 16px;
+
+    }
+
+    .login-card h2{
+
+        font-size:22px;
+
+    }
+
+    .input-group-custom input{
+
+        height:44px;
+
+    }
+
+    .otp-container{
+
+        gap:8px;
+
+    }
+
+    .otp-input{
+
+        width:40px;
+
+        height:40px;
+
+        font-size:16px;
+
+    }
+
+}
+
+
+/*==========================================================
+  LARGE DESKTOPS
+==========================================================*/
+
+@media (min-width:1600px){
+
+    .login-card{
+
+        max-width:520px;
+
+    }
+
+    .left-panel{
+
+        padding:90px;
+
+    }
+
+    .left-panel h1{
+
+        font-size:60px;
+
+    }
+
+    .left-panel p{
+
+        font-size:19px;
+
+    }
+
+}
+/*==========================================================
+  ACCESSIBILITY
+==========================================================*/
+
+:focus-visible{
+
+    outline:3px solid rgba(37,99,235,.30);
+
+    outline-offset:3px;
+
+}
+
+button,
+input,
+textarea,
+select,
+a{
+
+    transition:
+        background-color var(--transition),
+        border-color var(--transition),
+        color var(--transition),
+        box-shadow var(--transition),
+        transform var(--transition);
+
+}
+
+
+/*==========================================================
+  DISABLED ELEMENTS
+==========================================================*/
+
+button:disabled,
+input:disabled,
+textarea:disabled,
+select:disabled{
+
+    cursor:not-allowed;
+
+    opacity:.65;
+
+}
+
+
+/*==========================================================
+  SCROLLBAR
+==========================================================*/
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+    height:8px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#F1F5F9;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--primary);
+
+    border-radius:999px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:var(--primary-dark);
+
+}
+
+
+/*==========================================================
+  HORIZONTAL RULE
+==========================================================*/
+
+hr{
+
+    border:none;
+
+    height:1px;
+
+    background:var(--border);
+
+    margin:24px 0;
+
+}
+
+
+/*==========================================================
+  CURSOR UTILITIES
+==========================================================*/
+
+.pointer{
+
+    cursor:pointer;
+
+}
+
+.no-select{
+
+    user-select:none;
+
+}
+
+.overflow-hidden{
+
+    overflow:hidden;
+
+}
+
+
+/*==========================================================
+  DISPLAY UTILITIES
+==========================================================*/
+
+.d-none{
+
+    display:none !important;
+
+}
+
+.d-block{
+
+    display:block !important;
+
+}
+
+.d-inline{
+
+    display:inline !important;
+
+}
+
+.d-inline-flex{
+
+    display:inline-flex !important;
+
+}
+
+.flex-column{
+
+    flex-direction:column;
+
+}
+
+.flex-wrap{
+
+    flex-wrap:wrap;
+
+}
+
+.gap-1{
+
+    gap:8px;
+
+}
+
+.gap-2{
+
+    gap:16px;
+
+}
+
+.gap-3{
+
+    gap:24px;
+
+}
+
+
+/*==========================================================
+  BORDER RADIUS UTILITIES
+==========================================================*/
+
+.rounded-sm{
+
+    border-radius:var(--radius-sm);
+
+}
+
+.rounded{
+
+    border-radius:var(--radius-md);
+
+}
+
+.rounded-lg{
+
+    border-radius:var(--radius-lg);
+
+}
+
+.rounded-xl{
+
+    border-radius:var(--radius-xl);
+
+}
+
+.rounded-circle{
+
+    border-radius:50%;
+
+}
+
+
+/*==========================================================
+  SHADOW UTILITIES
+==========================================================*/
+
+.shadow-sm{
+
+    box-shadow:var(--shadow-sm);
+
+}
+
+.shadow{
+
+    box-shadow:var(--shadow-md);
+
+}
+
+.shadow-lg{
+
+    box-shadow:var(--shadow-lg);
+
+}
+
+
+/*==========================================================
+  OPACITY UTILITIES
+==========================================================*/
+
+.opacity-0{
+
+    opacity:0;
+
+}
+
+.opacity-50{
+
+    opacity:.5;
+
+}
+
+.opacity-75{
+
+    opacity:.75;
+
+}
+
+.opacity-100{
+
+    opacity:1;
+
+}
+
+
+/*==========================================================
+  WIDTH / HEIGHT UTILITIES
+==========================================================*/
+
+.h-100{
+
+    height:100%;
+
+}
+
+.vh-100{
+
+    height:100vh;
+
+}
+
+.w-auto{
+
+    width:auto;
+
+}
+
+
+/*==========================================================
+  ANIMATION UTILITIES
+==========================================================*/
+
+.fade-in{
+
+    animation:fadeInUp .6s ease;
+
+}
+
+.float{
+
+    animation:floating 5s ease-in-out infinite;
+
+}
+
+.spin{
+
+    animation:spin .8s linear infinite;
+
+}
+
+
+/*==========================================================
+  PRINT
+==========================================================*/
+
+@media print{
+
+    body{
+
+        background:#FFFFFF;
+
+    }
+
+    .left-panel{
+
+        display:none;
+
+    }
+
+    .right-panel{
+
+        width:100%;
+
+    }
+
+    .login-card{
+
+        box-shadow:none;
+
+        border:1px solid #CCCCCC;
+
+    }
+
+}
+
+
+/*==========================================================
+  PERFORMANCE
+==========================================================*/
+
+.login-card,
+.role-card,
+.login-btn,
+.google-btn,
+.password-toggle,
+.toast-message{
+
+    will-change:transform;
+
+}
+
+
+/*==========================================================
+  REDUCED MOTION
+==========================================================*/
+
+@media (prefers-reduced-motion:reduce){
+
+    *{
+
+        animation:none !important;
+
+        transition:none !important;
+
+        scroll-behavior:auto !important;
+
+    }
+
+}
+
+
+/*==========================================================
+  FINAL POLISH
+==========================================================*/
+
+.login-card:hover{
+
+    box-shadow:
+        0 24px 60px rgba(15,23,42,.14);
+
+}
+
+.role-card:hover i{
+
+    transform:scale(1.08);
+
+}
+
+.input-group-custom input:hover,
+.input-group-custom textarea:hover{
+
+    border-color:#CBD5E1;
+
+}
+
+.login-btn:hover,
+.google-btn:hover{
+
+    transform:translateY(-2px);
+
+}
+
+
+/*==========================================================
+  END OF FILE
+==========================================================*/
+

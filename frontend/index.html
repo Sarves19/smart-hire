@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Hire | AI Powered Service Marketplace</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!-- Google Font -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+
+</head>
+
+<body>
+
+    <!-- =========================================
+                NAVIGATION BAR
+    ========================================== -->
+
+    <header class="bg-white shadow-sm sticky-top">
+
+        <div class="container">
+
+            <nav class="d-flex justify-content-between align-items-center py-3">
+
+                <!-- Logo -->
+
+                <a href="#" class="d-flex align-items-center text-decoration-none">
+
+                    <i class="bi bi-lightning-charge-fill text-primary fs-3 me-2"></i>
+
+                    <span class="fw-bold fs-2 text-primary">
+                        Smart Hire
+                    </span>
+
+                </a>
+
+                <!-- Navigation -->
+
+                <ul class="d-none d-lg-flex align-items-center gap-4 mb-0">
+
+                    <li>
+                        <a href="#" class="nav-link-custom active">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="nav-link-custom">
+                            Services
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="nav-link-custom">
+                            Providers
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="nav-link-custom">
+                            AI Search
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="nav-link-custom">
+                            About
+                        </a>
+                    </li>
+
+                </ul>
+
+                <!-- Right Buttons -->
+
+                <div class="d-none d-lg-flex align-items-center gap-2">
+
+                    <button class="btn btn-outline-primary px-4">
+                        Login
+                    </button>
+
+                    <button class="btn btn-primary px-4">
+                        Register
+                    </button>
+
+                </div>
+
+                <!-- Mobile Menu -->
+
+                <button
+                    class="btn d-lg-none fs-3"
+                    id="menuButton">
+
+                    <i class="bi bi-list"></i>
+
+                </button>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+    <!-- =========================================
+                MOBILE MENU
+    ========================================== -->
+
+    <div class="mobile-menu" id="mobileMenu">
+
+        <a href="#">Home</a>
+        <a href="#">Services</a>
+        <a href="#">Providers</a>
+        <a href="#">AI Search</a>
+        <a href="#">About</a>
+
+        <hr>
+
+        <button class="btn btn-outline-primary w-100 mb-2">
+            Login
+        </button>
+
+        <button class="btn btn-primary w-100">
+            Register
+        </button>
+
+    </div>
+
+    <!-- =========================================
+                HERO SECTION
+    ========================================== -->
+
+    <section class="hero">
+
+        <div class="container">
+
+            <div class="row align-items-center">
+
+                <!-- LEFT SIDE -->
+
+                <div class="col-lg-6">
+
+                    <span class="hero-badge">
+                        AI Powered Marketplace
+                    </span>
+
+                    <h1 class="hero-title">
+
+                        Find Trusted
+
+                        <span>Service Providers</span>
+
+                        with AI
+
+                    </h1>
+
+                    <p class="hero-text">
+
+                        Smart Hire connects you with verified electricians,
+                        plumbers, cleaners, painters and many more using
+                        intelligent AI recommendations.
+
+                    </p>
+
+                    <!-- Search -->
+
+                    <div class="hero-search">
+
+                        <input
+                            type="text"
+                            placeholder="Describe the service you need...">
+
+                        <button>
+
+                            <i class="bi bi-search"></i>
+
+                        </button>
+
+                    </div>
+
+                    <!-- Buttons -->
+
+                    <div class="hero-buttons">
+
+                        <button class="btn btn-primary">
+
+                            Find Services
+
+                        </button>
+
+                        <button class="btn btn-outline-primary">
+
+                            Become a Provider
+
+                        </button>
+
+                    </div>
+
+                    <!-- Features -->
+
+                    <div class="hero-features">
+
+                        <div>
+
+                            <i class="bi bi-check-circle-fill"></i>
+
+                            AI Recommendations
+
+                        </div>
+
+                        <div>
+
+                            <i class="bi bi-check-circle-fill"></i>
+
+                            Verified Providers
+
+                        </div>
+
+                        <div>
+
+                            <i class="bi bi-check-circle-fill"></i>
+
+                            Secure Booking
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- RIGHT SIDE -->
+
+                <div class="col-lg-6">
+
+                    <div class="hero-image">
+
+                        <img
+                            src="assets/images/hero.svg"
+                            alt="Smart Hire Illustration">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+            TRUST STATISTICS
+========================================== -->
+
+<section class="stats-section">
+
+    <div class="container">
+
+        <div class="row g-4">
+
+            <!-- Card 1 -->
+
+            <div class="col-lg-4 col-md-4">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-person-check-fill"></i>
+
+                    </div>
+
+                    <h2>500+</h2>
+
+                    <p>Verified Providers</p>
+
+                </div>
+
+            </div>
+
+            <!-- Card 2 -->
+
+            <div class="col-lg-4 col-md-4">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-calendar-check-fill"></i>
+
+                    </div>
+
+                    <h2>10,000+</h2>
+
+                    <p>Completed Bookings</p>
+
+                </div>
+
+            </div>
+
+            <!-- Card 3 -->
+
+            <div class="col-lg-4 col-md-4">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-star-fill"></i>
+
+                    </div>
+
+                    <h2>4.9 ★</h2>
+
+                    <p>Customer Rating</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================================
+            POPULAR CATEGORIES
+========================================== -->
+
+<section class="categories">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>Popular Categories</h2>
+
+            <p>
+
+                Discover trusted professionals across a wide range
+                of home and business services.
+
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-lg-3 col-md-6">
+                <div class="category-card">
+                    <i class="bi bi-lightning-charge-fill"></i>
+                    <h5>Electrical</h5>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="category-card">
+                    <i class="bi bi-droplet-fill"></i>
+                    <h5>Plumbing</h5>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="category-card">
+                    <i class="bi bi-stars"></i>
+                    <h5>Cleaning</h5>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="category-card">
+                    <i class="bi bi-brush-fill"></i>
+                    <h5>Painting</h5>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="category-card">
+                    <i class="bi bi-tree-fill"></i>
+                    <h5>Gardening</h5>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="category-card">
+                    <i class="bi bi-hammer"></i>
+                    <h5>Carpentry</h5>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="category-card">
+                    <i class="bi bi-snow"></i>
+                    <h5>AC Repair</h5>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="category-card">
+                    <i class="bi bi-car-front-fill"></i>
+                    <h5>Vehicle Service</h5>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================================
+            HOW IT WORKS
+========================================== -->
+
+<section class="how-it-works">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>How Smart Hire Works</h2>
+
+            <p>
+
+                Finding trusted professionals has never been easier.
+                Complete your booking in just four simple steps.
+
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="work-card">
+
+                    <div class="work-icon">
+
+                        <i class="bi bi-search"></i>
+
+                    </div>
+
+                    <h4>Search</h4>
+
+                    <p>
+
+                        Describe the service you need using our AI-powered search.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="work-card">
+
+                    <div class="work-icon">
+
+                        <i class="bi bi-person-check-fill"></i>
+
+                    </div>
+
+                    <h4>Choose Provider</h4>
+
+                    <p>
+
+                        Compare verified providers based on ratings and experience.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="work-card">
+
+                    <div class="work-icon">
+
+                        <i class="bi bi-calendar-check-fill"></i>
+
+                    </div>
+
+                    <h4>Book Service</h4>
+
+                    <p>
+
+                        Select your preferred date and confirm your booking.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="work-card">
+
+                    <div class="work-icon">
+
+                        <i class="bi bi-star-fill"></i>
+
+                    </div>
+
+                    <h4>Get It Done</h4>
+
+                    <p>
+
+                        Receive quality service and leave a review afterwards.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+            FEATURED PROVIDERS
+========================================== -->
+
+<section class="providers">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>Featured Service Providers</h2>
+
+            <p>
+
+                Meet some of our highest-rated professionals trusted
+                by customers across Sri Lanka.
+
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Provider 1 -->
+
+            <div class="col-lg-4">
+
+                <div class="provider-card">
+
+                    <img
+                        src="https://placehold.co/120x120"
+                        alt="Provider">
+
+                    <h4>John Electrical Services</h4>
+
+                    <div class="rating">
+
+                        ★★★★★
+
+                    </div>
+
+                    <p>
+
+                        Colombo
+
+                    </p>
+
+                    <span>
+
+                        15 Years Experience
+
+                    </span>
+
+                    <button class="btn btn-primary">
+
+                        View Profile
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- Provider 2 -->
+
+            <div class="col-lg-4">
+
+                <div class="provider-card">
+
+                    <img
+                        src="https://placehold.co/120x120"
+                        alt="Provider">
+
+                    <h4>Colombo Plumbing Experts</h4>
+
+                    <div class="rating">
+
+                        ★★★★☆
+
+                    </div>
+
+                    <p>
+
+                        Kandy
+
+                    </p>
+
+                    <span>
+
+                        12 Years Experience
+
+                    </span>
+
+                    <button class="btn btn-primary">
+
+                        View Profile
+
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- Provider 3 -->
+
+            <div class="col-lg-4">
+
+                <div class="provider-card">
+
+                    <img
+                        src="https://placehold.co/120x120"
+                        alt="Provider">
+
+                    <h4>Clean Pro Lanka</h4>
+
+                    <div class="rating">
+
+                        ★★★★★
+
+                    </div>
+
+                    <p>
+
+                        Galle
+
+                    </p>
+
+                    <span>
+
+                        8 Years Experience
+
+                    </span>
+
+                    <button class="btn btn-primary">
+
+                        View Profile
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================================
+            TESTIMONIALS
+========================================== -->
+
+<section class="testimonials">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>What Our Customers Say</h2>
+
+            <p>
+
+                Thousands of customers trust Smart Hire to find
+                reliable professionals every day.
+
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Testimonial 1 -->
+
+            <div class="col-lg-4">
+
+                <div class="testimonial-card">
+
+                    <div class="stars">
+
+                        ★★★★★
+
+                    </div>
+
+                    <p>
+
+                        "The electrician arrived on time and completed
+                        the work perfectly. Highly recommended!"
+
+                    </p>
+
+                    <h5>Nimal Perera</h5>
+
+                    <span>Colombo</span>
+
+                </div>
+
+            </div>
+
+            <!-- Testimonial 2 -->
+
+            <div class="col-lg-4">
+
+                <div class="testimonial-card">
+
+                    <div class="stars">
+
+                        ★★★★★
+
+                    </div>
+
+                    <p>
+
+                        "Booking through Smart Hire was simple,
+                        fast and stress free."
+
+                    </p>
+
+                    <h5>Kasuni Silva</h5>
+
+                    <span>Kandy</span>
+
+                </div>
+
+            </div>
+
+            <!-- Testimonial 3 -->
+
+            <div class="col-lg-4">
+
+                <div class="testimonial-card">
+
+                    <div class="stars">
+
+                        ★★★★★
+
+                    </div>
+
+                    <p>
+
+                        "The AI recommendation found the perfect
+                        service provider for me."
+
+                    </p>
+
+                    <h5>Akila Fernando</h5>
+
+                    <span>Galle</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================================
+            WHY CHOOSE SMART HIRE
+========================================== -->
+
+<section class="why-choose">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>Why Choose Smart Hire?</h2>
+
+            <p>
+
+                Experience a smarter, safer and faster way
+                to find trusted service professionals.
+
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            <div class="col-lg-6">
+
+                <div class="feature-box">
+
+                    <div class="feature-icon">
+
+                        <i class="bi bi-robot"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h4>AI Recommendations</h4>
+
+                        <p>
+
+                            Our AI helps you discover the most suitable
+                            providers based on your needs.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <div class="feature-box">
+
+                    <div class="feature-icon">
+
+                        <i class="bi bi-patch-check-fill"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h4>Verified Professionals</h4>
+
+                        <p>
+
+                            Every provider goes through a verification
+                            process before joining Smart Hire.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <div class="feature-box">
+
+                    <div class="feature-icon">
+
+                        <i class="bi bi-shield-lock-fill"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h4>Secure Booking</h4>
+
+                        <p>
+
+                            Your bookings and future online payments
+                            are protected with secure technology.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <div class="feature-box">
+
+                    <div class="feature-icon">
+
+                        <i class="bi bi-lightning-charge-fill"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h4>Fast & Reliable</h4>
+
+                        <p>
+
+                            Book trusted professionals in minutes
+                            with a seamless booking experience.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================================
+            CALL TO ACTION
+========================================== -->
+
+<section class="cta-section">
+
+    <div class="container">
+
+        <div class="cta-box">
+
+            <h2>
+
+                Ready to Find the Perfect Professional?
+
+            </h2>
+
+            <p>
+
+                Join thousands of customers and trusted service providers
+                using Smart Hire every day.
+
+            </p>
+
+            <div class="cta-buttons">
+
+                <button class="btn btn-light btn-lg">
+
+                    Find a Service
+
+                </button>
+
+                <button class="btn btn-outline-light btn-lg">
+
+                    Become a Provider
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================================
+                FOOTER
+========================================== -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="row gy-5">
+
+            <!-- Company -->
+
+            <div class="col-lg-4">
+
+                <h3 class="footer-logo">
+
+                    <i class="bi bi-lightning-charge-fill"></i>
+
+                    Smart Hire
+
+                </h3>
+
+                <p class="footer-text">
+
+                    Smart Hire is an AI-powered service marketplace that
+                    connects customers with trusted and verified
+                    professionals across Sri Lanka.
+
+                </p>
+
+                <div class="social-links">
+
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+
+                    <a href="#"><i class="bi bi-instagram"></i></a>
+
+                    <a href="#"><i class="bi bi-linkedin"></i></a>
+
+                    <a href="#"><i class="bi bi-github"></i></a>
+
+                </div>
+
+            </div>
+
+            <!-- Quick Links -->
+
+            <div class="col-lg-2 col-md-4">
+
+                <h5>Quick Links</h5>
+
+                <ul>
+
+                    <li><a href="#">Home</a></li>
+
+                    <li><a href="#">Services</a></li>
+
+                    <li><a href="#">Providers</a></li>
+
+                    <li><a href="#">About</a></li>
+
+                    <li><a href="#">Register</a></li>
+
+                </ul>
+
+            </div>
+
+            <!-- Categories -->
+
+            <div class="col-lg-3 col-md-4">
+
+                <h5>Categories</h5>
+
+                <ul>
+
+                    <li><a href="#">Electrical</a></li>
+
+                    <li><a href="#">Plumbing</a></li>
+
+                    <li><a href="#">Cleaning</a></li>
+
+                    <li><a href="#">Painting</a></li>
+
+                    <li><a href="#">Vehicle Services</a></li>
+
+                </ul>
+
+            </div>
+
+            <!-- Contact -->
+
+            <div class="col-lg-3 col-md-4">
+
+                <h5>Contact</h5>
+
+                <ul class="contact-info">
+
+                    <li>
+
+                        <i class="bi bi-geo-alt-fill"></i>
+
+                        Colombo, Sri Lanka
+
+                    </li>
+
+                    <li>
+
+                        <i class="bi bi-envelope-fill"></i>
+
+                        support@smarthire.lk
+
+                    </li>
+
+                    <li>
+
+                        <i class="bi bi-telephone-fill"></i>
+
+                        +94 77 123 4567
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="copyright">
+
+            © 2026 Smart Hire. All Rights Reserved.
+
+        </div>
+
+    </div>
+
+</footer>
+
+    <!-- Bootstrap JS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+
+    <script src="assets/js/app.js"></script>
+
+</body>
+</html>

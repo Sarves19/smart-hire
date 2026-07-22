@@ -1,0 +1,113 @@
+/* ==========================================================
+   SMART HIRE - MY PROFILE
+========================================================== */
+
+.profile-layout {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 8px 32px 32px;
+}
+
+.profile-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.profile-card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 18px;
+}
+
+.profile-photo-card { text-align: center; }
+.profile-image-preview { width: 88px; height: 88px; margin: 0 auto 16px; border-radius: 50%; display: grid; place-items: center; overflow: hidden; color: #fff; background: #2563eb; font-size: 28px; font-weight: 700; }
+.profile-image-preview img { width: 100%; height: 100%; object-fit: cover; }
+.profile-photo-card input[type="file"] { display: block; max-width: 100%; margin: 8px auto 14px; font-size: 13px; }
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 6px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+.form-group input:disabled {
+    background: #f9fafb;
+    color: #9ca3af;
+}
+
+.field-hint {
+    font-size: 12px;
+    color: #9ca3af;
+    margin-top: 4px;
+}
+
+.form-error {
+    background: #fef2f2;
+    color: #b91c1c;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 14px;
+}
+
+.form-success {
+    background: #f0fdf4;
+    color: #15803d;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 14px;
+}
+
+.btn-primary-inline-btn {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.btn-primary-inline-btn:hover {
+    background: #1d4ed8;
+}
+
+@media (max-width: 900px) {
+    .profile-layout {
+        grid-template-columns: 1fr;
+    }
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}

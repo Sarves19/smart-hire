@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | Smart Hire</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="../../assets/css/customer/dashboard.css">
+
+    <!-- Shared Components -->
+    <link rel="stylesheet" href="../../assets/css/components/sidebar.css">
+    <link rel="stylesheet" href="../../assets/css/components/navbar.css">
+    <link rel="stylesheet" href="../../assets/css/components/footer.css">
+    <link rel="stylesheet" href="../../assets/css/components/loader.css">
+
+</head>
+
+<body>
+
+    <!-- ==========================================
+         Page Loader
+    =========================================== -->
+
+    <div id="loader-container"></div>
+
+    <!-- ==========================================
+         Dashboard Wrapper
+    =========================================== -->
+
+    <div id="dashboard-wrapper">
+
+        <!-- Sidebar -->
+        <aside id="sidebar-container" data-component="../../components/sidebar.html"></aside>
+
+        <!-- Main Content -->
+        <main id="main-content">
+
+            <!-- Navbar -->
+            <header id="navbar-container" data-component="../../components/navbar.html"></header>
+
+            <!-- Page Content -->
+         <section id="dashboard-content">
+
+    <!-- ==========================================
+         Welcome Banner
+    =========================================== -->
+
+    <section class="welcome-banner">
+
+        <div class="welcome-content">
+
+            <h1 id="welcomeTitle">
+
+                Welcome back!
+
+            </h1>
+
+            <p>
+
+                Manage your bookings, discover trusted professionals,
+                and keep track of all your services in one place.
+
+            </p>
+
+        </div>
+
+        <div class="welcome-date">
+
+            <p id="currentDate">
+
+                Monday, 20 July 2026
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==========================================
+     Dashboard Statistics
+========================================== -->
+
+<section class="stats-section">
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            <i class="bi bi-calendar-check"></i>
+        </div>
+
+        <div class="stat-content">
+            <h3 id="activeBookings">12</h3>
+            <p>Active Bookings</p>
+        </div>
+
+    </div>
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            <i class="bi bi-hourglass-split"></i>
+        </div>
+
+        <div class="stat-content">
+            <h3 id="pendingBookings">4</h3>
+            <p>Pending</p>
+        </div>
+
+    </div>
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            <i class="bi bi-check-circle"></i>
+        </div>
+
+        <div class="stat-content">
+            <h3 id="completedBookings">28</h3>
+            <p>Completed</p>
+        </div>
+
+    </div>
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+            <i class="bi bi-bookmark-heart"></i>
+        </div>
+
+        <div class="stat-content">
+            <h3 id="savedProviders">15</h3>
+            <p>Saved Providers</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================================
+     Dashboard Main Section
+========================================== -->
+
+<section class="dashboard-main">
+
+    <!-- Recent Bookings -->
+
+    <div class="dashboard-card">
+
+        <div class="card-header">
+
+            <h2>Recent Bookings</h2>
+
+            <a href="#" class="view-all-link">View All</a>
+
+        </div>
+
+        <div class="card-body">
+
+            <table class="booking-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Service</th>
+                        <th>Provider</th>
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+          <tbody id="recentBookingsTable">
+
+        </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <!-- Quick Actions -->
+
+    <div class="dashboard-card">
+
+        <div class="card-header">
+
+            <h2>Quick Actions</h2>
+
+        </div>
+
+        <div class="card-body quick-actions">
+
+            <button class="action-btn">
+
+                <i class="bi bi-search"></i>
+
+                Browse Services
+
+            </button>
+
+            <button class="action-btn">
+
+                <i class="bi bi-calendar-plus"></i>
+
+                Book a Service
+
+            </button>
+
+            <button class="action-btn">
+
+                <i class="bi bi-person"></i>
+
+                My Profile
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+</section>
+
+
+
+            <!-- Footer -->
+            <footer id="footer-container" data-component="../../components/footer.html"></footer>
+
+        </main>
+
+    </div>
+
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Utilities -->
+    <script src="../../assets/js/utils/helpers.js"></script>
+
+    <!-- Services -->
+    <script src="../../assets/js/services/api-client.js"></script>
+    <script src="../../assets/js/services/auth-service.js"></script>
+
+    <!-- Components -->
+    <script src="../../assets/js/components/loader.js"></script>
+    <script src="../../assets/js/components/sidebar.js"></script>
+    <script src="../../assets/js/components/navbar.js"></script>
+    <script src="../../assets/js/components/footer.js"></script>
+
+    <!-- Dashboard -->
+    <script src="../../assets/js/customer/dashboard.js"></script>
+
+</body>
+
+</html>

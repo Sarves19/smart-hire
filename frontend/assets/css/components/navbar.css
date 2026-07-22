@@ -1,0 +1,358 @@
+/* ==========================================================
+   SMART HIRE NAVBAR
+========================================================== */
+
+.navbar{
+
+    position:fixed;
+
+    top:0;
+
+    left:280px;
+
+    right:0;
+
+    height:80px;
+
+    background:#FFFFFF;
+
+    border-bottom:1px solid #E5E7EB;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 30px;
+
+    z-index:1000;
+
+}
+
+.navbar-left h2{
+
+    margin:0;
+
+    font-size:26px;
+
+    color:#111827;
+
+    font-weight:700;
+
+}
+
+.navbar-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+}
+
+/* Notification */
+
+.nav-icon-btn{
+
+    width:46px;
+
+    height:46px;
+
+    border:none;
+
+    background:#F3F4F6;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.nav-icon-btn:hover{
+
+    background:#E5E7EB;
+
+}
+
+.nav-icon-btn i{
+
+    font-size:20px;
+
+}
+
+/* User */
+
+.navbar-user{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    cursor:pointer;
+
+}
+
+.navbar-avatar{
+
+    width:46px;
+
+    height:46px;
+
+    border-radius:50%;
+
+    background:#2563EB;
+
+    color:white;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-weight:700;
+
+}
+
+.navbar-user-info h5{
+
+    margin:0;
+
+    font-size:15px;
+
+}
+
+.navbar-user-info p{
+
+    margin:2px 0 0;
+
+    color:#6B7280;
+
+    font-size:13px;
+
+}
+
+/* ==========================================================
+   Notification Badge
+========================================================== */
+
+.nav-icon-btn{
+
+    position:relative;
+
+}
+
+.notification-badge{
+
+    position:absolute;
+
+    top:-4px;
+
+    right:-4px;
+
+    width:20px;
+
+    height:20px;
+
+    border-radius:50%;
+
+    background:#EF4444;
+
+    color:#FFFFFF;
+
+    font-size:11px;
+
+    font-weight:600;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+/* ==========================================================
+   Avatar Container
+========================================================== */
+
+.navbar-avatar-container{
+
+    position:relative;
+
+}
+
+/* Online Status */
+
+.online-indicator{
+
+    position:absolute;
+
+    bottom:2px;
+
+    right:2px;
+
+    width:12px;
+
+    height:12px;
+
+    border-radius:50%;
+
+    background:#10B981;
+
+    border:2px solid #FFFFFF;
+
+}
+
+/* ==========================================================
+   Hover
+========================================================== */
+
+.navbar-user{
+
+    padding:8px 12px;
+
+    border-radius:14px;
+
+    transition:.25s;
+
+}
+
+.navbar-user:hover{
+
+    background:#F3F4F6;
+
+}
+
+.dropdown-icon{
+
+    transition:.25s;
+
+}
+
+.navbar-user:hover .dropdown-icon{
+
+    transform:rotate(180deg);
+
+}
+
+/* ==========================================================
+   USER DROPDOWN
+========================================================== */
+
+.navbar-user{
+
+    position: relative;
+
+}
+
+.navbar-dropdown{
+
+    position: absolute;
+
+    top: 70px;
+
+    right: 0;
+
+    width: 240px;
+
+    background: #FFFFFF;
+
+    border: 1px solid #E5E7EB;
+
+    border-radius: 14px;
+
+    box-shadow: 0 12px 30px rgba(0,0,0,.08);
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform: translateY(10px);
+
+    transition: all .25s ease;
+
+    z-index: 1000;
+
+}
+
+/* Active State */
+
+.navbar-dropdown.active{
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: translateY(0);
+
+}
+
+/* ==========================================================
+   Dropdown Items
+========================================================== */
+
+.dropdown-item{
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 14px 18px;
+
+    color: #374151;
+
+    text-decoration: none;
+
+    transition: .25s;
+
+}
+
+.dropdown-item:hover{
+
+    background: #F9FAFB;
+
+}
+
+.dropdown-item i{
+
+    font-size: 18px;
+
+    width: 20px;
+
+}
+
+/* Divider */
+
+.dropdown-divider{
+
+    height: 1px;
+
+    background: #E5E7EB;
+
+}
+
+/* Logout */
+
+.logout-item{
+
+    color: #DC2626;
+
+}
+
+.logout-item:hover{
+
+    background: #FEF2F2;
+
+}
+

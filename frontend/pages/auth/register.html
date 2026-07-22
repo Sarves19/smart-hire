@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register | Smart Hire</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <style>
+    :root { --brand-a: #0b7285; --brand-b: #1971c2; --text-main: #1f2937; --text-muted: #6b7280; }
+    body {
+      min-height: 100vh;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text-main);
+      background: radial-gradient(circle at 15% 20%, rgba(25, 113, 194, 0.22) 0%, transparent 45%), radial-gradient(circle at 85% 10%, rgba(11, 114, 133, 0.2) 0%, transparent 40%), linear-gradient(135deg, #eef2ff 0%, #e6fcf5 45%, #f8f9fa 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+    .auth-card {
+      width: 100%; max-width: 760px; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.65); border-radius: 20px; box-shadow: 0 24px 60px rgba(15, 23, 42, 0.14);
+      animation: reveal 0.45s ease;
+    }
+    .auth-header { background: linear-gradient(120deg, var(--brand-a), var(--brand-b)); color: #fff; border-radius: 20px 20px 0 0; padding: 1.35rem 1.5rem; }
+    .form-control, .form-select { border-radius: 12px; transition: all 0.2s ease; }
+    .form-control:focus, .form-select:focus { border-color: rgba(25, 113, 194, 0.5); box-shadow: 0 0 0 0.2rem rgba(25, 113, 194, 0.12); }
+    .btn-primary { background: linear-gradient(120deg, var(--brand-a), var(--brand-b)); border: none; border-radius: 12px; padding: 0.7rem 1rem; font-weight: 600; }
+    .password-meter { height: 8px; border-radius: 999px; background: #e9ecef; overflow: hidden; }
+    .password-meter-fill { height: 100%; width: 0; transition: width 0.25s ease, background-color 0.25s ease; }
+    .small-muted { color: var(--text-muted); font-size: 0.87rem; }
+    @keyframes reveal { from { opacity: 0; transform: translateY(12px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+  </style>
+</head>
+<body>
+  <main class="auth-card">
+    <header class="auth-header">
+      <h1 class="h4 mb-1">Create Your Smart Hire Account</h1>
+      <p class="mb-0 opacity-75">Register as a customer or provider to continue.</p>
+    </header>
+    <section class="p-4 p-md-5">
+      <div id="alertContainer" aria-live="polite"></div>
+      <form id="registerForm" novalidate>
+        <div class="row g-3">
+          <div class="col-md-6"><label for="firstName" class="form-label">First Name</label><input id="firstName" type="text" class="form-control" required minlength="2" autocomplete="given-name" /><div class="invalid-feedback">First name must be at least 2 characters.</div></div>
+          <div class="col-md-6"><label for="lastName" class="form-label">Last Name</label><input id="lastName" type="text" class="form-control" required minlength="2" autocomplete="family-name" /><div class="invalid-feedback">Last name must be at least 2 characters.</div></div>
+          <div class="col-md-6"><label for="email" class="form-label">Email</label><input id="email" type="email" class="form-control" required autocomplete="email" /><div class="invalid-feedback">Please provide a valid email address.</div></div>
+          <div class="col-md-6"><label for="phone" class="form-label">Phone Number</label><input id="phone" type="tel" class="form-control" required placeholder="07XXXXXXXX" maxlength="10" autocomplete="tel" /><div class="invalid-feedback">Use Sri Lankan format: 07XXXXXXXX.</div></div>
+          <div class="col-12">
+            <label for="role" class="form-label">Role</label>
+            <select id="role" class="form-select" required>
+              <option value="" selected disabled>Select role</option>
+              <option value="CUSTOMER">Customer</option>
+              <option value="PROVIDER">Provider</option>
+            </select>
+            <div class="invalid-feedback">Please choose a role.</div>
+          </div>
+          <div class="col-md-6">
+            <label for="password" class="form-label">Password</label>
+            <div class="input-group"><input id="password" type="password" class="form-control" required minlength="8" autocomplete="new-password" /><button class="btn btn-outline-secondary" type="button" data-toggle-password="password" aria-label="Toggle password visibility"><i class="bi bi-eye"></i></button></div>
+            <div class="password-meter mt-2"><div id="passwordMeter" class="password-meter-fill"></div></div>
+            <small id="passwordStrengthText" class="small-muted d-block mt-1">Password strength: -</small>
+          </div>
+          <div class="col-md-6">
+            <label for="confirmPassword" class="form-label">Confirm Password</label>
+            <div class="input-group"><input id="confirmPassword" type="password" class="form-control" required minlength="8" autocomplete="new-password" /><button class="btn btn-outline-secondary" type="button" data-toggle-password="confirmPassword" aria-label="Toggle confirm password visibility"><i class="bi bi-eye"></i></button></div>
+            <div class="invalid-feedback d-block" id="confirmPasswordError"></div>
+          </div>
+        </div>
+        <button id="submitBtn" class="btn btn-primary w-100 mt-4" type="submit"><span class="btn-label">Create Account</span><span class="spinner-border spinner-border-sm ms-2 d-none" aria-hidden="true"></span></button>
+      </form>
+      <p class="text-center mt-4 mb-0 small-muted">Already have an account? <a href="login.html" class="fw-semibold text-decoration-none">Sign in</a></p>
+    </section>
+  </main>
+
+  <script>
+    const API_BASE_URL = "http://localhost:8000/api/v1";
+    const PHONE_REGEX = /^07\d{8}$/;
+    const NAME_REGEX = /^[A-Za-z][A-Za-z\s'-]{1,}$/;
+
+    const el = {
+      form: document.getElementById("registerForm"),
+      firstName: document.getElementById("firstName"),
+      lastName: document.getElementById("lastName"),
+      email: document.getElementById("email"),
+      phone: document.getElementById("phone"),
+      role: document.getElementById("role"),
+      password: document.getElementById("password"),
+      confirmPassword: document.getElementById("confirmPassword"),
+      confirmPasswordError: document.getElementById("confirmPasswordError"),
+      meter: document.getElementById("passwordMeter"),
+      meterText: document.getElementById("passwordStrengthText"),
+      submitBtn: document.getElementById("submitBtn"),
+      alertContainer: document.getElementById("alertContainer")
+    };
+
+    function showAlert(type, message) {
+      el.alertContainer.innerHTML = `<div class="alert alert-${type} alert-dismissible fade show" role="alert">${message}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+    }
+
+    function setLoading(isLoading) {
+      const spinner = el.submitBtn.querySelector(".spinner-border");
+      const label = el.submitBtn.querySelector(".btn-label");
+      el.submitBtn.disabled = isLoading;
+      spinner.classList.toggle("d-none", !isLoading);
+      label.textContent = isLoading ? "Creating account..." : "Create Account";
+    }
+
+    function strength(password) {
+      let score = 0;
+      if (password.length >= 8) score++;
+      if (/[A-Z]/.test(password)) score++;
+      if (/[a-z]/.test(password)) score++;
+      if (/\d/.test(password)) score++;
+      if (/[^A-Za-z0-9]/.test(password)) score++;
+      const levels = [
+        { label: "Very weak", color: "#c92a2a", width: 15 },
+        { label: "Weak", color: "#e67700", width: 35 },
+        { label: "Fair", color: "#fab005", width: 55 },
+        { label: "Good", color: "#2b8a3e", width: 75 },
+        { label: "Strong", color: "#087f5b", width: 100 }
+      ];
+      return levels[Math.max(0, score - 1)] || levels[0];
+    }
+
+    function updateStrength() {
+      const s = strength(el.password.value);
+      el.meter.style.width = `${s.width}%`;
+      el.meter.style.backgroundColor = s.color;
+      el.meterText.textContent = `Password strength: ${s.label}`;
+    }
+
+    function validate() {
+      let ok = true;
+      if (!NAME_REGEX.test(el.firstName.value.trim())) { el.firstName.classList.add("is-invalid"); ok = false; } else { el.firstName.classList.remove("is-invalid"); }
+      if (!NAME_REGEX.test(el.lastName.value.trim())) { el.lastName.classList.add("is-invalid"); ok = false; } else { el.lastName.classList.remove("is-invalid"); }
+      if (!el.email.checkValidity()) { el.email.classList.add("is-invalid"); ok = false; } else { el.email.classList.remove("is-invalid"); }
+      if (!PHONE_REGEX.test(el.phone.value.trim())) { el.phone.classList.add("is-invalid"); ok = false; } else { el.phone.classList.remove("is-invalid"); }
+      if (!el.role.value) { el.role.classList.add("is-invalid"); ok = false; } else { el.role.classList.remove("is-invalid"); }
+      if (!el.password.value || el.password.value.length < 8) { el.password.classList.add("is-invalid"); ok = false; } else { el.password.classList.remove("is-invalid"); }
+      if (el.password.value !== el.confirmPassword.value) { el.confirmPassword.classList.add("is-invalid"); el.confirmPasswordError.textContent = "Passwords do not match."; ok = false; } else { el.confirmPassword.classList.remove("is-invalid"); el.confirmPasswordError.textContent = ""; }
+      return ok;
+    }
+
+    async function postJson(path, payload) {
+      const response = await fetch(`${API_BASE_URL}${path}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.detail || data.message || "Request failed.");
+      return data;
+    }
+
+    el.form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      el.alertContainer.innerHTML = "";
+      if (!validate()) { showAlert("danger", "Please correct the highlighted fields and try again."); return; }
+      const payload = {
+        first_name: el.firstName.value.trim(),
+        last_name: el.lastName.value.trim(),
+        email: el.email.value.trim(),
+        phone_number: el.phone.value.trim(),
+        password: el.password.value,
+        role: el.role.value
+      };
+      try {
+        setLoading(true);
+        await postJson("/auth/register", payload);
+        showAlert("success", "Registration successful. Redirecting to OTP verification...");
+        setTimeout(() => { window.location.href = `verify-otp.html?email=${encodeURIComponent(payload.email)}`; }, 900);
+      } catch (error) {
+        showAlert("danger", error.message || "Unable to register right now.");
+      } finally {
+        setLoading(false);
+      }
+    });
+
+    el.password.addEventListener("input", updateStrength);
+    document.querySelectorAll("[data-toggle-password]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const input = document.getElementById(button.getAttribute("data-toggle-password"));
+        const icon = button.querySelector("i");
+        input.type = input.type === "password" ? "text" : "password";
+        icon.className = input.type === "password" ? "bi bi-eye" : "bi bi-eye-slash";
+      });
+    });
+
+    updateStrength();
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

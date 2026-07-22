@@ -1,0 +1,134 @@
+/* ==========================================================
+   SMART HIRE - MY BOOKINGS
+========================================================== */
+
+.bookings-tabs {
+    display: flex;
+    gap: 8px;
+    padding: 0 32px 16px;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    color: #4b5563;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.tab-btn.active {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #fff;
+}
+
+.bookings-list {
+    padding: 0 32px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.loading-placeholder,
+.bookings-error {
+    text-align: center;
+    padding: 60px 20px;
+    color: #6b7280;
+}
+
+.bookings-empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: #6b7280;
+}
+
+.bookings-empty i {
+    font-size: 40px;
+    color: #d1d5db;
+    margin-bottom: 12px;
+}
+
+.btn-primary-inline {
+    display: inline-block;
+    margin-top: 12px;
+    background: #2563eb;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.booking-item {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: box-shadow 0.15s ease;
+}
+
+.booking-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.booking-item-main h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 6px;
+}
+
+.booking-item-main p {
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 2px;
+}
+
+.booking-item-side {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.booking-price {
+    font-weight: 700;
+    color: #111827;
+    font-size: 14px;
+}
+
+.booking-cancel-btn {
+    background: #fef2f2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.booking-cancel-btn:hover {
+    background: #fee2e2;
+}
+
+@media (max-width: 640px) {
+    .booking-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .booking-item-side {
+        align-items: flex-start;
+        width: 100%;
+    }
+}
